@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ZoomIn, ArrowRight } from 'lucide-react';
-import { CATEGORIES_DATA } from '../data/categoriesData';
+import { useCatalog } from '../hooks/useCatalog';
 import SubpageHeader from '../components/SubpageHeader';
 import SubpageVoldogHero from '../components/SubpageVoldogHero';
 import Footer from '../components/Footer';
@@ -36,12 +36,10 @@ const CATEGORY_TICKERS = {
 
 export default function CategoriaPage() {
   const { categorySlug } = useParams();
+  const { getCategory, categoriesList } = useCatalog();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Normalizar slug (manejo de alias como 'insumos-papeleria')
-  const currentKey =
-    categorySlug === 'insumos-papeleria' ? 'insumos' : categorySlug;
-  const category = CATEGORIES_DATA[currentKey] || CATEGORIES_DATA['papeleria-creativa'];
+  const category = getCategory(categorySlug);
 
   const handleOpenProduct = useCallback((prod) => {
     setSelectedProduct({ ...prod, categorySlug: category.slug, categoryTitle: category.title });
@@ -78,7 +76,12 @@ export default function CategoriaPage() {
   };
 
   // Otras categorías para navegación cruzada
-  const otherCategories = Object.values(CATEGORIES_DATA).filter((cat) => cat.slug !== category.slug);
+  const otherCategories = categoriesList.filter((cat) => cat.slug !== category.slug);
+
+  const totalCatalogCount = categoriesList.reduce(
+    (acc, c) => acc + (Array.isArray(c.products) ? c.products.length : 0),
+    0
+  );
 
   const tickerItems = CATEGORY_TICKERS[category.slug] || [
     category.title.toUpperCase(),
@@ -117,7 +120,7 @@ export default function CategoriaPage() {
                 )}
               </h2>
               <p className="text-xs sm:text-sm text-gray-500 font-medium mt-1">
-                {category.sectionSubtitle || `${category.products.length} productos disponibles con asesoría y entrega en Cali`}
+                {category.sectionSubtitle || `${category.products?.length || 0} productos disponibles con asesoría y entrega en Cali`}
               </p>
             </div>
 
@@ -125,7 +128,7 @@ export default function CategoriaPage() {
               to="/catalogo"
               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#7E04A1] hover:text-[#5E0279] transition-colors"
             >
-              <span>Ver catálogo completo ({Object.values(CATEGORIES_DATA).reduce((acc, c) => acc + c.products.length, 0)} productos)</span>
+              <span>Ver catálogo completo ({totalCatalogCount} productos)</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

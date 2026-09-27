@@ -12,8 +12,8 @@ Operamos bajo un modelo transparente de cotización y asesoría personalizada si
 
 - [Página Principal](https://maranathapapeleria.com/): Portal de presentación de Maranatha Papelería Creativa en Cali, metodología de trabajo y canales de contacto directo.
 - [Catálogo General](https://maranathapapeleria.com/catalogo): Vitrina completa organizada por colecciones temáticas, papelería de fiesta y materiales de producción.
-- [Papelería Creativa para Eventos](https://maranathapapeleria.com/categoria/papeleria-creativa): Cajas temáticas tipo milk, pirámide, lonchera, dulceros con relieve 3D, cake toppers para tortas, letras 3D y banderines festivos.
-- [Papelería Empresarial y Empaques](https://maranathapapeleria.com/categoria/papeleria-empresarial): Tarjetas de presentación en propalcote, etiquetas colgantes para prendas, stickers troquelados para packaging, volantes y carnets institucionales.
+- [Papelería Creativa para Eventos](https://maranathapapeleria.com/categoria/papeleria-creativa): Cajas temáticas tipo milk, pirámide, lonchera, dulceros con relieve 3D, cake toppers para tortas, tarjetas plegables de agradecimiento, letras 3D y banderines festivos.
+- [Papelería Empresarial y Empaques](https://maranathapapeleria.com/categoria/papeleria-empresarial): Tarjetas de presentación en propalcote, etiquetas colgantes para prendas, botones publicitarios prendedores, stickers troquelados para packaging, volantes y carnets institucionales.
 - [Insumos de Papelería](https://maranathapapeleria.com/categoria/insumos): Vinilos adhesivos brillantes y mates, cartulinas perladas, papeles fotográficos glossy y bases acrílicas.
 
 ## Especificaciones Técnicas y Materiales de Fabricación

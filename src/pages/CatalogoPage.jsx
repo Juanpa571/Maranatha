@@ -1,46 +1,28 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
-import { CATEGORIES_DATA } from '../data/categoriesData';
+import { useCatalog } from '../hooks/useCatalog';
 import SubpageHeader from '../components/SubpageHeader';
 import SubpageVoldogHero from '../components/SubpageVoldogHero';
 import Footer from '../components/Footer';
 import ProductQuickViewModal from '../components/ProductQuickViewModal';
 
-// Todos los 14 productos agrupados con metadato de categoría
-const ALL_PRODUCTS = Object.values(CATEGORIES_DATA).flatMap((cat) =>
-  cat.products.map((p) => ({
-    ...p,
-    categorySlug: cat.slug,
-    categoryTitle: cat.title,
-  }))
-);
-
-const TABS = [
-  { id: 'todos', label: 'Todos', count: ALL_PRODUCTS.length },
-  {
-    id: 'papeleria-creativa',
-    label: 'Papelería Creativa',
-    count: CATEGORIES_DATA['papeleria-creativa'].products.length,
-    slug: 'papeleria-creativa',
-  },
-  {
-    id: 'papeleria-empresarial',
-    label: 'Papelería Empresarial',
-    count: CATEGORIES_DATA['papeleria-empresarial'].products.length,
-    slug: 'papeleria-empresarial',
-  },
-  {
-    id: 'insumos',
-    label: 'Insumos de Papelería',
-    count: CATEGORIES_DATA['insumos'].products.length,
-    slug: 'insumos',
-  },
-];
-
 export default function CatalogoPage() {
+  const { allProducts, categories, categoriesList } = useCatalog();
   const [activeTab, setActiveTab] = useState('todos');
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const tabs = useMemo(() => {
+    return [
+      { id: 'todos', label: 'Todos', count: allProducts.length },
+      ...categoriesList.map((cat) => ({
+        id: cat.slug,
+        label: cat.title,
+        count: cat.products?.length || 0,
+        slug: cat.slug,
+      })),
+    ];
+  }, [allProducts.length, categoriesList]);
 
   const handleOpenProduct = useCallback((prod) => {
     setSelectedProduct(prod);
@@ -75,10 +57,10 @@ export default function CatalogoPage() {
 
   const filteredProducts =
     activeTab === 'todos'
-      ? ALL_PRODUCTS
-      : ALL_PRODUCTS.filter((prod) => prod.categorySlug === activeTab);
+      ? allProducts
+      : allProducts.filter((prod) => prod.categorySlug === activeTab);
 
-  const currentCategoryData = CATEGORIES_DATA[activeTab] || null;
+  const currentCategoryData = categories[activeTab] || null;
 
   return (
     <div className="min-h-screen bg-white font-peridot text-[#141517] selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
@@ -114,7 +96,7 @@ export default function CatalogoPage() {
           {/* Barra de Filtros Instantáneos (Tabs Horizontales Tipográficos - Cero Cápsulas) */}
           <div className="mb-10 sm:mb-12 border-b border-gray-200/80 pb-3 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
             <div className="flex items-center gap-2 sm:gap-4 md:gap-6 shrink-0">
-              {TABS.map((tab) => {
+              {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
                   <button

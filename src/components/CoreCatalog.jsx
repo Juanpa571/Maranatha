@@ -1,51 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
+import { useCatalog } from '../hooks/useCatalog';
 import ProductQuickViewModal from './ProductQuickViewModal';
 
-const FEATURED_PRODUCTS = [
-  {
-    id: 'cajas-personalizadas',
-    title: 'Cajas Personalizadas',
-    description: 'Diseñamos empaques que cuentan tu historia.',
-    pricePrefix: 'Desde',
-    priceVal: '$2.800 COP',
-    image: '/catalogo/cajas-personalizadas.webp',
-    alt: 'Cajas personalizadas para fiestas y marcas en Cali',
-    whatsapp: 'Hola Maranatha, quisiera cotizar cajas personalizadas para un evento o marca en Cali.',
-    categorySlug: 'papeleria-creativa',
-    categoryName: 'Papelería Creativa',
-    delay: '150ms',
-  },
-  {
-    id: 'stickers-personalizados',
-    title: 'Stickers Personalizados',
-    description: 'Vinilo impermeable troquelado al contorno para tu marca.',
-    pricePrefix: 'Desde',
-    priceVal: '$25.000 / 50 und',
-    image: '/catalogo/stickers-personalizados.webp',
-    alt: 'Stickers personalizados troquelados en Cali',
-    whatsapp: 'Hola Maranatha, quisiera cotizar stickers personalizados desde 50 unidades en Cali.',
-    categorySlug: 'papeleria-creativa',
-    categoryName: 'Papelería Creativa',
-    delay: '300ms',
-  },
-  {
-    id: 'vinilos-adhesivos',
-    title: 'Vinilos Adhesivos',
-    description: 'Para paredes, vitrinas y espacios que quieras transformar.',
-    pricePrefix: 'Desde',
-    priceVal: '$35.000 COP',
-    image: '/catalogo/vinilos-adhesivos.webp',
-    alt: 'Vinilos adhesivos para paredes y vitrinas en Cali',
-    whatsapp: 'Hola Maranatha, quisiera cotizar vinilos adhesivos para pared o vitrinas en Cali.',
-    categorySlug: 'insumos',
-    categoryName: 'Insumos de Papelería',
-    delay: '450ms',
-  },
-];
-
 export default function CoreCatalog() {
+  const { featuredProducts } = useCatalog();
   const [headerState, setHeaderState] = useState('below'); // 'below' | 'visible' | 'above'
   const [cardsState, setCardsState] = useState('below');   // 'below' | 'visible' | 'above'
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -202,10 +162,16 @@ export default function CoreCatalog() {
         ref={cardsRef}
         className="max-w-[1080px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch w-full"
       >
-        {FEATURED_PRODUCTS.map((prod) => {
+        {featuredProducts.map((prod, index) => {
+          const rawPrice = prod.priceVal || prod.price || '';
+          const pricePrefix = prod.pricePrefix || (rawPrice.startsWith('Desde ') ? 'Desde' : 'Desde');
+          const cleanPrice = rawPrice.replace(/^Desde\s+/, '');
+          const priceMain = cleanPrice.match(/^(\$[\d.]+)/) ? cleanPrice.match(/^(\$[\d.]+)/)[1] : cleanPrice;
+          const priceSub = cleanPrice.replace(/^(\$[\d.]+)\s*/, '');
+
           return (
             <div
-              key={prod.id}
+              key={prod.id || prod._id || index}
               className={`group relative flex flex-col w-full rounded-[22px] sm:rounded-[26px] md:rounded-[28px] overflow-hidden bg-white border border-[#F0E6FA] shadow-[0_6px_22px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.15)] hover:-translate-y-1 transition-all duration-400 ${
                 cardsState === 'below'
                   ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96] pointer-events-none'
@@ -213,7 +179,7 @@ export default function CoreCatalog() {
                   ? 'opacity-0 -translate-y-8 scale-[0.98] pointer-events-none'
                   : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
               }`}
-              style={{ transitionDelay: cardsState === 'visible' ? prod.delay : '0ms' }}
+              style={{ transitionDelay: cardsState === 'visible' ? (prod.delay || `${(index + 1) * 150}ms`) : '0ms' }}
             >
               {/* Foto oficial con más espacio, cursor zoom y apertura de QuickView Modal */}
               <button
@@ -224,7 +190,7 @@ export default function CoreCatalog() {
               >
                 <img
                   src={cardsState !== 'below' ? prod.image : undefined}
-                  alt={prod.alt}
+                  alt={prod.alt || prod.title}
                   width="500"
                   height="500"
                   loading="lazy"
@@ -263,15 +229,17 @@ export default function CoreCatalog() {
                     {/* Precio Tipográfico Puro estilo Amazon (Cero Cápsula) */}
                     <div className="flex flex-col select-text leading-none py-0.5">
                       <span className="text-[10.5px] text-gray-400 font-medium">
-                        {prod.pricePrefix || 'Desde'}
+                        {pricePrefix}
                       </span>
                       <div className="flex items-baseline gap-1 mt-0.5">
                         <span className="text-[19px] sm:text-[21px] font-black text-[#141517] tracking-tight leading-none">
-                          {prod.priceVal.match(/^(\$[\d.]+)/) ? prod.priceVal.match(/^(\$[\d.]+)/)[1] : prod.priceVal}
+                          {priceMain}
                         </span>
-                        <span className="text-[11px] text-gray-500 font-semibold leading-none">
-                          {prod.priceVal.replace(/^(\$[\d.]+)\s*/, '')}
-                        </span>
+                        {priceSub ? (
+                          <span className="text-[11px] text-gray-500 font-semibold leading-none">
+                            {priceSub}
+                          </span>
+                        ) : null}
                       </div>
                     </div>
 
