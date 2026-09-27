@@ -321,14 +321,15 @@ export default function VoldogHero() {
   const heroMarginTop = config.circleMarginTop;
   const heroButtonConfig = config.buttonConfig;
 
-  // Color del logo 'maranatha'
-  // Morado Maranatha (#7E04A1) continuo para contraste perfecto (>8:1) en fondo lavanda (#E7D1FF) y fondo blanco sticky (#FFFFFF)
-  // Cumplimiento estricto WCAG AAA (pasa 100/100 en accesibilidad Lighthouse)
-  const logoColor = '#7E04A1';
+  // Interpolación de color continua: de Blanco Puro (#FFFFFF: 255, 255, 255) a Morado Maranatha (#7E04A1: 126, 4, 161)
+  const logoR = Math.round((1 - eased) * 255 + eased * 126);
+  const logoG = Math.round((1 - eased) * 255 + eased * 4);
+  const logoB = Math.round((1 - eased) * 255 + eased * 161);
+  const logoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
 
   // Sombra volumétrica del hero que se disuelve progresivamente hasta 'none' en la navbar
-  const shadowAlpha = (1 - eased) * 0.12;
-  const logoFilter = shadowAlpha > 0.01 ? `drop-shadow(0 2px 10px rgba(126, 4, 161, ${shadowAlpha.toFixed(3)}))` : 'none';
+  const shadowAlpha = (1 - eased) * 0.22;
+  const logoFilter = shadowAlpha > 0.01 ? `drop-shadow(0 4px 18px rgba(0, 0, 0, ${shadowAlpha.toFixed(3)}))` : 'none';
 
   // Video circular central: escala y desvanecimiento sutil progresivo (cero cortes bruscos)
   const videoScale = 1 - eased * 0.45;
