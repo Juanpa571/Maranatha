@@ -8,7 +8,7 @@
     <title>Maranatha Papelería Creativa | Eventos y Empaques en Cali</title>
     <meta name="description" content="Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos." />
     <meta name="keywords" content="papeleria creativa cali, stickers personalizados cali, cajas para fiestas cali, toppers 3d cali, tarjetas de presentacion cali, etiquetas adhesivas cali, empaques personalizados cali" />
-    <meta name="author" content="Maranatha Papelería Creativa" />
+    <meta name="author" content="Karla - Maranatha Papelería Creativa" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://maranathapapeleria.com/" />
     
@@ -27,28 +27,34 @@
     <meta name="twitter:description" content="Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos." />
     <meta name="twitter:image" content="https://maranathapapeleria.com/hero-page.webp" />
 
-    <!-- Navegación Agéntica y Descubrimiento de Recursos IA (Agentic Web Discovery) -->
-    <link rel="alternate" type="application/json" href="/ai-catalog.json" title="AI Product Catalog">
-    <link rel="alternate" type="application/json" href="/.well-known/ai-catalog.json" title="AI Catalog Manifest">
-    <link rel="alternate" type="application/json" href="/.well-known/ard.json" title="ARD Manifest">
-    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs Context">
-    <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
-    <link rel="ard" href="/.well-known/ard.json">
+    <!-- RSS & Freshness Signals -->
+    <link rel="alternate" type="application/rss+xml" title="Maranatha Papelería Creativa RSS" href="/rss.xml" />
+
+    <!-- Navegación Agéntica y Descubrimiento de Recursos IA (GEO / AEO Discovery) -->
+    <link rel="alternate" type="application/json" href="/ai-catalog.json" title="AI Product Catalog" />
+    <link rel="alternate" type="application/json" href="/.well-known/ai-catalog.json" title="AI Catalog Manifest" />
+    <link rel="alternate" type="application/json" href="/.well-known/ard.json" title="ARD Manifest" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs Context" />
+    <link rel="alternate" type="application/json" href="/ai/summary.json" title="AI Summary" />
+    <link rel="alternate" type="application/json" href="/ai/faq.json" title="AI FAQ" />
+    <link rel="alternate" type="application/json" href="/ai/service.json" title="AI Service" />
+    <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
+    <link rel="ard" href="/.well-known/ard.json" />
 
     <!-- Precarga de Fuente LCP Oficial (Pacifico Subconjunto Local 4.6 KB) e Isotipos -->
-    <link rel="preload" href="/fonts/pacifico-subset.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/unicornio-white.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="/logo-circle-poster.webp" as="image" type="image/webp">
+    <link rel="preload" href="/fonts/pacifico-subset.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/unicornio-white.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="/logo-circle-poster.webp" as="image" type="image/webp" />
 
     <!-- Optimización de carga de fuentes y precarga DNS (Google Fonts Oficiales) -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Tipografías de Contenido: Montserrat y Patrick Hand (No bloqueante) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap" /></noscript>
 
     <!-- CSS Crítico Inlined para Pintura Inmediata (0ms Render-Blocking) -->
     <style>
@@ -70,13 +76,36 @@
       @media (min-width: 1024px) { .hero-logo-center { font-size: 42px; } }
     </style>
 
-    <!-- Schema.org JSON-LD para SEO Local Google -->
+    <!-- Schema 1: WebSite con SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Maranatha Papelería Creativa | Eventos y Empaques en Cali",
+      "url": "https://maranathapapeleria.com",
+      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://maranathapapeleria.com/catalogo?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Schema 2: LocalBusiness & Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Maranatha Papelería Creativa",
       "image": "https://maranathapapeleria.com/logo.svg",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://maranathapapeleria.com/logo.svg"
+      },
       "url": "https://maranathapapeleria.com",
       "telephone": "+573145854213",
       "email": "hola@maranathapapeleria.com",
@@ -100,7 +129,7 @@
         "latitude": 3.4516,
         "longitude": -76.5320
       },
-      "description": "Taller de papelería creativa para eventos y papelería comercial en Cali. Cajas temáticas, dulceros, toppers 3D, stickers desde 50 unidades y empaques para emprendedores.",
+      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
       "areaServed": [
         {
           "@type": "City",
@@ -111,16 +140,194 @@
           "name": "Colombia"
         }
       ],
+      "founder": {
+        "@type": "Person",
+        "name": "Karla",
+        "jobTitle": "Diseñadora y Fundadora"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Karla",
+        "jobTitle": "Diseñadora y Creadora"
+      },
       "sameAs": [
         "https://www.instagram.com/maranathacalico",
         "https://www.tiktok.com/@maranathacalico",
-        "https://www.facebook.com/maranatha.calico"
+        "https://www.facebook.com/maranatha.calico",
+        "https://www.linkedin.com/company/maranatha-papeleria-creativa"
       ]
+    }
+    </script>
+
+    <!-- Schema 3: FAQPage estructurado para motores de IA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué productos personalizados elaboran en Maranatha Papelería Creativa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas 3D, dulceros para fiestas, cake toppers en relieve, tarjetas de presentación, etiquetas adhesivas y pendones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la cantidad mínima para encargar stickers personalizados en Cali?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El pedido mínimo de stickers personalizados troquelados en vinilo o papel fotográfico es de tan solo 50 unidades por diseño, con corte troquelado exacto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se realizan los envíos en Cali y el resto de Colombia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Realizamos entregas directas y mensajería express en toda la ciudad de Cali, y despachos garantizados a nivel nacional a través de transportadoras certificadas hacia cualquier ciudad de Colombia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo solicitar una cotización o realizar un pedido en Maranatha?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes escribirnos directamente a nuestro WhatsApp oficial +57 314 585 4213 para recibir asesoría personalizada inmediata sobre tu evento o emprendimiento."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema 4: BlogPosting / Article con dateModified para Freshness Signals -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Guía de Papelería Creativa, Empaques y Stickers en Cali",
+      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
+      "url": "https://maranathapapeleria.com",
+      "image": "https://maranathapapeleria.com/hero-page.webp",
+      "datePublished": "2026-01-15T09:00:00+00:00",
+      "dateModified": "2026-09-27T00:00:00+00:00",
+      "author": {
+        "@type": "Person",
+        "name": "Karla",
+        "jobTitle": "Diseñadora y Fundadora"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Maranatha Papelería Creativa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://maranathapapeleria.com/logo.svg"
+        }
+      }
     }
     </script>
   </head>
   <body class="bg-white text-gray-900 font-peridot antialiased selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
-    <div id="root"></div>
+    <!-- Contenedor Raíz de React con Pre-renderizado Semántico Accesible para Crawlers e IA -->
+    <div id="root">
+      <header>
+        <nav aria-label="Navegación principal">
+          <a href="#catalogo">Catálogo</a>
+          <a href="#about" class="about-link">Sobre Nosotros</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </header>
+
+      <main>
+        <article>
+          <h1>Maranatha Papelería Creativa | Eventos y Empaques en Cali</h1>
+          <p>
+            Taller artesanal y digital vallecaucano con más de 5 años creando papelería creativa orientada a eventos y marcas en Colombia. Fabricamos stickers personalizados desde solo 50 unidades con 100% de personalización, cajas temáticas tridimensionales, dulceros festivos infantiles, cake toppers multicapa y empaques comerciales con corte milimétrico en vinilo y cartulinas especiales de 220 g/m² a 250 g/m². Ofrecemos cotizaciones directas, entregas rápidas a domicilio y despachos asegurados a más de 30 ciudades de Colombia.
+          </p>
+
+          <h2>Nuestras Especialidades en Papelería y Empaques</h2>
+          
+          <h3>1. Stickers y Etiquetas Personalizadas</h3>
+          <p>
+            Troquelado digital de alta definición en vinilo resistente al agua y papel fotográfico brillante de 135 g/m² desde 50 unidades por referencia.
+          </p>
+          <ul>
+            <li>Stickers en vinilo adhesivo impermeable aptos en botellas y packaging</li>
+            <li>Etiquetas troqueladas en papel brillante glossy sobre cajas de regalo</li>
+            <li>Stickers en láminas kiss-cut con fácil desprendimiento comercial</li>
+          </ul>
+
+          <h3>2. Cajas Temáticas 3D y Dulceros Infantiles</h3>
+          <p>
+            Estructuras tridimensionales diseñadas en mesas de dulces y recuerdos de celebración familiar con técnicas de relieve multicapa.
+          </p>
+          <ul>
+            <li>Cajas pirámide con apliques 3D y remate de lazo de satín</li>
+            <li>Cajas milkbox con ventana de acetato y fondo reforzado</li>
+            <li>Cajitas interactivas tipo shaker con lentejuelas y microperlas</li>
+          </ul>
+
+          <h3>3. Papelería Empresarial y Comercial</h3>
+          <p>
+            Soluciones de presentación gráfica destinadas a marcas, tiendas y emprendimientos en propalcote de 300 g/m² con acabados mate o brillante.
+          </p>
+          <ul>
+            <li>Tarjetas de presentación con esquinas redondeadas y reserva UV</li>
+            <li>Etiquetas colgantes (hang tags) con perforación en prendas de vestir</li>
+            <li>Volantes publicitarios y pendones en lona banner de 13 onzas</li>
+          </ul>
+
+          <h3>4. Insumos y Materiales Especializados</h3>
+          <p>
+            Distribución de vinilos adhesivos por metro, cartulinas perladas libres de ácido y soportes acrílicos transparentes grado alimenticio.
+          </p>
+          <ul>
+            <li>Vinilos adhesivos en colores mates, brillantes y metalizados</li>
+            <li>Cartulinas Sirio Pearl y cartulinas escarchadas glitter sin desprendimiento</li>
+            <li>Varillas y bases acrílicas transparentes destinadas a cake toppers</li>
+          </ul>
+
+          <h2>Preguntas Frecuentes sobre Pedidos y Envíos</h2>
+          <ol>
+            <li>
+              <strong>¿Cuál es la cantidad mínima de stickers personalizados?</strong>
+              El pedido mínimo es desde 50 unidades por diseño en vinilo o papel fotográfico.
+            </li>
+            <li>
+              <strong>¿Cuáles son los tiempos de entrega promedio?</strong>
+              El tiempo estándar de producción es de 3 a 5 días hábiles tras confirmar el diseño y el anticipo.
+            </li>
+            <li>
+              <strong>¿Hacen envíos a otras ciudades de Colombia?</strong>
+              Sí, realizamos envíos nacionales certificados a Bogotá, Medellín, Barranquilla y todo el país.
+            </li>
+          </ol>
+
+          <section id="about">
+            <h2>Sobre Nuestro Taller</h2>
+            <p class="author">
+              Diseñado y elaborado artesanalmente por Karla en Maranatha Papelería Creativa en Cali, Colombia.
+            </p>
+            <p>
+              Creemos en el valor de los detalles hechos a mano con precisión digital, brindando soluciones accesibles y con alta dedicación a emprendedores y familias que celebran momentos inolvidables.
+            </p>
+            <p>
+              Canales oficiales de atención:
+              <a href="https://wa.me/573145854213" rel="noopener noreferrer">WhatsApp Oficial (+57 314 585 4213)</a> |
+              <a href="https://www.instagram.com/maranathacalico" rel="noopener noreferrer">Instagram (@maranathacalico)</a> |
+              <a href="https://www.tiktok.com/@maranathacalico" rel="noopener noreferrer">TikTok (@maranathacalico)</a>
+            </p>
+          </section>
+        </article>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 Maranatha Papelería Creativa. Cali, Colombia. Todos los derechos reservados.</p>
+      </footer>
+    </div>
+
+    <!-- Script de React: al cargar el navegador, hidrata/monta la SPA sobre #root -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

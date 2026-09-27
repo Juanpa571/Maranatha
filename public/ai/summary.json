@@ -1,0 +1,17 @@
+{
+  "name": "Maranatha Papelería Creativa",
+  "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
+  "url": "https://maranathapapeleria.com",
+  "industry": "Papelería Creativa, Empaques y Diseño Gráfico",
+  "location": {
+    "city": "Cali",
+    "region": "Valle del Cauca",
+    "country": "Colombia"
+  },
+  "contact": {
+    "phone": "+57 314 585 4213",
+    "email": "hola@maranathapapeleria.com",
+    "whatsapp": "https://wa.me/573145854213"
+  },
+  "lastModified": "2026-09-27T00:00:00Z"
+}

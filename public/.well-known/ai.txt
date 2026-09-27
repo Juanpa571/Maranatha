@@ -1,0 +1,13 @@
+# AI Policy & Discovery Manifest for Maranatha Papelería Creativa
+User-agent: *
+Allow: /
+
+# Endpoints de contexto y catálogos estructurados para LLMs y Agentes
+Contact: hola@maranathapapeleria.com
+Policy: https://maranathapapeleria.com/politica-de-privacidad
+Catalog: https://maranathapapeleria.com/ai-catalog.json
+LLMs-Txt: https://maranathapapeleria.com/llms.txt
+Summary: https://maranathapapeleria.com/ai/summary.json
+FAQ: https://maranathapapeleria.com/ai/faq.json
+Service: https://maranathapapeleria.com/ai/service.json
+RSS: https://maranathapapeleria.com/rss.xml
