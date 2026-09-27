@@ -109,16 +109,18 @@ export default function NavigationDrawer({ isOpen, onClose }) {
       />
 
       {/* 2. Panel Drawer Lateral deslizante desde la derecha */}
-      <div
+      <aside
+        data-lenis-prevent
+        data-lenis-prevent-touch
         role="dialog"
         aria-modal="true"
         aria-label="Menú de navegación principal"
-        className={`fixed top-0 right-0 z-[70] h-full w-full max-w-[420px] bg-white font-peridot shadow-[-10px_0_40px_rgba(0,0,0,0.18)] flex flex-col justify-between transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 right-0 z-[70] h-full h-[100dvh] max-h-[100dvh] w-full max-w-[420px] bg-white font-peridot shadow-[-10px_0_40px_rgba(0,0,0,0.18)] flex flex-col justify-between transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Cabecera del Drawer */}
-        <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+        <div className="px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-100 flex items-center justify-between shrink-0">
           <Link
             to="/"
             onClick={onClose}
@@ -137,8 +139,15 @@ export default function NavigationDrawer({ isOpen, onClose }) {
           </button>
         </div>
 
-        {/* Contenido Scrollable Interior */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+        {/* Contenido Scrollable Interior con soporte táctil nativo garantizado para móviles */}
+        <div
+          data-lenis-prevent
+          data-lenis-prevent-touch
+          onTouchMove={(e) => e.stopPropagation()}
+          onWheel={(e) => e.stopPropagation()}
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-6 py-5 sm:py-6 space-y-5 sm:space-y-6 touch-pan-y"
+          style={{ WebkitOverflowScrolling: 'touch', overscrollBehaviorY: 'contain' }}
+        >
           
           {/* Card de Estado del Taller en Vivo en Cali */}
           <div className="rounded-2xl bg-[#FAF6FD] border border-[#EBD6FA] p-4">
@@ -292,23 +301,23 @@ export default function NavigationDrawer({ isOpen, onClose }) {
         </div>
 
         {/* Footer del Drawer con Botón Principal de WhatsApp */}
-        <div className="p-6 border-t border-gray-100 bg-[#FAF8FD]">
+        <div className="p-4 sm:p-6 border-t border-gray-100 bg-[#FAF8FD] shrink-0">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3.5 px-5 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-[0_6px_20px_rgba(126,4,161,0.28)] hover:shadow-xl transition-all duration-300 active:scale-95"
+            className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 sm:gap-2.5 shadow-[0_6px_20px_rgba(126,4,161,0.28)] hover:shadow-xl transition-all duration-300 active:scale-95"
           >
-            <MessageCircle className="w-5 h-5 fill-current shrink-0" />
+            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
             <span>Hablar por WhatsApp</span>
-            <ArrowRight className="w-4 h-4 shrink-0" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
           </a>
-          <p className="text-[11px] text-center text-gray-500 mt-2.5">
+          <p className="text-[10.5px] sm:text-[11px] text-center text-gray-500 mt-2 sm:mt-2.5">
             +57 314 5854213 • Cali, Valle del Cauca
           </p>
 
           {/* Enlaces a Redes Sociales Oficiales */}
-          <div className="flex items-center justify-center gap-3.5 mt-3 pt-3 border-t border-[#EBD6FA]/70 text-[#7E04A1]">
+          <div className="flex items-center justify-center gap-3.5 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-[#EBD6FA]/70 text-[#7E04A1]">
             <a
               href="https://www.instagram.com/maranathacalico"
               target="_blank"
@@ -349,7 +358,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
             </a>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }
