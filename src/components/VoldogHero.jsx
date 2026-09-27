@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HelpCircle, MapPin, Clock, ChevronDown } from 'lucide-react';
-import NavigationDrawer from './NavigationDrawer';
+
+const NavigationDrawer = lazy(() => import('./NavigationDrawer'));
 
 // Easing cúbico suave: aceleración inicial y desaceleración elástica al final (exacto referencia Voldog)
 function easeInOutCubic(t) {
@@ -711,8 +712,12 @@ export default function VoldogHero() {
 
       </section>
 
-      {/* 3. Menú Lateral Drawer */}
-      <NavigationDrawer isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      {/* 3. Menú Lateral Drawer (Carga diferida bajo demanda) */}
+      {isMenuOpen && (
+        <Suspense fallback={null}>
+          <NavigationDrawer isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        </Suspense>
+      )}
     </>
   );
 }
