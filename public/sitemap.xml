@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://maranathapapeleria.com/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Catálogo General -->
+  <url>
+    <loc>https://maranathapapeleria.com/catalogo</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Categoría: Papelería Creativa -->
+  <url>
+    <loc>https://maranathapapeleria.com/categoria/papeleria-creativa</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Categoría: Papelería Empresarial -->
+  <url>
+    <loc>https://maranathapapeleria.com/categoria/papeleria-empresarial</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Categoría: Insumos de Papelería -->
+  <url>
+    <loc>https://maranathapapeleria.com/categoria/insumos</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Legal: Política de Privacidad -->
+  <url>
+    <loc>https://maranathapapeleria.com/politica-de-privacidad</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <!-- Legal: Términos y Condiciones -->
+  <url>
+    <loc>https://maranathapapeleria.com/terminos-y-condiciones</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>

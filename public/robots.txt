@@ -1,0 +1,5 @@
+# robots.txt for https://maranathapapeleria.com
+User-agent: *
+Allow: /
+
+Sitemap: https://maranathapapeleria.com/sitemap.xml

@@ -1,0 +1,129 @@
+@import url('https://use.typekit.net/lqx2qrc.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Pacifico&family=Patrick+Hand&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    overflow-anchor: none !important;
+    scroll-behavior: auto !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'peridot-pe-variable', 'Montserrat', system-ui, sans-serif;
+  }
+}
+
+/* Interacción hover física estilo Voldog para el botón cápsula */
+.voldog-btn-expand {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 9999px;
+  background-color: #7E04A1;
+  transition: width 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+              height 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+              right 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .voldog-btn-expand {
+    right: 12px;
+    width: 62px;
+    height: 62px;
+  }
+}
+
+@media (min-width: 768px) {
+  .voldog-btn-expand {
+    right: 14px;
+    width: 68px;
+    height: 68px;
+  }
+}
+
+.group:hover .voldog-btn-expand {
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Interacción hover física estilo Voldog en lila (#E7D1FF) para Destacados en Cali */
+.voldog-btn-expand-lilac {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: #E7D1FF;
+  transition: width 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+              height 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+              right 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .voldog-btn-expand-lilac {
+    right: 10px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (min-width: 768px) {
+  .voldog-btn-expand-lilac {
+    right: 12px;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .voldog-btn-expand-lilac {
+    right: 12px;
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.group:hover .voldog-btn-expand-lilac {
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cinta corrediza infinita (Marquee Ticker estilo Voldog) */
+@keyframes voldogMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-voldog-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: voldogMarquee 120s linear infinite;
+  pointer-events: none;
+}
+
+
+
+
+
