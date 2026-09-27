@@ -1,37 +1,56 @@
 {
-  "$schema": "https://agenticresourcediscovery.org/spec/v1/schema.json",
-  "specVersion": "1.0",
-  "name": "Maranatha Papelería Creativa",
-  "description": "Taller de autor en Cali, Colombia especializado en cajas temáticas, stickers personalizados, toppers e insumos",
-  "url": "https://maranathapapeleria.com",
   "entries": [
     {
-      "identifier": "urn:ai:maranathapapeleria.com:catalog:papeleria-creativa",
-      "displayName": "Papelería Creativa",
-      "type": "text/html",
-      "url": "https://maranathapapeleria.com/papeleria-creativa",
-      "description": "Cajas temáticas, dulceros con relieve 3D, kits festivos y cake toppers personalizados en Cali"
+      "identifier": "urn:air:maranathapapeleria.com:catalog:papeleria-creativa",
+      "displayName": "Papelería Creativa Maranatha Cali",
+      "type": "application/ai-catalog+json",
+      "url": "https://maranathapapeleria.com/categoria/papeleria-creativa",
+      "description": "Cajas temáticas para fiestas, dulceros con relieve 3D, kits festivos y cake toppers personalizados en Cali.",
+      "representativeQueries": [
+        "cajas tematicas personalizadas en cali",
+        "cake toppers 3d para fiestas infantiles cali",
+        "dulceros y empaques creativos eventos cali",
+        "papeleria creativa para cumpleanos cali"
+      ]
     },
     {
-      "identifier": "urn:ai:maranathapapeleria.com:catalog:papeleria-empresarial",
-      "displayName": "Papelería Empresarial",
-      "type": "text/html",
-      "url": "https://maranathapapeleria.com/papeleria-empresarial",
-      "description": "Tarjetas de presentación, volantes publicitarios, pendones y etiquetas corporativas"
+      "identifier": "urn:air:maranathapapeleria.com:catalog:papeleria-empresarial",
+      "displayName": "Papelería Empresarial y Empaques Maranatha Cali",
+      "type": "application/ai-catalog+json",
+      "url": "https://maranathapapeleria.com/categoria/papeleria-empresarial",
+      "description": "Tarjetas de presentación, volantes publicitarios, pendones y stickers corporativos desde 50 unidades.",
+      "representativeQueries": [
+        "stickers personalizados para emprendimientos cali",
+        "tarjetas de presentacion en cali",
+        "etiquetas adhesivas para productos cali",
+        "volantes y pendones publicitarios cali"
+      ]
     },
     {
-      "identifier": "urn:ai:maranathapapeleria.com:catalog:insumos",
-      "displayName": "Insumos de Papelería",
-      "type": "text/html",
-      "url": "https://maranathapapeleria.com/insumos",
-      "description": "Vinilos adhesivos por metro, cartulinas especiales, papel fotográfico glossy y herramientas"
+      "identifier": "urn:air:maranathapapeleria.com:catalog:insumos",
+      "displayName": "Insumos de Papelería Maranatha Cali",
+      "type": "application/ai-catalog+json",
+      "url": "https://maranathapapeleria.com/categoria/insumos",
+      "description": "Vinilos adhesivos por metro, cartulinas especiales, papel fotográfico glossy y herramientas de corte.",
+      "representativeQueries": [
+        "vinilos adhesivos por metro en cali",
+        "cartulina especial y papel fotografico cali",
+        "insumos para papeleria creativa cali",
+        "materiales para manualidades y plotter cali"
+      ]
     },
     {
-      "identifier": "urn:ai:maranathapapeleria.com:context:llms",
-      "displayName": "LLMs Context Manifest",
-      "type": "text/markdown",
+      "identifier": "urn:air:maranathapapeleria.com:context:llms",
+      "displayName": "Maranatha Papelería Creativa Context Manifest",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://maranathapapeleria.com/llms.txt",
-      "description": "Documentación y contexto estructurado de productos, contacto y cobertura para modelos de lenguaje"
+      "description": "Especificación estructurada de catálogo, servicios, preguntas frecuentes, cobertura local y canales oficiales de atención para agentes de IA.",
+      "representativeQueries": [
+        "informacion de productos y servicios maranatha papeleria cali",
+        "catalogo y precios papeleria creativa cali",
+        "contacto y horario de atencion maranatha cali",
+        "como hacer pedidos personalizados de papeleria en cali"
+      ]
     }
   ]
 }
