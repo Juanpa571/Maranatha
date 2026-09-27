@@ -115,7 +115,7 @@ export default function CategoryCards() {
           >
             {/* Imagen de fondo oficial (pointer-events-none para que el contenedor Link capture todo el hover) */}
             <img
-              src={cat.image}
+              src={cardsState !== 'below' ? cat.image : undefined}
               alt={cat.alt}
               width="680"
               height="850"

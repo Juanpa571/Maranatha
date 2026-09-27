@@ -215,7 +215,7 @@ export default function CoreCatalog() {
                 className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
               >
                 <img
-                  src={prod.image}
+                  src={cardsState !== 'below' ? prod.image : undefined}
                   alt={prod.alt}
                   width="500"
                   height="500"

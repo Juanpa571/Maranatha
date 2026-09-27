@@ -204,7 +204,7 @@ export default function VoldogHero() {
   const [isVideoMounted, setIsVideoMounted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVideoMounted(true), 600);
+    const timer = setTimeout(() => setIsVideoMounted(true), 2500);
     return () => clearTimeout(timer);
   }, []);
 
