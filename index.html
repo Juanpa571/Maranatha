@@ -229,8 +229,10 @@
     </script>
   </head>
   <body class="bg-white text-gray-900 font-peridot antialiased selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
-    <!-- Contenedor Raíz de React con Pre-renderizado Semántico Accesible para Crawlers e IA -->
-    <div id="root">
+    <div id="root"></div>
+
+    <!-- Fallback Semántico Accesible para Crawlers e Indexadores sin JavaScript -->
+    <noscript>
       <header>
         <nav aria-label="Navegación principal">
           <a href="#catalogo">Catálogo</a>
@@ -331,7 +333,7 @@
       <footer>
         <p>&copy; 2026 Maranatha Papelería Creativa. Cali, Colombia. Todos los derechos reservados.</p>
       </footer>
-    </div>
+    </noscript>
 
     <!-- Script de React: al cargar el navegador, hidrata/monta la SPA sobre #root -->
     <script type="module" src="/src/main.jsx"></script>
