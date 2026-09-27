@@ -117,8 +117,8 @@ export default function CategoryCards() {
             <img
               src={cat.image}
               alt={cat.alt}
-              width="600"
-              height="750"
+              width="680"
+              height="850"
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"

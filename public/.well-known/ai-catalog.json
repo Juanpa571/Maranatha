@@ -1,38 +1,37 @@
 {
   "$schema": "https://agenticresourcediscovery.org/spec/v1/schema.json",
+  "specVersion": "1.0",
   "name": "Maranatha Papelería Creativa",
-  "description": "Taller de autor en Cali, Colombia especializado en cajas temáticas, stickers, toppers e insumos",
+  "description": "Taller de autor en Cali, Colombia especializado en cajas temáticas, stickers personalizados, toppers e insumos",
   "url": "https://maranathapapeleria.com",
-  "location": {
-    "city": "Cali",
-    "region": "Valle del Cauca",
-    "country": "Colombia"
-  },
-  "contact": {
-    "telephone": "+573145854213",
-    "whatsapp": "https://wa.me/573145854213"
-  },
-  "catalog": {
-    "currency": "COP",
-    "categories": [
-      {
-        "id": "papeleria-creativa",
-        "name": "Papelería Creativa",
-        "url": "https://maranathapapeleria.com/papeleria-creativa",
-        "description": "Cajas temáticas, dulceros con relieve 3D, kits festivos y cake toppers"
-      },
-      {
-        "id": "papeleria-empresarial",
-        "name": "Papelería Empresarial",
-        "url": "https://maranathapapeleria.com/papeleria-empresarial",
-        "description": "Tarjetas de presentación, volantes publicitarios, pendones y etiquetas"
-      },
-      {
-        "id": "insumos",
-        "name": "Insumos de Papelería",
-        "url": "https://maranathapapeleria.com/insumos",
-        "description": "Vinilos adhesivos por metro, cartulinas especiales y papel glossy"
-      }
-    ]
-  }
+  "entries": [
+    {
+      "identifier": "urn:ai:maranathapapeleria.com:catalog:papeleria-creativa",
+      "displayName": "Papelería Creativa",
+      "type": "text/html",
+      "url": "https://maranathapapeleria.com/papeleria-creativa",
+      "description": "Cajas temáticas, dulceros con relieve 3D, kits festivos y cake toppers personalizados en Cali"
+    },
+    {
+      "identifier": "urn:ai:maranathapapeleria.com:catalog:papeleria-empresarial",
+      "displayName": "Papelería Empresarial",
+      "type": "text/html",
+      "url": "https://maranathapapeleria.com/papeleria-empresarial",
+      "description": "Tarjetas de presentación, volantes publicitarios, pendones y etiquetas corporativas"
+    },
+    {
+      "identifier": "urn:ai:maranathapapeleria.com:catalog:insumos",
+      "displayName": "Insumos de Papelería",
+      "type": "text/html",
+      "url": "https://maranathapapeleria.com/insumos",
+      "description": "Vinilos adhesivos por metro, cartulinas especiales, papel fotográfico glossy y herramientas"
+    },
+    {
+      "identifier": "urn:ai:maranathapapeleria.com:context:llms",
+      "displayName": "LLMs Context Manifest",
+      "type": "text/markdown",
+      "url": "https://maranathapapeleria.com/llms.txt",
+      "description": "Documentación y contexto estructurado de productos, contacto y cobertura para modelos de lenguaje"
+    }
+  ]
 }

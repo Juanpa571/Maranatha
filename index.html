@@ -30,8 +30,10 @@
     <!-- Navegación Agéntica y Descubrimiento de Recursos IA (Agentic Web Discovery) -->
     <link rel="alternate" type="application/json" href="/ai-catalog.json" title="AI Product Catalog">
     <link rel="alternate" type="application/json" href="/.well-known/ai-catalog.json" title="AI Catalog Manifest">
+    <link rel="alternate" type="application/json" href="/.well-known/ard.json" title="ARD Manifest">
     <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs Context">
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
+    <link rel="ard" href="/.well-known/ard.json">
 
     <!-- Optimización de carga de fuentes y precarga DNS (máximo 2 preconnects para no agotar socket pool) -->
     <link rel="dns-prefetch" href="https://use.typekit.net">
@@ -41,16 +43,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Precarga de fuente crítica para acelerar LCP -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Tipografía Voldog Oficial: Peridot PE Variable (No bloqueante) -->
-    <link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css"></noscript>
-
     <!-- Tipografías Oficiales de Maranatha: Montserrat, Pacifico y Patrick Hand (No bloqueante) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap"></noscript>
+
+    <!-- Tipografía Secundaria Voldog: Peridot PE Variable (Carga diferida post-render para 95+ en PageSpeed) -->
+    <script>
+      window.addEventListener('load', function() {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = 'https://use.typekit.net/lqx2qrc.css';
+        document.head.appendChild(l);
+      });
+    </script>
+    <noscript><link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css"></noscript>
 
     <!-- Schema.org JSON-LD para SEO Local Google -->
     <script type="application/ld+json">

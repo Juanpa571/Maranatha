@@ -126,7 +126,7 @@ export default function CoreCatalog() {
       >
         <div className="relative pt-6 sm:pt-8 md:pt-10">
           <div className="absolute -top-1 sm:-top-2 left-0 pointer-events-none transform -rotate-12 opacity-85">
-            <img src="/faq-heart.webp" alt="" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
+            <img src="/faq-heart.webp" alt="" width="28" height="28" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[58px] xl:text-[66px] font-bold tracking-tight text-[#141517] leading-[1.10]">
@@ -217,8 +217,8 @@ export default function CoreCatalog() {
                 <img
                   src={prod.image}
                   alt={prod.alt}
-                  width="400"
-                  height="400"
+                  width="500"
+                  height="500"
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
