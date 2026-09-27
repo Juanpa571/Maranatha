@@ -18,14 +18,14 @@
     <meta property="og:site_name" content="Maranatha Papelería Creativa" />
     <meta property="og:title" content="Maranatha Papelería Creativa | Eventos y Empaques en Cali" />
     <meta property="og:description" content="Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos." />
-    <meta property="og:image" content="https://maranathapapeleria.com/hero-page.png" />
+    <meta property="og:image" content="https://maranathapapeleria.com/hero-page.webp" />
     <meta property="og:locale" content="es_CO" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Maranatha Papelería Creativa | Eventos y Empaques en Cali" />
     <meta name="twitter:description" content="Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos." />
-    <meta name="twitter:image" content="https://maranathapapeleria.com/hero-page.png" />
+    <meta name="twitter:image" content="https://maranathapapeleria.com/hero-page.webp" />
 
     <!-- Optimización de carga de fuentes y precarga DNS -->
     <link rel="dns-prefetch" href="https://use.typekit.net">
@@ -33,17 +33,20 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Precarga de fuente crítica para eliminar el LCP y CLS de la cabecera -->
     <link rel="preload" href="https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Tipografía Voldog Oficial: Peridot PE Variable -->
-    <link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css">
+    <!-- Tipografía Voldog Oficial: Peridot PE Variable (No bloqueante) -->
+    <link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css"></noscript>
 
-    <!-- Tipografías Oficiales de Maranatha: Montserrat (fallback ligero), Pacifico (marca) y Patrick Hand (acento artesanal) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <!-- Tipografías Oficiales de Maranatha: Montserrat, Pacifico y Patrick Hand (No bloqueante) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap"></noscript>
 
     <!-- Schema.org JSON-LD para SEO Local Google -->
     <script type="application/ld+json">

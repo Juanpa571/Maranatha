@@ -5,28 +5,28 @@ import { MessageCircle } from 'lucide-react';
 const STICKY_NOTES = [
   {
     id: 'asesoria',
-    image: '/purple-note.png',
+    image: '/purple-note.webp',
     alt: 'Atención 1 a 1: Asesoría de persona a persona',
     desktopPos: 'lg:-top-5 lg:-left-5 xl:-top-7 xl:-left-7',
     width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'taller',
-    image: '/pink-note.png',
+    image: '/pink-note.webp',
     alt: 'Hecho en Cali: Taller propio en Cali con diseño y producción artesanal',
     desktopPos: 'lg:-top-5 lg:-right-5 xl:-top-7 xl:-right-7',
     width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'muestras',
-    image: '/blue-note.png',
+    image: '/blue-note.webp',
     alt: 'Revisión y muestras previas: Validamos juntos antes de mandar a producción',
     desktopPos: 'lg:-bottom-5 lg:-left-5 xl:-bottom-7 xl:-left-7',
     width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'entregas',
-    image: '/green-note.png',
+    image: '/green-note.webp',
     alt: 'Entregas ágiles y cuidadosas: Domicilios directos en Cali y despachos a toda Colombia',
     desktopPos: 'lg:-bottom-5 lg:-right-5 xl:-bottom-7 xl:-right-7',
     width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
@@ -157,7 +157,7 @@ export default function LocalAttention() {
               </span>{' '}
               por WhatsApp
               <span className="inline-block align-middle ml-2 pointer-events-none">
-                <img src="/faq-rays-clean.png" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
+                <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
               </span>
             </h2>
           </div>
@@ -184,7 +184,7 @@ export default function LocalAttention() {
           {/* FOTO PANORÁMICA CENTRAL CON MÁXIMA PRESENCIA CINEMATOGRÁFICA */}
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-[28px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-[0_28px_85px_rgba(0,0,0,0.13)] border border-white/90 bg-white group">
             <img
-              src="/espacio-trabajo.png"
+              src="/espacio-trabajo.webp"
               alt="Espacio de trabajo y taller de Maranatha Papelería en Cali"
               width="1200"
               height="675"
@@ -250,7 +250,7 @@ export default function LocalAttention() {
                 ¡escríbenos!
               </span>
               <img
-                src="/faq-arrow-clean.png"
+                src="/faq-arrow-clean.webp"
                 alt=""
                 width="48"
                 height="48"
@@ -268,7 +268,7 @@ export default function LocalAttention() {
             >
               {/* Rayitas en la esquina del botón */}
               <div className="absolute -top-3 -right-2 sm:-top-3.5 sm:-right-2.5 pointer-events-none">
-                <img src="/faq-rays-clean.png" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain transform rotate-12 opacity-85" />
+                <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain transform rotate-12 opacity-85" />
               </div>
 
               <MessageCircle className="w-5 h-5 fill-current" />

@@ -95,7 +95,7 @@ export default function Footer() {
               {/* Foto de Karla sin fondo */}
               <div className="relative w-[90px] sm:w-[96px] h-[86px] sm:h-[92px] shrink-0 flex items-end justify-center">
                 <img
-                  src="/karla-face.png"
+                  src="/karla-face.webp"
                   alt="Karla - Recepcionista del taller"
                   className="w-full h-full object-contain object-bottom transform group-hover:scale-105 transition-transform duration-300"
                   draggable={false}
@@ -321,12 +321,12 @@ export default function Footer() {
                 </svg>
                 <div className="leading-snug">
                   <span className="block text-[#9898A4] text-xs">Redes sociales</span>
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1 text-[13px]">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 mt-1 text-[13px]">
                     <a
                       href="https://www.instagram.com/maranathacalico"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium"
+                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium py-1.5 px-1 inline-block"
                     >
                       IG: @maranathacalico
                     </a>
@@ -335,7 +335,7 @@ export default function Footer() {
                       href="https://www.tiktok.com/@maranathacalico"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium"
+                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium py-1.5 px-1 inline-block"
                     >
                       TikTok
                     </a>
@@ -344,7 +344,7 @@ export default function Footer() {
                       href="https://www.facebook.com/maranatha.calico"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium"
+                      className="text-white hover:text-[#EDA3FF] transition-colors font-medium py-1.5 px-1 inline-block"
                     >
                       FB: @maranatha.calico
                     </a>
@@ -372,14 +372,14 @@ export default function Footer() {
           {/* Lado Derecho: Iconos Sociales + Divisor + Volver Arriba */}
           <div className="flex items-center gap-4 sm:gap-5">
             
-            {/* Redes Sociales Oficiales */}
-            <div className="flex items-center gap-3 text-[#D0D0D8]">
+            {/* Redes Sociales Oficiales con área táctil accesible de 44x44px */}
+            <div className="flex items-center gap-1 sm:gap-2 text-[#D0D0D8]">
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/maranathacalico"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1 hover:text-[#EDA3FF] transition-colors"
+                className="w-11 h-11 flex items-center justify-center rounded-lg hover:text-[#EDA3FF] transition-colors"
                 title="Instagram: @maranathacalico"
                 aria-label="Instagram de Maranatha Papelería"
               >
@@ -395,7 +395,7 @@ export default function Footer() {
                 href="https://www.tiktok.com/@maranathacalico"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1 hover:text-[#EDA3FF] transition-colors"
+                className="w-11 h-11 flex items-center justify-center rounded-lg hover:text-[#EDA3FF] transition-colors"
                 title="TikTok: @maranathacalico"
                 aria-label="TikTok de Maranatha Papelería"
               >
@@ -409,7 +409,7 @@ export default function Footer() {
                 href="https://www.facebook.com/maranatha.calico"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1 hover:text-[#EDA3FF] transition-colors"
+                className="w-11 h-11 flex items-center justify-center rounded-lg hover:text-[#EDA3FF] transition-colors"
                 title="Facebook: @maranatha.calico"
                 aria-label="Facebook de Maranatha Papelería"
               >

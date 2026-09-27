@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agenticresourcediscovery.org/spec/v1/schema.json",
+  "name": "Maranatha Papelería Creativa",
+  "description": "Taller de autor en Cali, Colombia especializado en cajas temáticas, stickers, toppers e insumos",
+  "url": "https://maranathapapeleria.com",
+  "location": {
+    "city": "Cali",
+    "region": "Valle del Cauca",
+    "country": "Colombia"
+  },
+  "contact": {
+    "telephone": "+573145854213",
+    "whatsapp": "https://wa.me/573145854213"
+  },
+  "catalog": {
+    "currency": "COP",
+    "categories": [
+      {
+        "id": "papeleria-creativa",
+        "name": "Papelería Creativa",
+        "url": "https://maranathapapeleria.com/papeleria-creativa",
+        "description": "Cajas temáticas, dulceros con relieve 3D, kits festivos y cake toppers"
+      },
+      {
+        "id": "papeleria-empresarial",
+        "name": "Papelería Empresarial",
+        "url": "https://maranathapapeleria.com/papeleria-empresarial",
+        "description": "Tarjetas de presentación, volantes publicitarios, pendones y etiquetas"
+      },
+      {
+        "id": "insumos",
+        "name": "Insumos de Papelería",
+        "url": "https://maranathapapeleria.com/insumos",
+        "description": "Vinilos adhesivos por metro, cartulinas especiales y papel glossy"
+      }
+    ]
+  }
+}

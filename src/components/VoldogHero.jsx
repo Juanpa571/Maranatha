@@ -661,7 +661,9 @@ export default function VoldogHero() {
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
+                  aria-hidden="true"
+                  tabIndex={-1}
                   className="w-full h-full object-cover"
                 >
                   <source src="/logo-circle.mp4" type="video/mp4" />

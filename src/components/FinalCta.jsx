@@ -82,7 +82,7 @@ export default function FinalCta() {
         {/* 1. Tabla de corte lila con flor (Esquina superior izquierda) */}
         <div className="absolute -top-10 sm:-top-16 md:-top-20 lg:-top-24 -left-8 sm:-left-12 md:-left-16 lg:-left-20 w-[220px] sm:w-[320px] md:w-[27vw] lg:w-[25vw] max-w-[480px] pointer-events-none select-none z-10">
         <img
-          src="/seccion-final/cutting-mat.png"
+          src="/seccion-final/cutting-mat.webp"
           alt=""
           width="480"
           height="480"
@@ -96,7 +96,7 @@ export default function FinalCta() {
       {/* 2. Nota adhesiva rosa 'Atención 1 a 1' (Lateral izquierdo) */}
       <div className="absolute top-[28%] sm:top-[29%] md:top-[31%] left-2 sm:left-4 md:left-[3vw] lg:left-[4vw] xl:left-[5vw] w-[170px] sm:w-[230px] md:w-[19.5vw] lg:w-[18vw] max-w-[340px] pointer-events-none select-none z-10">
         <img
-          src="/seccion-final/note-atencion.png"
+          src="/seccion-final/note-atencion.webp"
           alt="Atención 1 a 1"
           width="340"
           height="340"
@@ -107,7 +107,7 @@ export default function FinalCta() {
         />
         {/* Rayitas doodle debajo de la nota */}
         <img
-          src="/faq-rays-clean.png"
+          src="/faq-rays-clean.webp"
           alt=""
           width="28"
           height="28"
@@ -120,7 +120,7 @@ export default function FinalCta() {
       {/* 3. Cuaderno espiral unicornio + marcador morado (Esquina inferior izquierda) */}
       <div className="absolute -bottom-10 sm:-bottom-16 md:-bottom-20 lg:-bottom-24 -left-8 sm:-left-12 md:-left-16 lg:-left-20 w-[250px] sm:w-[360px] md:w-[31vw] lg:w-[28vw] max-w-[540px] pointer-events-none select-none z-10">
         <img
-          src="/seccion-final/notebook.png"
+          src="/seccion-final/notebook.webp"
           alt=""
           width="540"
           height="540"
@@ -134,7 +134,7 @@ export default function FinalCta() {
       {/* 4. Foto Polaroid taller con washi tape gingham y corazón (Esquina superior derecha) */}
       <div className="absolute -top-12 sm:-top-18 md:-top-24 lg:-top-28 -right-8 sm:-right-12 md:-right-16 lg:-right-20 w-[240px] sm:w-[340px] md:w-[29vw] lg:w-[27vw] max-w-[520px] pointer-events-none select-none z-10">
         <img
-          src="/seccion-final/polaroid.png"
+          src="/seccion-final/polaroid.webp"
           alt=""
           width="520"
           height="520"
@@ -149,7 +149,7 @@ export default function FinalCta() {
       <div className="absolute top-[32%] sm:top-[33%] md:top-[35%] right-2 sm:right-4 md:right-[3vw] lg:right-[4vw] xl:right-[5vw] w-[170px] sm:w-[230px] md:w-[19.5vw] lg:w-[18vw] max-w-[340px] pointer-events-none select-none z-10">
         {/* Corazón doodle encima de la nota */}
         <img
-          src="/faq-heart.png"
+          src="/faq-heart.webp"
           alt=""
           width="32"
           height="32"
@@ -158,7 +158,7 @@ export default function FinalCta() {
           className="absolute -top-7 sm:-top-8 right-12 sm:right-16 md:right-20 w-6 h-6 sm:w-8 sm:h-8 object-contain pointer-events-none transform rotate-12 opacity-85"
         />
         <img
-          src="/seccion-final/note-cali.png"
+          src="/seccion-final/note-cali.webp"
           alt="Hecho en Cali"
           width="340"
           height="340"
@@ -169,7 +169,7 @@ export default function FinalCta() {
         />
         {/* Rayitas doodle a la derecha */}
         <img
-          src="/faq-rays-clean.png"
+          src="/faq-rays-clean.webp"
           alt=""
           width="28"
           height="28"
@@ -179,7 +179,7 @@ export default function FinalCta() {
         />
         {/* Rayitas doodle debajo */}
         <img
-          src="/faq-rays-clean.png"
+          src="/faq-rays-clean.webp"
           alt=""
           width="28"
           height="28"
@@ -192,7 +192,7 @@ export default function FinalCta() {
       {/* 6. Rollos de cinta washi sobre cartulinas (Esquina inferior derecha) */}
       <div className="absolute -bottom-8 sm:-bottom-12 md:-bottom-18 lg:-bottom-20 -right-8 sm:-right-12 md:-right-16 lg:-right-20 w-[240px] sm:w-[330px] md:w-[28vw] lg:w-[26vw] max-w-[500px] pointer-events-none select-none z-10">
         <img
-          src="/seccion-final/washi-sheets.png"
+          src="/seccion-final/washi-sheets.webp"
           alt=""
           width="500"
           height="500"
@@ -220,7 +220,7 @@ export default function FinalCta() {
         {/* Rótulo superior: Estamos en el taller 3D Ilustrado */}
         <div className="inline-block mb-3 sm:mb-5 relative select-none">
           <img
-            src="/seccion-final/estamos-en-el-taller.png"
+            src="/seccion-final/estamos-en-el-taller.webp"
             alt="Estamos en el taller"
             width="430"
             height="144"
@@ -236,7 +236,7 @@ export default function FinalCta() {
           <span className="relative inline-block">
             {/* Rayitas doodle a la izquierda del titular */}
             <img
-              src="/faq-rays-clean.png"
+              src="/faq-rays-clean.webp"
               alt=""
               width="48"
               height="48"
@@ -251,7 +251,7 @@ export default function FinalCta() {
             <span>Hagámosla</span>
             <span className="relative inline-block align-baseline">
               <img
-                src="/final-cta-realidad.png"
+                src="/final-cta-realidad.webp"
                 alt="realidad."
                 width="160"
                 height="48"

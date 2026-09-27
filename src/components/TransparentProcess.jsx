@@ -111,7 +111,7 @@ export default function TransparentProcess() {
           <div className="text-center max-w-2xl mx-auto relative">
             {/* Corazón doodle flotante */}
             <div className="absolute -top-3.5 left-2 sm:left-8 pointer-events-none transform -rotate-12 opacity-85">
-              <img src="/faq-heart.png" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
+              <img src="/faq-heart.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
             </div>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-bold tracking-tight text-[#141517] leading-[1.15]">
@@ -120,7 +120,7 @@ export default function TransparentProcess() {
               <span className="text-[#7E04A1]">diseño, aprobación previa</span>{' '}
               y entrega sin mínimos
               <span className="inline-block align-middle ml-2 pointer-events-none">
-                <img src="/faq-rays-clean.png" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
+                <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
               </span>
             </h2>
           </div>
@@ -152,7 +152,7 @@ export default function TransparentProcess() {
 
             <div className="relative w-full max-w-[420px] mx-auto md:mx-0">
               <img
-                src="/escritorio/fase-01.png"
+                src="/escritorio/fase-01.webp"
                 alt="Fase 01 - Cuéntanos tu idea"
                 width="420"
                 height="350"
@@ -181,7 +181,7 @@ export default function TransparentProcess() {
               {/* Burbujita doodle artesanal flotando sobre el teléfono */}
               <div className="absolute -top-3.5 -right-2 sm:-top-5 sm:-right-4 z-20 pointer-events-none transform rotate-12">
                 <img
-                  src="/faq-bubble-clean.png"
+                  src="/faq-bubble-clean.webp"
                   alt=""
                   width="40"
                   height="40"
@@ -192,7 +192,7 @@ export default function TransparentProcess() {
               </div>
 
               <img
-                src="/escritorio/fase-02.png"
+                src="/escritorio/fase-02.webp"
                 alt="Fase 02 - Aprobación previa"
                 width="300"
                 height="420"
@@ -219,7 +219,7 @@ export default function TransparentProcess() {
 
             <div className="relative w-full max-w-[420px] mx-auto md:mx-0">
               <img
-                src="/escritorio/fase-03.png"
+                src="/escritorio/fase-03.webp"
                 alt="Fase 03 - Producción y entrega"
                 width="420"
                 height="350"
@@ -268,7 +268,7 @@ export default function TransparentProcess() {
                 {/* Rayitas arriba del botón */}
                 <div className="absolute -top-2.5 -right-2 pointer-events-none">
                   <img
-                    src="/faq-rays-clean.png"
+                    src="/faq-rays-clean.webp"
                     alt=""
                     className="w-4 h-4 sm:w-5 sm:h-5 object-contain transform rotate-12 opacity-85"
                   />

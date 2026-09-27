@@ -109,7 +109,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
       />
 
       {/* 2. Panel Drawer Lateral deslizante desde la derecha */}
-      <aside
+      <div
         role="dialog"
         aria-modal="true"
         aria-label="Menú de navegación principal"
@@ -267,7 +267,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
           <div className="rounded-2xl bg-[#FAF8FD] border border-gray-100 p-3.5 flex items-center gap-3">
             <div className="w-14 h-14 rounded-full overflow-hidden bg-[#EBD6FA] shrink-0 flex items-center justify-center">
               <img
-                src="/karla-face.png"
+                src="/karla-face.webp"
                 alt="Karla"
                 className="w-full h-full object-contain object-bottom"
               />
@@ -345,7 +345,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
             </a>
           </div>
         </div>
-      </aside>
+      </div>
     </>
   );
 }

@@ -223,7 +223,7 @@ export default function FaqSection() {
                   Dudas resueltas
                 </span>
                 <img
-                  src="/faq-rays-clean.png"
+                  src="/faq-rays-clean.webp"
                   alt=""
                   width="20"
                   height="20"
@@ -236,7 +236,7 @@ export default function FaqSection() {
               {/* Corazón dibujado a mano exacto de la imagen */}
               <div className="pr-4 sm:pr-8">
                 <img
-                  src="/faq-heart.png"
+                  src="/faq-heart.webp"
                   alt=""
                   width="32"
                   height="32"
@@ -267,7 +267,7 @@ export default function FaqSection() {
               {/* NOTA 1: MORADA (SUPERIOR) - INTERACTIVA INDEPENDIENTE */}
               <div className="relative z-10 w-[92%] sm:w-[90%] transform -rotate-[2deg] hover:rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:z-30 transition-all duration-300 ease-out cursor-pointer group">
                 <img
-                  src="/purple-note.png"
+                  src="/purple-note.webp"
                   alt="Asesoría de persona a persona"
                   width="1024"
                   height="682"
@@ -281,7 +281,7 @@ export default function FaqSection() {
               {/* NOTA 2: ROSA (INFERIOR) - INTERACTIVA INDEPENDIENTE, SUPERPUESTA A LA DERECHA */}
               <div className="relative z-20 w-[92%] sm:w-[90%] ml-[8%] sm:ml-[10%] -mt-[18%] sm:-mt-[20%] transform rotate-[1.5deg] hover:rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:z-30 transition-all duration-300 ease-out cursor-pointer group">
                 <img
-                  src="/pink-note.png"
+                  src="/pink-note.webp"
                   alt="Taller propio en Cali"
                   width="1024"
                   height="681"
@@ -312,7 +312,7 @@ export default function FaqSection() {
             
             {/* Rayitas doodle en la esquina superior derecha */}
             <div className="absolute -top-3.5 right-2 hidden sm:block pointer-events-none">
-              <img src="/faq-rays-clean.png" alt="" className="w-6 h-5 object-contain opacity-80" />
+              <img src="/faq-rays-clean.webp" alt="" className="w-6 h-5 object-contain opacity-80" />
             </div>
 
             {/* UN ÚNICO BLOQUE MAESTRO CON TODAS LAS 8 PREGUNTAS PEGADAS CON DIVIDE-Y */}
@@ -399,7 +399,7 @@ export default function FaqSection() {
                 {/* Icono de burbuja de diálogo oficial limpio */}
                 <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center shrink-0">
                   <img
-                    src="/faq-bubble-clean.png"
+                    src="/faq-bubble-clean.webp"
                     alt=""
                     width="40"
                     height="40"
@@ -421,7 +421,7 @@ export default function FaqSection() {
                 {/* Flecha curva doodle oficial con espiral apuntando al botón */}
                 <div className="hidden md:flex items-center pl-2 pr-1 shrink-0">
                   <img
-                    src="/faq-arrow-clean.png"
+                    src="/faq-arrow-clean.webp"
                     alt=""
                     width="80"
                     height="36"
@@ -435,7 +435,7 @@ export default function FaqSection() {
               {/* Botón de WhatsApp con rayitas doodle */}
               <div className="relative shrink-0">
                 <div className="absolute -top-3.5 -right-2 hidden sm:block pointer-events-none">
-                  <img src="/faq-rays-clean.png" alt="" width="20" height="20" loading="lazy" decoding="async" className="w-5 h-5 object-contain" />
+                  <img src="/faq-rays-clean.webp" alt="" width="20" height="20" loading="lazy" decoding="async" className="w-5 h-5 object-contain" />
                 </div>
 
                 <a
