@@ -41,3 +41,6 @@ Thumbs.db
 
 # Heavy local raw design archives (preserved locally on disk)
 assets_raw/
+
+# Lighthouse temporary audit reports
+lh-*.json

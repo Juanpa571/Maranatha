@@ -35,15 +35,39 @@
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
     <link rel="ard" href="/.well-known/ard.json">
 
+    <!-- Precarga de Fuente LCP Oficial (Pacifico Subconjunto Local 4.6 KB) e Isotipo -->
+    <link rel="preload" href="/fonts/pacifico-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/unicornio-white.svg" as="image" type="image/svg+xml">
+
     <!-- Optimización de carga de fuentes y precarga DNS (Google Fonts Oficiales) -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Tipografías Oficiales de Maranatha: Montserrat, Pacifico y Patrick Hand (No bloqueante) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap"></noscript>
+    <!-- Tipografías de Contenido: Montserrat y Patrick Hand (No bloqueante) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Patrick+Hand&display=swap"></noscript>
+
+    <!-- CSS Crítico Inlined para Pintura Inmediata (0ms Render-Blocking) -->
+    <style>
+      @font-face {
+        font-family: 'Pacifico';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/pacifico-subset.woff2') format('woff2');
+        unicode-range: U+4d, U+61, U+68, U+6d-6e, U+72, U+74;
+      }
+      *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; }
+      html { line-height: 1.5; -webkit-text-size-adjust: 100%; font-family: Montserrat, system-ui, -apple-system, sans-serif; }
+      body { margin: 0; background-color: #ffffff; color: #111827; -webkit-font-smoothing: antialiased; }
+      .hero-logo-center { position: absolute; left: 50%; top: 50%; font-family: 'Pacifico', cursive; line-height: 1; letter-spacing: -0.025em; color: #ffffff; white-space: nowrap; user-select: none; pointer-events: auto; will-change: transform; cursor: pointer; text-decoration: none; filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.22)); transform-origin: center center; }
+      @media (max-width: 639px) { .hero-logo-center { font-size: 28px; } }
+      @media (min-width: 640px) { .hero-logo-center { font-size: 34px; } }
+      @media (min-width: 768px) { .hero-logo-center { font-size: 38px; } }
+      @media (min-width: 1024px) { .hero-logo-center { font-size: 42px; } }
+    </style>
 
     <!-- Schema.org JSON-LD para SEO Local Google -->
     <script type="application/ld+json">
@@ -102,6 +126,28 @@
             <nav class="flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold text-[#7E04A1]">
               <span class="inline-flex items-center gap-1.5 py-1">Catálogo</span>
             </nav>
+
+            <!-- Isotipo Central y Logotipo Unificado Hero → LCP Inmediato (< 1s) -->
+            <div class="absolute left-1/2 -translate-x-1/2 top-0 h-full flex items-center justify-center pointer-events-none">
+              <div class="flex items-center justify-center will-change-transform">
+                <img
+                  src="/unicornio-white.svg"
+                  alt="Maranatha"
+                  width="56"
+                  height="56"
+                  class="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[86px] lg:h-[86px] object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.12)]"
+                />
+              </div>
+              <a
+                href="/"
+                title="Maranatha - Ir al inicio"
+                class="absolute left-1/2 top-1/2 font-['Pacifico',cursive] text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] tracking-tight leading-none hover:opacity-85 transition-opacity pb-1 whitespace-nowrap select-none pointer-events-auto will-change-transform cursor-pointer hero-logo-center"
+                style="color: rgb(255, 255, 255); transform: translate3d(-50%, calc(-50% + 82px), 0) scale(2.45); transform-origin: center center; filter: drop-shadow(rgba(0, 0, 0, 0.22) 0px 4px 18px);"
+              >
+                maranatha
+              </a>
+            </div>
+
             <div class="flex items-center gap-3 sm:gap-4 md:gap-5">
               <div class="w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full bg-[#7E04A1] text-white flex flex-col items-center justify-center gap-[5px] shadow-[0_4px_18px_rgba(126,4,161,0.28)]">
                 <span class="w-5 sm:w-6 h-[2.5px] bg-white rounded-full"></span>
@@ -115,8 +161,8 @@
             <div class="absolute inset-x-3 sm:inset-x-6 md:inset-x-8 lg:inset-x-[35px] top-3 sm:top-6 md:top-8 lg:top-[35px] bottom-3 sm:bottom-6 md:bottom-8 lg:bottom-[35px] bg-[#E7D1FF] rounded-[26px] sm:rounded-[36px] md:rounded-[42px] lg:rounded-[50px] overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-8">
               <div class="w-full shrink-0 h-[80px]"></div>
               <div class="relative flex-grow flex flex-col items-center justify-center w-full my-auto">
-                <div class="font-['Pacifico',cursive] text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] tracking-tight leading-none pb-1 text-white [filter:drop-shadow(0_4px_18px_rgba(0,0,0,0.22))]">
-                  maranatha
+                <div class="relative z-20 flex items-center justify-center aspect-square select-none pointer-events-none w-[215px] h-[215px] mt-[105px]">
+                  <div class="w-full h-full rounded-full overflow-hidden shadow-[0_12px_45px_rgba(0,0,0,0.18)] bg-[#7E04A1]"></div>
                 </div>
               </div>
               <footer class="relative z-30 w-full flex items-center justify-start">
