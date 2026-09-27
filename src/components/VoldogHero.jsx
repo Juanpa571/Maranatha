@@ -202,12 +202,6 @@ export default function VoldogHero() {
 
   // Progreso de scroll normalizado de 0 a 1
   const [progress, setProgress] = useState(0);
-  const [isVideoMounted, setIsVideoMounted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVideoMounted(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Inicialización sincrónica según dimensiones exactas del viewport para garantizar CLS = 0.000
   const [config, setConfig] = useState(() => {
@@ -647,12 +641,13 @@ export default function VoldogHero() {
                   loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="auto"
+                  poster="/logo-circle-poster.webp"
                   aria-hidden="true"
                   tabIndex={-1}
                   className="w-full h-full object-cover"
                 >
-                  {isVideoMounted && <source src="/logo-circle.mp4" type="video/mp4" />}
+                  <source src="/logo-circle.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
