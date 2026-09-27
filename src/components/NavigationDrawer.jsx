@@ -269,6 +269,10 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               <img
                 src="/karla-face.webp"
                 alt="Karla"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain object-bottom"
               />
             </div>

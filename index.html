@@ -35,9 +35,7 @@
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
     <link rel="ard" href="/.well-known/ard.json">
 
-    <!-- Optimización de carga de fuentes y precarga DNS (máximo 2 preconnects para no agotar socket pool) -->
-    <link rel="dns-prefetch" href="https://use.typekit.net">
-    <link rel="dns-prefetch" href="https://p.typekit.net">
+    <!-- Optimización de carga de fuentes y precarga DNS (Google Fonts Oficiales) -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,17 +44,6 @@
     <!-- Tipografías Oficiales de Maranatha: Montserrat, Pacifico y Patrick Hand (No bloqueante) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Patrick+Hand&display=swap"></noscript>
-
-    <!-- Tipografía Secundaria Voldog: Peridot PE Variable (Carga diferida post-render para 95+ en PageSpeed) -->
-    <script>
-      window.addEventListener('load', function() {
-        var l = document.createElement('link');
-        l.rel = 'stylesheet';
-        l.href = 'https://use.typekit.net/lqx2qrc.css';
-        document.head.appendChild(l);
-      });
-    </script>
-    <noscript><link rel="stylesheet" href="https://use.typekit.net/lqx2qrc.css"></noscript>
 
     <!-- Schema.org JSON-LD para SEO Local Google -->
     <script type="application/ld+json">

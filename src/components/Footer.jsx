@@ -97,6 +97,10 @@ export default function Footer() {
                 <img
                   src="/karla-face.webp"
                   alt="Karla - Recepcionista del taller"
+                  width="96"
+                  height="92"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain object-bottom transform group-hover:scale-105 transition-transform duration-300"
                   draggable={false}
                 />

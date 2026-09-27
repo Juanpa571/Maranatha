@@ -17,11 +17,11 @@ export default {
         },
       },
       fontFamily: {
-        peridot: ['"peridot-pe-variable"', 'Peridot', 'Montserrat', 'sans-serif'],
+        peridot: ['Montserrat', 'system-ui', 'sans-serif'],
         montserrat: ['Montserrat', 'system-ui', 'sans-serif'],
         pacifico: ['Pacifico', 'cursive'],
         hand: ['"Patrick Hand"', 'cursive'],
-        sans: ['"peridot-pe-variable"', 'Peridot', 'Montserrat', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
     },
   },
