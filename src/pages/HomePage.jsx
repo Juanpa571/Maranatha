@@ -10,8 +10,19 @@ const FinalCta = lazy(() => import('../components/FinalCta'));
 const Footer = lazy(() => import('../components/Footer'));
 
 export default function HomePage() {
+  const [showBelowFold, setShowBelowFold] = React.useState(false);
+
   useEffect(() => {
     document.title = 'Maranatha Papelería Creativa | Eventos y Empaques en Cali';
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => setShowBelowFold(true), { timeout: 1200 });
+      } else {
+        const timer = setTimeout(() => setShowBelowFold(true), 100);
+        return () => clearTimeout(timer);
+      }
+    }
   }, []);
 
   return (
@@ -19,20 +30,24 @@ export default function HomePage() {
       {/* 1. Hero Principal Editorial con Navbar Unificada Continua (Estilo Voldog) */}
       <VoldogHero />
 
-      {/* 2. Secciones del Home: Carga Asíncrona Progresiva para Cero TBT en Móviles */}
-      <Suspense fallback={<div className="w-full min-h-[400px] bg-white" />}>
-        <main id="contenido" className="w-full bg-white relative z-10">
-          <CategoryCards />
-          <CoreCatalog />
-          <LocalAttention />
-          <TransparentProcess />
-          <FaqSection />
-          <FinalCta />
-        </main>
+      {/* 2. Secciones del Home: Carga Progresiva Asíncrona */}
+      {showBelowFold ? (
+        <Suspense fallback={<div className="w-full min-h-[400px] bg-white" />}>
+          <main id="contenido" className="w-full bg-white relative z-10">
+            <CategoryCards />
+            <CoreCatalog />
+            <LocalAttention />
+            <TransparentProcess />
+            <FaqSection />
+            <FinalCta />
+          </main>
 
-        {/* 3. Footer de Autor con Navegación Semántica, Datos Locales y Horarios */}
-        <Footer />
-      </Suspense>
+          {/* 3. Footer de Autor con Navegación Semántica, Datos Locales y Horarios */}
+          <Footer />
+        </Suspense>
+      ) : (
+        <div className="w-full min-h-[400px] bg-white" />
+      )}
     </div>
   );
 }
