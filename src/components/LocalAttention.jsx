@@ -7,29 +7,29 @@ const STICKY_NOTES = [
     id: 'asesoria',
     image: '/purple-note.webp',
     alt: 'Atención 1 a 1: Asesoría de persona a persona',
-    desktopPos: 'lg:-top-5 lg:-left-5 xl:-top-7 xl:-left-7',
-    width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
+    position: '-top-3 -left-2 sm:-top-5 sm:-left-4 lg:-top-5 lg:-left-5 xl:-top-7 xl:-left-7',
+    width: 'w-[47%] xs:w-[45%] sm:w-[38%] md:w-[32%] lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'taller',
     image: '/pink-note.webp',
     alt: 'Hecho en Cali: Taller propio en Cali con diseño y producción artesanal',
-    desktopPos: 'lg:-top-5 lg:-right-5 xl:-top-7 xl:-right-7',
-    width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
+    position: '-top-3 -right-2 sm:-top-5 sm:-right-4 lg:-top-5 lg:-right-5 xl:-top-7 xl:-right-7',
+    width: 'w-[47%] xs:w-[45%] sm:w-[38%] md:w-[32%] lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'muestras',
     image: '/blue-note.webp',
     alt: 'Revisión y muestras previas: Validamos juntos antes de mandar a producción',
-    desktopPos: 'lg:-bottom-5 lg:-left-5 xl:-bottom-7 xl:-left-7',
-    width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
+    position: '-bottom-3 -left-2 sm:-bottom-5 sm:-left-4 lg:-bottom-5 lg:-left-5 xl:-bottom-7 xl:-left-7',
+    width: 'w-[47%] xs:w-[45%] sm:w-[38%] md:w-[32%] lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
   {
     id: 'entregas',
     image: '/green-note.webp',
     alt: 'Entregas ágiles y cuidadosas: Domicilios directos en Cali y despachos a toda Colombia',
-    desktopPos: 'lg:-bottom-5 lg:-right-5 xl:-bottom-7 xl:-right-7',
-    width: 'lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
+    position: '-bottom-3 -right-2 sm:-bottom-5 sm:-right-4 lg:-bottom-5 lg:-right-5 xl:-bottom-7 xl:-right-7',
+    width: 'w-[47%] xs:w-[45%] sm:w-[38%] md:w-[32%] lg:w-[28.5%] xl:w-[27.5%] max-w-[340px]',
   },
 ];
 
@@ -181,7 +181,7 @@ export default function LocalAttention() {
         >
           
           {/* FOTO PANORÁMICA CENTRAL CON MÁXIMA PRESENCIA CINEMATOGRÁFICA */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-[28px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-[0_28px_85px_rgba(0,0,0,0.13)] border border-white/90 bg-white group">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-[24px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:shadow-[0_28px_85px_rgba(0,0,0,0.13)] border border-white/90 bg-white group">
             <img
               src="/espacio-trabajo.webp"
               alt="Espacio de trabajo y taller de Maranatha Papelería en Cali"
@@ -195,14 +195,13 @@ export default function LocalAttention() {
 
             {/* Sutil viñeta perimetral para realzar el contraste de las esquinas */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10 pointer-events-none" />
-
           </div>
 
-          {/* 3. NOTITAS ADHESIVAS OFICIALES EN DESKTOP (LG+): FLOTANDO EN LAS 4 ESQUINAS DEL TALLER */}
+          {/* 3. NOTITAS ADHESIVAS OFICIALES EN LAS 4 ESQUINAS (SOLO EN DESKTOP LG+, OCULTAS EN MÓVIL) */}
           {STICKY_NOTES.map((note) => (
             <div
               key={note.id}
-              className={`hidden lg:block absolute ${note.desktopPos} ${note.width} z-20 hover:z-30 hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 ease-out cursor-pointer group select-none`}
+              className={`hidden lg:block absolute ${note.position} ${note.width} z-20 hover:z-30 hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 ease-out cursor-pointer group select-none`}
             >
               <img
                 src={note.image}
@@ -211,37 +210,16 @@ export default function LocalAttention() {
                 height="681"
                 loading="lazy"
                 decoding="async"
-                className="w-full h-auto object-contain select-none"
+                className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-sm"
                 draggable={false}
               />
             </div>
           ))}
 
-          {/* NOTITAS ADHESIVAS EN MÓVIL / TABLET (<LG): GRID DE 2 COLUMNAS DEBAJO DE LA FOTO */}
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:hidden">
-            {STICKY_NOTES.map((note) => (
-              <div
-                key={note.id}
-                className="w-full transition-transform duration-300 hover:scale-[1.02] cursor-pointer select-none"
-              >
-                <img
-                  src={note.image}
-                  alt={note.alt}
-                  width="1024"
-                  height="681"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-contain select-none"
-                  draggable={false}
-                />
-              </div>
-            ))}
-          </div>
-
         </div>
 
         {/* 4. Botón de Llamado a la Acción Directo por WhatsApp con Garabatos Artesanales */}
-        <div className="mt-12 sm:mt-14 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
           <div className="relative inline-flex flex-col sm:flex-row items-center justify-center">
             {/* Flechita manuscrita que apunta al botón */}
             <div className="hidden md:flex items-center gap-2 absolute -left-28 lg:-left-32 top-1/2 -translate-y-1/2 pointer-events-none select-none">

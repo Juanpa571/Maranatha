@@ -194,8 +194,8 @@ export default function FaqSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Línea divisoria arquitectónica de transición superior */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-8 sm:mb-12 pointer-events-none">
+      {/* Línea divisoria arquitectónica de transición superior: oculta en móvil, preservada intacta en PC */}
+      <div className="hidden lg:block w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-8 sm:mb-12 pointer-events-none">
         <div className="w-full h-px bg-gradient-to-r from-transparent via-[#7E04A1]/20 to-transparent"></div>
       </div>
 
@@ -259,8 +259,8 @@ export default function FaqSection() {
               Desde cantidades mínimas hasta diseño, materiales y entregas. Aquí encontrarás todo lo que necesitas saber antes de empezar.
             </p>
 
-            {/* CONTENEDOR DE LAS 2 NOTITAS ADHESIVAS INDEPENDIENTES */}
-            <div className="relative mt-8 sm:mt-10 w-full max-w-[480px]">
+            {/* CONTENEDOR DE LAS 2 NOTITAS ADHESIVAS: OCULTAS EN MÓVIL, ORIGINAL INTACTO EN PC */}
+            <div className="hidden lg:block relative mt-8 sm:mt-10 w-full max-w-[480px]">
               
               {/* NOTA 1: MORADA (SUPERIOR) - INTERACTIVA INDEPENDIENTE */}
               <div className="relative z-10 w-[92%] sm:w-[90%] transform -rotate-[2deg] hover:rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:z-30 transition-all duration-300 ease-out cursor-pointer group">
