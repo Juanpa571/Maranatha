@@ -95,7 +95,42 @@
     </script>
   </head>
   <body class="bg-white text-gray-900 font-peridot antialiased selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
-    <div id="root"></div>
+    <div id="root">
+      <div class="min-h-screen bg-white text-gray-900 font-peridot">
+        <header class="fixed left-0 top-0 w-full z-50 flex items-center font-peridot pointer-events-auto h-[80px]">
+          <div class="w-full h-full flex items-center justify-between gap-4 px-7 sm:px-9">
+            <nav class="flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold text-[#7E04A1]">
+              <span class="inline-flex items-center gap-1.5 py-1">Catálogo</span>
+            </nav>
+            <div class="flex items-center gap-3 sm:gap-4 md:gap-5">
+              <div class="w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full bg-[#7E04A1] text-white flex flex-col items-center justify-center gap-[5px] shadow-[0_4px_18px_rgba(126,4,161,0.28)]">
+                <span class="w-5 sm:w-6 h-[2.5px] bg-white rounded-full"></span>
+                <span class="w-5 sm:w-6 h-[2.5px] bg-white rounded-full"></span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section class="relative w-full z-20 h-screen">
+          <div class="sticky top-0 w-full h-screen overflow-hidden bg-transparent">
+            <div class="absolute inset-x-3 sm:inset-x-6 md:inset-x-8 lg:inset-x-[35px] top-3 sm:top-6 md:top-8 lg:top-[35px] bottom-3 sm:bottom-6 md:bottom-8 lg:bottom-[35px] bg-[#E7D1FF] rounded-[26px] sm:rounded-[36px] md:rounded-[42px] lg:rounded-[50px] overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-8">
+              <div class="w-full shrink-0 h-[80px]"></div>
+              <div class="relative flex-grow flex flex-col items-center justify-center w-full my-auto">
+                <div class="font-['Pacifico',cursive] text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] tracking-tight leading-none pb-1 text-white [filter:drop-shadow(0_4px_18px_rgba(0,0,0,0.22))]">
+                  maranatha
+                </div>
+              </div>
+              <footer class="relative z-30 w-full flex items-center justify-start">
+                <div class="relative inline-flex items-center justify-between rounded-full bg-white text-gray-900 shadow-[0_16px_50px_rgba(0,0,0,0.22)] h-[56px] sm:h-[62px] md:h-[72px] lg:h-[94px] px-6 sm:px-8 gap-3 sm:gap-5">
+                  <span class="font-bold tracking-tight text-[#1C1D20] text-sm sm:text-base md:text-lg lg:text-xl">
+                    Explorar Catálogo
+                  </span>
+                </div>
+              </footer>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
