@@ -211,10 +211,22 @@ export default function VoldogHero() {
   });
 
   useEffect(() => {
+    let lastWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+
     const updateConfig = () => {
       const vh = window.innerHeight;
       const vw = window.innerWidth;
-      setConfig(getHeroConfig(vw, vh));
+
+      // En móviles, el scroll oculta/muestra la barra de direcciones disparando resize solo vertical.
+      // Si el ancho no ha cambiado y ya se ha iniciado el scroll, evitamos recalcular para prevenir layout shifts.
+      const isMobile = vw < 1024;
+      const widthChanged = Math.abs(vw - lastWidth) > 2;
+      const isAtTop = (window.scrollY || 0) <= 10;
+
+      if (!isMobile || widthChanged || isAtTop) {
+        lastWidth = vw;
+        setConfig(getHeroConfig(vw, vh));
+      }
     };
 
     updateConfig();
@@ -587,7 +599,10 @@ export default function VoldogHero() {
         }}
       >
         {/* CONTENEDOR STICKY PINNED EN VIEWPORT */}
-        <div className="sticky top-0 w-full h-screen overflow-hidden bg-transparent select-none pointer-events-none">
+        <div 
+          className="sticky top-0 w-full overflow-hidden bg-transparent select-none pointer-events-none"
+          style={{ height: `${viewportHeight}px` }}
+        >
 
           {/* 2. CONTENEDOR LAVANDA DEL HERO (#E7D1FF) CON DIMENSIONES Y PADDING ORIGINALES */}
         <div
@@ -666,7 +681,7 @@ export default function VoldogHero() {
             {/* Botón Izquierdo: Explorar Catálogo */}
             <Link
               to="/catalogo"
-              className="relative inline-flex items-center justify-between rounded-full bg-white text-gray-900 shadow-[0_16px_50px_rgba(0,0,0,0.22)] hover:shadow-[0_20px_60px_rgba(126,4,161,0.38)] transition-shadow duration-300 group active:scale-95 overflow-hidden select-none cursor-pointer"
+              className="relative w-full md:w-auto inline-flex items-center justify-between rounded-full bg-white text-gray-900 shadow-[0_16px_50px_rgba(0,0,0,0.22)] hover:shadow-[0_20px_60px_rgba(126,4,161,0.38)] transition-shadow duration-300 group active:scale-95 overflow-hidden select-none cursor-pointer"
               style={{
                 height: `${heroButtonConfig.height}px`,
                 paddingLeft: `${heroButtonConfig.paddingLeft}px`,
@@ -677,8 +692,8 @@ export default function VoldogHero() {
               <div className="voldog-btn-expand" />
 
               <span 
-                className="relative z-10 font-bold tracking-tight text-[#1C1D20] group-hover:text-white transition-colors duration-500 pointer-events-none whitespace-nowrap"
-                style={{ fontSize: `${heroButtonConfig.fontSize}px` }}
+                className="relative z-10 flex-1 md:flex-initial text-center md:text-left font-bold tracking-tight text-[#1C1D20] group-hover:text-white transition-colors duration-500 pointer-events-none whitespace-nowrap text-[17px] xs:text-[18.5px] md:text-[initial]"
+                style={{ fontSize: viewportWidth >= 768 ? `${heroButtonConfig.fontSize}px` : undefined }}
               >
                 Explorar Catálogo
               </span>

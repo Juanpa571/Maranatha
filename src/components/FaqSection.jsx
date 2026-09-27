@@ -20,7 +20,7 @@ const FAQ_ITEMS = [
     icon: Scissors,
     question: '¿Cuál es la cantidad mínima para hacer un pedido?',
     answer:
-      'La cantidad mínima depende del producto que elijas. En la mayoría de nuestros productos personalizados trabajamos desde 10 a 20 unidades, pero puede variar según el tipo de artículo, tamaño y acabados. Si tienes una idea específica, escríbenos y te confirmamos la cantidad exacta.',
+      'La cantidad mínima depende del producto que elijas: en papelería para eventos y fiestas trabajamos desde 10 a 20 unidades, y en la línea empresarial (tarjetas de presentación, etiquetas para ropa y volantes) desde solo 50 unidades. Sin mínimos de miles como en litografías industriales.',
   },
   {
     index: '02',
