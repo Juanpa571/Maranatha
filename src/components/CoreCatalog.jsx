@@ -163,7 +163,7 @@ export default function CoreCatalog() {
                   strokeLinecap="round" 
                 />
               </svg>
-            </span>
+            </span>{' '}
             <br />
             favoritas de papelería
             <span className="inline-block align-middle ml-2 pointer-events-none">

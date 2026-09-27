@@ -115,7 +115,7 @@ export default function TransparentProcess() {
             </div>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-bold tracking-tight text-[#141517] leading-[1.15]">
-              Cómo trabajamos:
+              Cómo trabajamos:{' '}
               <br />
               <span className="text-[#7E04A1]">diseño, aprobación previa</span>{' '}
               y entrega sin mínimos

@@ -78,11 +78,11 @@ export default function Footer() {
                 maranatha
               </Link>
 
-              {/* Subtítulo en dos líneas */}
-              <h3 className="text-[#E2E2EA] text-[15px] sm:text-[15.5px] font-normal leading-[1.3] mt-2.5">
-                Papelería Creativa &<br />
+              {/* Subtítulo descriptivo en dos líneas */}
+              <p className="text-[#E2E2EA] text-[15px] sm:text-[15.5px] font-normal leading-[1.3] mt-2.5">
+                Papelería Creativa &{' '}<br />
                 Taller Artesanal
-              </h3>
+              </p>
 
               {/* Párrafo descriptivo exacto */}
               <p className="text-[#9898A4] text-[13.5px] sm:text-[14px] leading-[1.5] mt-3.5 max-w-[280px]">
@@ -143,9 +143,9 @@ export default function Footer() {
           {/* COLUMNA 2: EXPLORA                                       */}
           {/* ======================================================== */}
           <div className="shrink-0 min-w-[140px] xl:min-w-[160px]">
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
               EXPLORA
-            </h4>
+            </p>
             <nav aria-label="Navegación Explora">
               <ul className="space-y-2.5 sm:space-y-3 text-[13.5px] sm:text-[14px]">
                 <li>
@@ -201,9 +201,9 @@ export default function Footer() {
           {/* COLUMNA 3: AYUDA                                         */}
           {/* ======================================================== */}
           <div className="shrink-0 min-w-[170px] xl:min-w-[190px]">
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
               AYUDA
-            </h4>
+            </p>
             <nav aria-label="Navegación Ayuda">
               <ul className="space-y-2.5 sm:space-y-3 text-[13.5px] sm:text-[14px]">
                 <li>
@@ -249,9 +249,9 @@ export default function Footer() {
           {/* COLUMNA 4: CONTACTO                                      */}
           {/* ======================================================== */}
           <div className="w-full sm:w-[260px] lg:w-[280px] xl:w-[300px] shrink-0">
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white mb-4 sm:mb-5">
               CONTACTO
-            </h4>
+            </p>
             
             <div className="space-y-4 sm:space-y-4.5 text-[13.5px]">
               

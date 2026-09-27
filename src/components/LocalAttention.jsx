@@ -150,12 +150,11 @@ export default function LocalAttention() {
         >
           <div className="relative pt-6 sm:pt-8 md:pt-10">
             <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[58px] xl:text-[66px] font-bold tracking-tight text-[#141517] leading-[1.10]">
-              Taller de papelería en Cali:
+              Taller de papelería en Cali:{' '}
               <br />
               <span className="text-[#7E04A1]">
-                asesoría de persona a persona
-              </span>{' '}
-              por WhatsApp
+                asesoría personalizada
+              </span>
               <span className="inline-block align-middle ml-2 pointer-events-none">
                 <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
               </span>
@@ -164,7 +163,7 @@ export default function LocalAttention() {
 
           <div className="max-w-md lg:pb-2">
             <p className="text-base sm:text-lg md:text-xl text-[#2B2B2E] font-medium leading-relaxed">
-              Olvídate de bots automáticos y respuestas frías. Te asesoramos directamente por WhatsApp desde nuestro taller en Cali para dar vida a cada detalle (pedidos 100% online con envíos o recogida coordinada previa).
+              Atención de persona a persona por WhatsApp sin bots fríos. Te asesoramos directamente desde nuestro taller en Cali para dar vida a cada detalle (pedidos 100% online con envíos o recogida previa).
             </p>
           </div>
         </div>

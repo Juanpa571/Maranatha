@@ -245,7 +245,7 @@ export default function FinalCta() {
               className="hidden sm:block absolute top-2 sm:top-3 md:top-4 -left-10 sm:-left-12 md:-left-16 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain pointer-events-none transform -rotate-45 opacity-85"
             />
             ¿Tienes una idea?
-          </span>
+          </span>{' '}
           <br />
           <span className="inline-flex items-baseline flex-wrap justify-center gap-x-2.5 sm:gap-x-4 md:gap-x-5">
             <span>Hagámosla</span>

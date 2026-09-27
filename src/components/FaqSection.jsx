@@ -249,11 +249,9 @@ export default function FaqSection() {
 
             {/* Titular Monumental */}
             <h2 className="text-4xl sm:text-[45px] lg:text-[46px] xl:text-[50px] font-extrabold tracking-tight text-[#141517] leading-[1.08]">
-              Preguntas frecuentes:
+              Preguntas frecuentes:{' '}
               <br />
-              <span className="text-[#7E04A1]">resolvemos</span>
-              <br />
-              <span className="text-[#7E04A1]">tus dudas.</span>
+              <span className="text-[#7E04A1]">resolvemos tus dudas.</span>
             </h2>
 
             {/* Subtítulo explicativo */}
