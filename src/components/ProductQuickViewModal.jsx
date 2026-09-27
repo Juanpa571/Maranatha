@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { X, ArrowRight, ShieldCheck, MapPin, ZoomIn } from 'lucide-react';
 
-export default function ProductQuickViewModal({ product, isOpen, onClose }) {
+function ProductQuickViewModal({ product, isOpen, onClose }) {
   // Manejo de tecla Escape y bloqueo de scroll de fondo
   useEffect(() => {
     if (!isOpen || !product) return;
@@ -37,7 +38,7 @@ export default function ProductQuickViewModal({ product, isOpen, onClose }) {
   const pricePrefix = product.pricePrefix || (priceText.startsWith('Desde ') ? 'Desde' : '');
   const cleanPrice = pricePrefix ? priceText.replace(/^Desde\s+/, '') : priceText;
 
-  return (
+  const modalContent = (
     <div
       role="dialog"
       aria-modal="true"
@@ -71,7 +72,11 @@ export default function ProductQuickViewModal({ product, isOpen, onClose }) {
               <img
                 src={product.image}
                 alt={product.alt || product.title}
-                className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
+                width="600"
+                height="600"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
                 draggable={false}
               />
               <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-medium flex items-center gap-1.5 pointer-events-none select-none">
@@ -159,4 +164,8 @@ export default function ProductQuickViewModal({ product, isOpen, onClose }) {
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : modalContent;
 }
+
+export default memo(ProductQuickViewModal);

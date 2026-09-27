@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ZoomIn, ArrowRight } from 'lucide-react';
 import { CATEGORIES_DATA } from '../data/categoriesData';
@@ -42,6 +42,14 @@ export default function CategoriaPage() {
   const currentKey =
     categorySlug === 'insumos-papeleria' ? 'insumos' : categorySlug;
   const category = CATEGORIES_DATA[currentKey] || CATEGORIES_DATA['papeleria-creativa'];
+
+  const handleOpenProduct = useCallback((prod) => {
+    setSelectedProduct({ ...prod, categorySlug: category.slug, categoryTitle: category.title });
+  }, [category.slug, category.title]);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedProduct(null);
+  }, []);
 
   // Scroll al tope y título de pestaña según categoría
   useEffect(() => {
@@ -134,15 +142,18 @@ export default function CategoriaPage() {
                   {/* Foto oficial con cursor zoom y apertura de QuickView Modal */}
                   <button
                     type="button"
-                    onClick={() => setSelectedProduct({ ...prod, categorySlug: category.slug, categoryTitle: category.title })}
+                    onClick={() => handleOpenProduct(prod)}
                     title={`Ver ${prod.title} en alta resolución`}
                     className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
                   >
                     <img
                       src={prod.image}
                       alt={prod.alt}
-                      className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
+                      width="500"
+                      height="500"
                       loading="lazy"
+                      decoding="async"
+                      className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
                       draggable={false}
                     />
                     {/* Micro badge de zoom al hacer hover */}
@@ -157,7 +168,7 @@ export default function CategoriaPage() {
                     <div>
                       <button
                         type="button"
-                        onClick={() => setSelectedProduct({ ...prod, categorySlug: category.slug, categoryTitle: category.title })}
+                        onClick={() => handleOpenProduct(prod)}
                         className="block group/title cursor-pointer text-left w-full"
                         title={`Ver detalles de ${prod.title}`}
                       >
@@ -246,7 +257,7 @@ export default function CategoriaPage() {
       <ProductQuickViewModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={handleCloseModal}
       />
 
       {/* 4. Footer de Autor */}

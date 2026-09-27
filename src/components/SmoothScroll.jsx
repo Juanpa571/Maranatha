@@ -61,6 +61,7 @@ export default function SmoothScroll() {
       unsub = true;
       if (handleResize) {
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener('load', handleResize);
       }
       if (handleAnchorClick) {
         document.removeEventListener('click', handleAnchorClick);

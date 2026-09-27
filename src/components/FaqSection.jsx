@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Scissors,
   Clock,
@@ -82,9 +82,9 @@ export default function FaqSection() {
   const accordionRef = useRef(null);
   const supportRef = useRef(null);
 
-  const toggleAccordion = (index) => {
+  const toggleAccordion = useCallback((index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
-  };
+  }, []);
 
   useEffect(() => {
     const checkPosition = () => {
@@ -323,10 +323,11 @@ export default function FaqSection() {
                   <div key={item.index} className="w-full bg-white transition-colors duration-200">
                     <button
                       type="button"
+                      id={`faq-btn-${item.index}`}
                       onClick={() => toggleAccordion(index)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-answer-${item.index}`}
-                      className="w-full px-5 sm:px-6 py-4 sm:py-4.5 flex items-center justify-between gap-3 sm:gap-4 text-left cursor-pointer group"
+                      className="w-full px-5 sm:px-6 py-4 sm:py-4.5 flex items-center justify-between gap-3 sm:gap-4 text-left cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7E04A1] focus-visible:ring-offset-2 rounded-2xl transition-all"
                     >
                       <div className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0">
                         {/* Número morado en negrita grande (01..08) */}
@@ -335,7 +336,7 @@ export default function FaqSection() {
                         </span>
 
                         {/* Icono temático en cajita cuadrada lila redondeada */}
-                        <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[13px] bg-[#FAF5FE] border border-[#EBD6FA] text-[#7E04A1] flex items-center justify-center transition-colors group-hover:bg-[#EFE3FB]">
+                        <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[13px] bg-[#FAF5FE] border border-[#EBD6FA] text-[#7E04A1] flex items-center justify-center transition-colors group-hover:bg-[#EFE3FB]" aria-hidden="true">
                           <IconComponent className="w-5 h-5" />
                         </div>
 
@@ -347,6 +348,7 @@ export default function FaqSection() {
 
                       {/* Botón circular con + o − (sólido morado cuando está abierto) */}
                       <div
+                        aria-hidden="true"
                         className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
                           isOpen
                             ? 'bg-[#7E04A1] text-white border border-[#7E04A1] shadow-[0_2px_8px_rgba(126,4,161,0.25)]'
@@ -364,6 +366,9 @@ export default function FaqSection() {
                     {/* Contenedor desplegable con animación fluida y línea morada izquierda */}
                     <div
                       id={`faq-answer-${item.index}`}
+                      role="region"
+                      aria-labelledby={`faq-btn-${item.index}`}
+                      aria-hidden={!isOpen}
                       className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                       }`}

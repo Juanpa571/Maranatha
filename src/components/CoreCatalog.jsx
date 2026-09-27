@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
 import ProductQuickViewModal from './ProductQuickViewModal';
@@ -52,6 +52,14 @@ export default function CoreCatalog() {
   const headerRef = useRef(null);
   const cardsRef = useRef(null);
   const getWhatsappUrl = (text) => `https://wa.me/573145854213?text=${encodeURIComponent(text)}`;
+
+  const handleOpenProduct = useCallback((prod) => {
+    setSelectedProduct(prod);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedProduct(null);
+  }, []);
 
   useEffect(() => {
     const checkPositions = () => {
@@ -210,7 +218,7 @@ export default function CoreCatalog() {
               {/* Foto oficial con más espacio, cursor zoom y apertura de QuickView Modal */}
               <button
                 type="button"
-                onClick={() => setSelectedProduct(prod)}
+                onClick={() => handleOpenProduct(prod)}
                 title={`Ver ${prod.title} en alta resolución`}
                 className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
               >
@@ -221,7 +229,7 @@ export default function CoreCatalog() {
                   height="500"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
+                  className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
                   draggable={false}
                 />
                 {/* Micro badge de zoom al hacer hover */}
@@ -236,7 +244,7 @@ export default function CoreCatalog() {
                 <div>
                   <button
                     type="button"
-                    onClick={() => setSelectedProduct(prod)}
+                    onClick={() => handleOpenProduct(prod)}
                     className="block group/title cursor-pointer text-left w-full"
                     title={`Ver detalles de ${prod.title}`}
                   >
@@ -316,7 +324,7 @@ export default function CoreCatalog() {
       <ProductQuickViewModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={handleCloseModal}
       />
 
     </section>

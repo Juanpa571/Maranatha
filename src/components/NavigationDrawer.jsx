@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { X, ArrowRight, MessageCircle, MapPin, Clock, HelpCircle, Sparkles, ChevronRight } from 'lucide-react';
 
@@ -97,7 +98,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
     'https://wa.me/573145854213?text=' +
     encodeURIComponent('Hola Maranatha 👋, me comunico desde el menú web y quisiera cotizar un pedido en Cali.');
 
-  return (
+  const drawerContent = (
     <>
       {/* 1. Backdrop con transición de opacidad */}
       <div
@@ -361,4 +362,6 @@ export default function NavigationDrawer({ isOpen, onClose }) {
       </aside>
     </>
   );
+
+  return typeof document !== 'undefined' ? createPortal(drawerContent, document.body) : drawerContent;
 }

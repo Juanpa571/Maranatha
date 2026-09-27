@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
 import { CATEGORIES_DATA } from '../data/categoriesData';
@@ -41,6 +41,14 @@ const TABS = [
 export default function CatalogoPage() {
   const [activeTab, setActiveTab] = useState('todos');
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleOpenProduct = useCallback((prod) => {
+    setSelectedProduct(prod);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedProduct(null);
+  }, []);
 
   useEffect(() => {
     document.title = 'Catálogo Completo | Maranatha Papelería Creativa';
@@ -154,15 +162,18 @@ export default function CatalogoPage() {
                   {/* Foto oficial con cursor zoom y apertura de QuickView Modal */}
                   <button
                     type="button"
-                    onClick={() => setSelectedProduct(prod)}
+                    onClick={() => handleOpenProduct(prod)}
                     title={`Ver ${prod.title} en alta resolución`}
                     className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
                   >
                     <img
                       src={prod.image}
                       alt={prod.alt}
-                      className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
+                      width="500"
+                      height="500"
                       loading="lazy"
+                      decoding="async"
+                      className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
                       draggable={false}
                     />
                     {/* Micro badge de zoom al hacer hover */}
@@ -177,7 +188,7 @@ export default function CatalogoPage() {
                     <div>
                       <button
                         type="button"
-                        onClick={() => setSelectedProduct(prod)}
+                        onClick={() => handleOpenProduct(prod)}
                         className="block group/title cursor-pointer text-left w-full"
                         title={`Ver detalles de ${prod.title}`}
                       >
@@ -269,7 +280,7 @@ export default function CatalogoPage() {
       <ProductQuickViewModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={handleCloseModal}
       />
 
       {/* 4. Footer de Autor con Navegación Semántica y Horarios */}

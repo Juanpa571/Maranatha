@@ -8,6 +8,9 @@ export function useScrollReveal(options = {}) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
+  const threshold = options.threshold ?? 0.12;
+  const rootMargin = options.rootMargin ?? '0px 0px -40px 0px';
+
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -25,17 +28,17 @@ export function useScrollReveal(options = {}) {
         }
       },
       {
-        threshold: options.threshold ?? 0.12,
-        rootMargin: options.rootMargin ?? '0px 0px -40px 0px',
+        threshold,
+        rootMargin,
       }
     );
 
     observer.observe(element);
 
     return () => {
-      if (element) observer.unobserve(element);
+      observer.disconnect();
     };
-  }, [options.threshold, options.rootMargin]);
+  }, [threshold, rootMargin]);
 
   return [ref, isVisible];
 }

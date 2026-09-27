@@ -121,7 +121,7 @@ export default function CategoryCards() {
               height="850"
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
+              className="w-full h-full aspect-[4/5] object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
               draggable={false}
             />
 
