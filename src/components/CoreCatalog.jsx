@@ -174,7 +174,7 @@ export default function CoreCatalog() {
           return (
             <div
               key={prod.id || prod._id || index}
-              className={`group relative flex flex-row sm:flex-col w-full rounded-2xl sm:rounded-[26px] md:rounded-[28px] overflow-hidden bg-white border border-[#E7E7E7] sm:border-[#F0E6FA] shadow-[0_2px_12px_rgba(126,4,161,0.05)] sm:shadow-[0_6px_22px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.15)] hover:-translate-y-1 transition-all duration-300 p-2.5 sm:p-0 ${
+              className={`group relative flex flex-row sm:flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300 ${
                 cardsState === 'below'
                   ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96] pointer-events-none'
                   : cardsState === 'above'
@@ -189,7 +189,7 @@ export default function CoreCatalog() {
                   type="button"
                   onClick={() => handleOpenProduct(prod)}
                   title={`Ver ${prod.title} en alta resolución`}
-                  className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] rounded-xl sm:rounded-none cursor-zoom-in text-left"
+                  className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
                 >
                   <img
                     src={cardsState !== 'below' ? prod.image : undefined}
@@ -215,8 +215,8 @@ export default function CoreCatalog() {
                 </button>
               </div>
 
-              {/* Área de Detalles: columna derecha en móvil, inferior en desktop */}
-              <div className="pl-3 sm:pl-0 sm:px-4 pt-0 sm:pt-3 pb-0 sm:pb-3.5 flex flex-col justify-between flex-1 min-w-0 bg-white">
+              {/* Área de Detalles: columna derecha en móvil, inferior en desktop con padding holgado */}
+              <div className="p-3.5 sm:p-5 sm:pt-4 flex flex-col justify-between flex-1 min-w-0 bg-white">
                 <div>
                   {/* Título */}
                   <button
@@ -225,19 +225,19 @@ export default function CoreCatalog() {
                     className="block group/title cursor-pointer text-left w-full"
                     title={`Ver detalles de ${prod.title}`}
                   >
-                    <h3 className="font-peridot text-[14px] xs:text-[15px] sm:text-[17px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 sm:line-clamp-none group-hover/title:text-[#7E04A1] transition-colors">
+                    <h3 className="font-peridot text-[14px] xs:text-[15px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 group-hover/title:text-[#7E04A1] transition-colors">
                       {prod.title}
                     </h3>
                   </button>
 
                   {/* Descripción real del producto */}
-                  <p className="font-peridot text-[11px] xs:text-[11.5px] sm:text-[12px] text-[#767987] font-normal leading-[1.35] mt-1 line-clamp-2 sm:line-clamp-none">
+                  <p className="font-peridot text-[11px] xs:text-[11.5px] sm:text-[12px] text-[#767987] font-normal leading-[1.38] mt-1.5 line-clamp-2">
                     {prod.description}
                   </p>
                 </div>
 
                 {/* Acciones: Fila de Precio + Botón Cotizar WhatsApp + Botón de Categoría */}
-                <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-[#F5EEFB] flex flex-col gap-2">
+                <div className="pt-3 sm:pt-3.5 mt-3 sm:mt-4 border-t border-[#F5EEFB] flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-2">
                     {/* Precio Tipográfico */}
                     <div className="flex flex-col select-text leading-none py-0.5">
@@ -263,7 +263,7 @@ export default function CoreCatalog() {
                       rel="noopener noreferrer"
                       title={`Cotizar ${prod.title} por WhatsApp`}
                       aria-label={`Cotizar ${prod.title} por WhatsApp`}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 h-[34px] sm:h-[40px] px-3 sm:px-4.5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 h-[34px] sm:h-[40px] px-3.5 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
                     >
                       <svg
                         className="w-3.5 h-3.5 sm:w-[17px] sm:h-[17px] fill-current shrink-0"
