@@ -23,6 +23,9 @@ export default {
         hand: ['"Patrick Hand"', 'cursive'],
         sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
+      spacing: {
+        '4.5': '1.125rem',
+      },
     },
   },
   plugins: [],
