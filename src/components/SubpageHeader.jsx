@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, ArrowRight, HelpCircle } from 'lucide-react';
 import NavigationDrawer from './NavigationDrawer';
+import { useActiveSectionTheme } from '../hooks/useActiveSectionTheme';
 
 const NAV_CATEGORIES = [
   {
@@ -24,6 +25,13 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
   const catalogDropdownRef = useRef(null);
   const location = useLocation();
 
+  // Sincronización de tema activa con el color de la sección en pantalla e iOS Safari
+  const { isDark } = useActiveSectionTheme({
+    defaultTheme: 'light',
+    defaultColor: '#ffffff',
+    probeOffset: 80,
+  });
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (catalogDropdownRef.current && !catalogDropdownRef.current.contains(e.target)) {
@@ -42,11 +50,21 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-[0_4px_30px_rgba(0,0,0,0.03)] font-peridot transition-all">
+      <header
+        className={`sticky top-0 z-40 w-full backdrop-blur-xl border-b font-peridot transition-colors duration-500 ${
+          isDark
+            ? 'bg-[#16161A]/92 border-[#25252D] shadow-[0_4px_30px_rgba(0,0,0,0.35)]'
+            : 'bg-white/95 border-gray-200/80 shadow-[0_4px_30px_rgba(0,0,0,0.03)]'
+        }`}
+      >
         <div className="w-full h-[64px] sm:h-[80px] max-w-7xl mx-auto px-3.5 sm:px-6 md:px-8 flex items-center justify-between gap-2 sm:gap-4 relative">
           
           {/* Navegación Izquierda: Catálogo desplegable con las 3 categorías + enlaces editoriales */}
-          <nav className="flex items-center space-x-4 sm:space-x-8 text-[14px] sm:text-[16px] font-semibold tracking-[-0.01em] text-[#7E04A1] shrink-0">
+          <nav
+            className={`flex items-center space-x-4 sm:space-x-8 text-[14px] sm:text-[16px] font-semibold tracking-[-0.01em] shrink-0 transition-colors duration-500 ${
+              isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+            }`}
+          >
             {/* Dropdown Desplegable: Catálogo */}
             <div
               ref={catalogDropdownRef}
@@ -72,16 +90,16 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                 <ChevronDown
                   className={`w-3.5 h-3.5 stroke-[2.2] transition-transform duration-300 ${
                     isCatalogDropdownOpen
-                      ? 'rotate-180 text-[#7E04A1]'
-                      : 'text-[#7E04A1]/80 group-hover/btn:rotate-180'
-                  }`}
+                      ? 'rotate-180'
+                      : 'group-hover/btn:rotate-180'
+                  } ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
                 />
                 <span
-                  className={`absolute bottom-1 left-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 ${
+                  className={`absolute bottom-1 left-0 h-[2.5px] transition-all duration-300 ${
                     isCatalogDropdownOpen || location.pathname === '/catalogo'
                       ? 'w-full'
                       : 'w-0 group-hover/btn:w-full'
-                  }`}
+                  } ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`}
                 />
               </Link>
 
@@ -93,22 +111,32 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                     : 'opacity-0 -translate-y-2 pointer-events-none invisible'
                 }`}
               >
-                <div className="bg-white border border-[#EBD6FA] rounded-2xl p-2.5 shadow-[0_16px_40px_rgba(126,4,161,0.14)] font-peridot">
+                <div
+                  className={`rounded-2xl p-2.5 font-peridot transition-colors duration-300 ${
+                    isDark
+                      ? 'bg-[#1F1D26] border border-[#2F2C3A] shadow-[0_16px_40px_rgba(0,0,0,0.5)]'
+                      : 'bg-white border border-[#EBD6FA] shadow-[0_16px_40px_rgba(126,4,161,0.14)]'
+                  }`}
+                >
                   <div className="space-y-1">
                     <Link
                       to="/catalogo"
                       onClick={() => setIsCatalogDropdownOpen(false)}
                       className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-200 ${
                         location.pathname === '/catalogo'
-                          ? 'bg-[#FAF3FF] text-[#7E04A1]'
+                          ? isDark
+                            ? 'bg-[#2E2838] text-[#EDA3FF]'
+                            : 'bg-[#FAF3FF] text-[#7E04A1]'
+                          : isDark
+                          ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]'
                           : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'
                       }`}
                     >
                       <span className="leading-snug tracking-tight font-bold">Ver Catálogo Completo</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#7E04A1] shrink-0 ml-2" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#EDA3FF] shrink-0 ml-2" />
                     </Link>
 
-                    <div className="my-1 border-t border-[#F0E6FA]" />
+                    <div className={`my-1 border-t ${isDark ? 'border-[#2F2C3A]' : 'border-[#F0E6FA]'}`} />
 
                     {NAV_CATEGORIES.map((cat) => {
                       const isActive = activeCategorySlug === cat.slug;
@@ -119,16 +147,24 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                           onClick={() => setIsCatalogDropdownOpen(false)}
                           className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-200 whitespace-nowrap ${
                             isActive
-                              ? 'bg-[#FAF3FF] text-[#7E04A1] font-bold'
+                              ? isDark
+                                ? 'bg-[#2E2838] text-[#EDA3FF] font-bold'
+                                : 'bg-[#FAF3FF] text-[#7E04A1] font-bold'
+                              : isDark
+                              ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]'
                               : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'
                           }`}
                         >
                           <span className="leading-snug tracking-tight">
                             {cat.title}
                           </span>
-                          <ArrowRight className={`w-3.5 h-3.5 text-[#7E04A1] shrink-0 ml-3 transition-all duration-200 ${
-                            isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0'
-                          }`} />
+                          <ArrowRight
+                            className={`w-3.5 h-3.5 text-[#EDA3FF] shrink-0 ml-3 transition-all duration-200 ${
+                              isActive
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0'
+                            }`}
+                          />
                         </Link>
                       );
                     })}
@@ -144,7 +180,11 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               title="Próximamente: Temporadas y eventos especiales"
             >
               Eventos
-              <span className="absolute bottom-0 left-0 w-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${
+                  isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'
+                }`}
+              />
             </button>
 
             <Link
@@ -152,7 +192,11 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               className="hover:opacity-75 transition-opacity duration-150 relative py-1 group hidden md:inline-block cursor-pointer"
             >
               Cómo trabajamos
-              <span className="absolute bottom-0 left-0 w-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${
+                  isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'
+                }`}
+              />
             </Link>
           </nav>
 
@@ -161,7 +205,9 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
             <Link
               to="/"
               title="Maranatha - Ir al inicio"
-              className="font-['Pacifico',cursive] text-[22px] xs:text-[25px] sm:text-[30px] md:text-[36px] text-[#7E04A1] tracking-tight leading-none hover:opacity-85 transition-opacity pb-1 whitespace-nowrap select-none cursor-pointer pointer-events-auto"
+              className={`font-['Pacifico',cursive] text-[22px] xs:text-[25px] sm:text-[30px] md:text-[36px] tracking-tight leading-none hover:opacity-85 transition-colors duration-500 pb-1 whitespace-nowrap select-none cursor-pointer pointer-events-auto ${
+                isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+              }`}
             >
               maranatha
             </Link>
@@ -174,7 +220,9 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               to="/#preguntas-frecuentes"
               aria-label="Preguntas Frecuentes"
               title="Preguntas frecuentes y tiempos de entrega"
-              className="p-1.5 sm:p-2 hover:opacity-75 transition-opacity text-[#7E04A1] hidden md:inline-flex"
+              className={`p-1.5 sm:p-2 hover:opacity-75 transition-colors duration-500 hidden md:inline-flex ${
+                isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+              }`}
             >
               <HelpCircle className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] stroke-[2.2]" />
             </Link>
@@ -184,7 +232,11 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               href="https://wa.me/573145854213?text=Hola%20Maranatha%20%F0%9F%91%8B%2C%20quisiera%20recibir%20asesor%C3%ADa%20sobre%20sus%20productos."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-[38px] h-[38px] sm:w-auto sm:h-[46px] p-0 sm:px-5 bg-[#7E04A1] hover:bg-[#5E0279] text-white text-[13.5px] sm:text-[14.5px] font-bold rounded-full shadow-[0_4px_18px_rgba(126,4,161,0.22)] hover:shadow-xl transition-all duration-300 active:scale-95 cursor-pointer group/btn shrink-0"
+              className={`inline-flex items-center justify-center gap-2 w-[38px] h-[38px] sm:w-auto sm:h-[46px] p-0 sm:px-5 text-white text-[13.5px] sm:text-[14.5px] font-bold rounded-full transition-all duration-300 active:scale-95 cursor-pointer group/btn shrink-0 ${
+                isDark
+                  ? 'bg-[#7E04A1] hover:bg-[#9B12C4] shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#C084FC]/30'
+                  : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
+              }`}
               title="Asesoría y cotizaciones por WhatsApp"
             >
               <svg
@@ -201,7 +253,11 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               type="button"
               onClick={() => setIsMenuOpen(true)}
               aria-label="Abrir menú"
-              className="w-[38px] h-[38px] sm:w-[46px] sm:h-[46px] rounded-full bg-[#7E04A1] hover:bg-[#5E0279] text-white flex flex-col items-center justify-center gap-[4.5px] transition-all duration-300 active:scale-95 shadow-[0_4px_18px_rgba(126,4,161,0.22)] shrink-0 cursor-pointer"
+              className={`w-[38px] h-[38px] sm:w-[46px] sm:h-[46px] rounded-full text-white flex flex-col items-center justify-center gap-[4.5px] transition-all duration-500 active:scale-95 shrink-0 cursor-pointer ${
+                isDark
+                  ? 'bg-[#2A2736] hover:bg-[#383448] border border-[#3E3A4E] shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
+                  : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
+              }`}
             >
               <span className="w-4 sm:w-5 h-[2.5px] bg-white rounded-full" />
               <span className="w-4 sm:w-5 h-[2.5px] bg-white rounded-full" />

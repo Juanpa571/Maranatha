@@ -93,6 +93,8 @@ export default function TransparentProcess() {
   return (
     <section
       id="proceso"
+      data-theme="light"
+      data-theme-color="#FAF8FD"
       className="relative w-full px-4 sm:px-8 md:px-[6vw] lg:px-[8.5%] pt-24 sm:pt-28 md:pt-32 pb-20 sm:pb-24 md:pb-28 bg-[#FAF8FD] border-t border-gray-200/80 overflow-hidden font-peridot"
     >
       <div className="max-w-[1400px] mx-auto">

@@ -184,6 +184,8 @@ export default function FaqSection() {
   return (
     <section
       id="preguntas-frecuentes"
+      data-theme="light"
+      data-theme-color="#FBF8FE"
       className="relative w-full border-t border-[#E8DAF7] px-4 sm:px-6 md:px-[4.5vw] lg:px-[5.5%] pt-24 sm:pt-28 md:pt-32 pb-20 sm:pb-24 md:pb-28 bg-[#FBF8FE] font-peridot overflow-hidden"
     >
       {/* Ancla alternativa #faq para compatibilidad de enlaces */}

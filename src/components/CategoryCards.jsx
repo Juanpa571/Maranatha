@@ -89,6 +89,8 @@ export default function CategoryCards() {
   return (
     <section 
       id="productos" 
+      data-theme="light"
+      data-theme-color="#ffffff"
       className="w-full px-3 sm:px-5 md:px-7 lg:px-[35px] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-28 font-peridot"
     >
       

@@ -65,7 +65,9 @@ export default function FinalCta() {
     <section
       ref={sectionRef}
       id="contacto"
-      className="relative w-full min-h-[85vh] lg:min-h-[96vh] flex flex-col justify-center px-4 sm:px-6 md:px-[3.5vw] lg:px-[4.5%] py-16 sm:py-32 md:py-36 lg:py-44 bg-[#F6F0FC] font-peridot overflow-x-clip text-center"
+      data-theme="light"
+      data-theme-color="#F6F0FC"
+      className="relative z-20 w-full min-h-[85vh] lg:min-h-[96vh] flex flex-col justify-center px-4 sm:px-6 md:px-[3.5vw] lg:px-[4.5%] py-16 sm:py-32 md:py-36 lg:py-44 bg-[#F6F0FC] font-peridot overflow-x-clip text-center"
     >
       {/* ============================================================== */}
       {/* ELEMENTOS DECORATIVOS PERIFÉRICOS (ESCALADOS Y POSICIONADOS)   */}

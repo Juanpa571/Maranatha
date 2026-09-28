@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HelpCircle, MapPin, Clock, ChevronDown } from 'lucide-react';
+import { useActiveSectionTheme } from '../hooks/useActiveSectionTheme';
 
 const NavigationDrawer = lazy(() => import('./NavigationDrawer'));
 
@@ -190,6 +191,13 @@ export default function VoldogHero() {
   const [isCatalogDropdownOpen, setIsCatalogDropdownOpen] = useState(false);
   const catalogDropdownRef = useRef(null);
 
+  // Sincronización de tema activa con el color de la sección en pantalla e iOS Safari
+  const { isDark } = useActiveSectionTheme({
+    defaultTheme: 'light',
+    defaultColor: '#ffffff',
+    probeOffset: 80,
+  });
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (catalogDropdownRef.current && !catalogDropdownRef.current.contains(e.target)) {
@@ -338,7 +346,8 @@ export default function VoldogHero() {
   const logoR = Math.round((1 - eased) * 255 + eased * 126);
   const logoG = Math.round((1 - eased) * 255 + eased * 4);
   const logoB = Math.round((1 - eased) * 255 + eased * 161);
-  const logoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
+  const interpolatedLogoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
+  const logoColor = isDark && eased >= 0.95 ? '#EDA3FF' : interpolatedLogoColor;
 
   // Sombra volumétrica del hero que se disuelve progresivamente hasta 'none' en la navbar
   const shadowAlpha = (1 - eased) * 0.22;
@@ -372,20 +381,24 @@ export default function VoldogHero() {
     <>
       {/* 1. NAVBAR UNIFICADA (Una sola navbar anclada a top: 0 con transformación progresiva continua) */}
       <header
-        className="fixed left-0 top-0 w-full z-50 flex items-center font-peridot pointer-events-auto"
+        className={`fixed left-0 top-0 w-full z-50 flex items-center font-peridot pointer-events-auto transition-colors duration-500 ${
+          isDark ? 'text-white' : ''
+        }`}
         style={{
           height: `${navHeight}px`,
-          backgroundColor: `rgba(255, 255, 255, ${0.85 * bgEased})`,
-          borderBottom: `1px solid rgba(229, 231, 235, ${0.75 * bgEased})`,
-          boxShadow: bgEased <= 0.05
+          backgroundColor: isDark
+            ? 'rgba(22, 22, 26, 0.92)'
+            : `rgba(255, 255, 255, ${0.85 * bgEased})`,
+          borderBottom: isDark
+            ? '1px solid rgba(37, 37, 45, 0.85)'
+            : `1px solid rgba(229, 231, 235, ${0.75 * bgEased})`,
+          boxShadow: isDark
+            ? '0 4px 30px rgba(0, 0, 0, 0.35)'
+            : bgEased <= 0.05
             ? 'none'
             : `0 4px 30px rgba(0, 0, 0, ${0.04 * bgEased})`,
-          backdropFilter: bgEased <= 0.05
-            ? 'none'
-            : `blur(${12 * bgEased}px)`,
-          WebkitBackdropFilter: bgEased <= 0.05
-            ? 'none'
-            : `blur(${12 * bgEased}px)`,
+          backdropFilter: isDark || bgEased > 0.05 ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: isDark || bgEased > 0.05 ? 'blur(12px)' : 'none',
         }}
       >
           <div 
@@ -397,7 +410,7 @@ export default function VoldogHero() {
             }}
           >
             {/* Navegación Izquierda - Escala generosa y presencia editorial */}
-            <nav className="flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold tracking-[-0.01em] text-[#7E04A1]">
+            <nav className={`flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold tracking-[-0.01em] transition-colors duration-500 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}>
               {/* Dropdown Desplegable: Catálogo y las 3 Categorías */}
               <div
                 ref={catalogDropdownRef}
@@ -423,14 +436,14 @@ export default function VoldogHero() {
                   <ChevronDown
                     className={`w-3.5 h-3.5 stroke-[2.2] transition-transform duration-300 ${
                       isCatalogDropdownOpen
-                        ? 'rotate-180 text-[#7E04A1]'
-                        : 'text-[#7E04A1]/80 group-hover/btn:rotate-180'
-                    }`}
+                        ? 'rotate-180'
+                        : 'group-hover/btn:rotate-180'
+                    } ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
                   />
                   <span
-                    className={`absolute bottom-1 left-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 ${
+                    className={`absolute bottom-1 left-0 h-[2.5px] transition-all duration-300 ${
                       isCatalogDropdownOpen ? 'w-full' : 'w-0 group-hover/btn:w-full'
-                    }`}
+                    } ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`}
                   />
                 </Link>
 
@@ -442,19 +455,19 @@ export default function VoldogHero() {
                       : 'opacity-0 -translate-y-2 pointer-events-none invisible'
                   }`}
                 >
-                  <div className="bg-white border border-[#EBD6FA] rounded-2xl p-2 shadow-[0_16px_40px_rgba(126,4,161,0.12)] font-peridot">
+                  <div className={`rounded-2xl p-2 font-peridot transition-colors duration-300 ${isDark ? 'bg-[#1F1D26] border border-[#2F2C3A] text-white shadow-[0_16px_40px_rgba(0,0,0,0.5)]' : 'bg-white border border-[#EBD6FA] shadow-[0_16px_40px_rgba(126,4,161,0.12)]'}`}>
                     <div className="space-y-1">
                       {NAV_CATEGORIES.map((cat) => (
                         <Link
                           key={cat.slug}
                           to={`/categoria/${cat.slug}`}
                           onClick={() => setIsCatalogDropdownOpen(false)}
-                          className="group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] sm:text-[14.5px] font-semibold text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF] transition-all duration-200 whitespace-nowrap"
+                          className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] sm:text-[14.5px] font-semibold transition-all duration-200 whitespace-nowrap ${isDark ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]' : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'}`}
                         >
                           <span className="leading-snug tracking-tight">
                             {cat.title}
                           </span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#7E04A1] opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 shrink-0 ml-3" />
+                          <ArrowRight className={`w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 shrink-0 ml-3 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`} />
                         </Link>
                       ))}
                     </div>
@@ -468,7 +481,7 @@ export default function VoldogHero() {
                 title="Próximamente: Temporadas y eventos especiales"
               >
                 Eventos
-                <span className="absolute bottom-0 left-0 w-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`} />
               </button>
               <a
                 href="#proceso"
@@ -486,7 +499,7 @@ export default function VoldogHero() {
                 className="hover:opacity-75 transition-opacity duration-150 relative py-1 group hidden md:inline-block cursor-pointer"
               >
                 Cómo trabajamos
-                <span className="absolute bottom-0 left-0 w-0 h-[2.5px] bg-[#7E04A1] transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`} />
               </a>
             </nav>
 
@@ -536,7 +549,7 @@ export default function VoldogHero() {
 
             {/* Acciones Derecha - Escala Protagónica */}
             <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
-              <div className="flex items-center gap-2.5 text-[#7E04A1]">
+              <div className={`flex items-center gap-2.5 transition-colors duration-500 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}>
                 {/* FAQ / Preguntas Frecuentes - Icono puro */}
                 <a
                   href="#preguntas-frecuentes"
@@ -553,7 +566,7 @@ export default function VoldogHero() {
                   }}
                   aria-label="Preguntas Frecuentes"
                   title="Preguntas frecuentes y tiempos de entrega"
-                  className="p-2 hover:opacity-75 transition-opacity text-[#7E04A1] cursor-pointer"
+                  className={`p-2 hover:opacity-75 transition-colors duration-500 cursor-pointer ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
                 >
                   <HelpCircle className="w-[22px] h-[22px] sm:w-[25px] sm:h-[25px] stroke-[2.2]" />
                 </a>
@@ -564,7 +577,11 @@ export default function VoldogHero() {
                 href="https://wa.me/573145854213?text=Hola%20Maranatha%20%F0%9F%91%8B%2C%20quisiera%20recibir%20asesor%C3%ADa%20sobre%20sus%20productos."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center justify-center gap-2.5 h-[48px] sm:h-[52px] px-6 sm:px-8 bg-[#7E04A1] hover:bg-[#5E0279] text-white text-[14px] sm:text-[15px] font-bold rounded-full shadow-[0_4px_18px_rgba(126,4,161,0.28)] hover:shadow-xl transition-all duration-300 active:scale-95 font-peridot cursor-pointer group/btn"
+                className={`hidden sm:inline-flex items-center justify-center gap-2.5 h-[48px] sm:h-[52px] px-6 sm:px-8 text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 active:scale-95 font-peridot cursor-pointer group/btn ${
+                  isDark
+                    ? 'bg-[#7E04A1] hover:bg-[#9B12C4] shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#C084FC]/30'
+                    : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
+                }`}
               >
                 <svg
                   className="w-5 h-5 fill-current shrink-0 transform group-hover/btn:scale-110 transition-transform duration-300"
@@ -580,7 +597,11 @@ export default function VoldogHero() {
                 type="button"
                 onClick={() => setIsMenuOpen(true)}
                 aria-label="Abrir menú"
-                className="w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full bg-[#7E04A1] hover:bg-[#5E0279] text-white flex flex-col items-center justify-center gap-[5px] transition-all duration-300 active:scale-95 shadow-[0_4px_18px_rgba(126,4,161,0.28)] shrink-0 cursor-pointer"
+                className={`w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex flex-col items-center justify-center gap-[5px] transition-all duration-500 active:scale-95 shrink-0 cursor-pointer ${
+                  isDark
+                    ? 'bg-[#2A2736] hover:bg-[#383448] border border-[#3E3A4E] shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
+                    : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
+                }`}
               >
                 <span className="w-5 sm:w-6 h-[2.5px] bg-white rounded-full" />
                 <span className="w-5 sm:w-6 h-[2.5px] bg-white rounded-full" />
@@ -592,6 +613,8 @@ export default function VoldogHero() {
       {/* 2. TRACK DE SCROLL Y CONTENEDOR HERO */}
       <section 
         ref={trackRef} 
+        data-theme="light"
+        data-theme-color="#ffffff"
         className="relative w-full z-20"
         style={{ 
           height: `${trackHeight}px`,
