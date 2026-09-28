@@ -1,7 +1,7 @@
 import React, { useEffect, memo } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { X, ArrowRight, ShieldCheck, MapPin, ZoomIn } from 'lucide-react';
+import { X, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 
 function ProductQuickViewModal({ product, isOpen, onClose }) {
   useEffect(() => {
@@ -115,10 +115,6 @@ function ProductQuickViewModal({ product, isOpen, onClose }) {
                   className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
                   draggable={false}
                 />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-medium flex items-center gap-1.5 pointer-events-none select-none">
-                  <ZoomIn className="w-3.5 h-3.5" />
-                  <span>Alta Resolución</span>
-                </div>
               </div>
             </div>
             

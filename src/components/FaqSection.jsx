@@ -74,7 +74,7 @@ const FAQ_ITEMS = [
 ];
 
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(0); // Pregunta 01 abierta por defecto
+  const [openIndex, setOpenIndex] = useState(null); // Todas las pestañas cerradas por defecto
   const [leftColState, setLeftColState] = useState('below'); // 'below' | 'visible' | 'above'
   const [accordionState, setAccordionState] = useState('below'); // 'below' | 'visible' | 'above'
   const [supportState, setSupportState] = useState('below'); // 'below' | 'visible' | 'above'
@@ -447,6 +447,7 @@ export default function FaqSection() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Hablar por WhatsApp para resolver dudas adicionales"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm shadow-[0_6px_20px_rgba(126,4,161,0.3)] hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95"
                 >
                   <MessageCircle className="w-4.5 h-4.5 fill-current shrink-0" />

@@ -683,7 +683,7 @@ export default function VoldogHero() {
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="none"
                   poster="/logo-circle-poster.webp"
                   aria-hidden="true"
                   tabIndex={-1}

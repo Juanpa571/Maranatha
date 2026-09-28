@@ -307,6 +307,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Hablar por WhatsApp desde el menú lateral"
             className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 sm:gap-2.5 shadow-[0_6px_20px_rgba(126,4,161,0.28)] hover:shadow-xl transition-all duration-300 active:scale-95"
           >
             <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />

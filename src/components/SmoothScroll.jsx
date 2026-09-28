@@ -7,6 +7,35 @@ export default function SmoothScroll() {
     let handleResize = null;
     let handleAnchorClick = null;
 
+    // En dispositivos móviles táctiles, el scroll nativo de hardware es óptimo y ahorra JS/CPU
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      handleAnchorClick = (e) => {
+        const anchor = e.target.closest('a[href^="#"], a[href^="/#"]');
+        if (anchor) {
+          const href = anchor.getAttribute('href');
+          if (href && href !== '#' && href !== '/#') {
+            const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
+            const isCurrentPageAnchor = href.startsWith('#') || (isHomePage && href.startsWith('/#'));
+            if (isCurrentPageAnchor) {
+              const hash = href.startsWith('/#') ? href.substring(1) : href;
+              const targetElement = document.querySelector(hash);
+              if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                if (window.location.hash !== hash) {
+                  window.history.pushState(null, '', hash);
+                }
+              }
+            }
+          }
+        }
+      };
+      document.addEventListener('click', handleAnchorClick);
+      return () => {
+        document.removeEventListener('click', handleAnchorClick);
+      };
+    }
+
     import('lenis').then(({ default: Lenis }) => {
       if (unsub) return;
 

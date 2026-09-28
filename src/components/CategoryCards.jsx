@@ -30,15 +30,16 @@ const CATEGORIES = [
 export default function CategoryCards() {
   const [cardsState, setCardsState] = useState('below'); // 'below' | 'visible' | 'above'
   const cardsRef = useRef(null);
-
   useEffect(() => {
+    let rAFId = null;
     const checkPosition = () => {
-      if (cardsRef.current) {
+      if (rAFId) return;
+      rAFId = window.requestAnimationFrame(() => {
+        rAFId = null;
+        if (!cardsRef.current) return;
         const rect = cardsRef.current.getBoundingClientRect();
         const windowH = window.innerHeight;
-        // Scroll-down: las tarjetas aparecen con animación escalonada al entrar por la parte inferior (88% del viewport)
         const enterThreshold = windowH * 0.88;
-        // Scroll hacia arriba / salida por navbar superior
         const exitThreshold = window.innerWidth < 768 ? 260 : 360;
 
         let state = 'visible';
@@ -48,7 +49,7 @@ export default function CategoryCards() {
           state = 'above';
         }
         setCardsState((prev) => (prev !== state ? state : prev));
-      }
+      });
     };
 
     let unsubLenis = null;
@@ -64,24 +65,14 @@ export default function CategoryCards() {
       window.addEventListener('lenis-init', (e) => subscribeLenis(e.detail), { once: true });
     }
 
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          checkPosition();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', checkPosition);
+    window.addEventListener('scroll', checkPosition, { passive: true });
+    window.addEventListener('resize', checkPosition, { passive: true });
     checkPosition();
 
     return () => {
+      if (rAFId) window.cancelAnimationFrame(rAFId);
       if (unsubLenis) unsubLenis();
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', checkPosition);
       window.removeEventListener('resize', checkPosition);
     };
   }, []);

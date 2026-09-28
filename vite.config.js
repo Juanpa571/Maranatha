@@ -16,6 +16,25 @@ function nonBlockingCss() {
 
 export default defineConfig({
   plugins: [react(), nonBlockingCss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/react-router') ||
+            id.includes('node_modules/react-router-dom/')
+          ) {
+            return 'vendor-react';
+          }
+          if (id.includes('node_modules/@sanity/')) {
+            return 'vendor-sanity';
+          }
+        },
+      },
+    },
+  },
   server: {
     host: true,
     port: 3000,

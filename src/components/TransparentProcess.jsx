@@ -265,6 +265,7 @@ export default function TransparentProcess() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Hablar por WhatsApp para asesoría sobre las etapas del proceso"
                 className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm md:text-base shadow-[0_10px_30px_rgba(126,4,161,0.30)] hover:shadow-[0_14px_40px_rgba(126,4,161,0.40)] transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer relative"
               >
                 {/* Rayitas arriba del botón */}

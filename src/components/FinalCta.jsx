@@ -278,6 +278,7 @@ export default function FinalCta() {
             href={defaultWhatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Hablar por WhatsApp para iniciar tu pedido o proyecto"
             className="inline-flex items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto max-w-[320px] sm:max-w-none px-6 sm:px-12 md:px-14 py-4 sm:py-5 md:py-6 rounded-full bg-[#74059F] hover:bg-[#620387] text-white font-bold text-[16px] sm:text-xl md:text-[22px] shadow-[0_14px_36px_rgba(116,5,159,0.34)] hover:shadow-[0_20px_48px_rgba(116,5,159,0.48)] transition-all duration-300 transform hover:-translate-y-1 active:scale-95 group mx-auto"
           >
             <svg

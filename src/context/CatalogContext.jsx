@@ -163,7 +163,22 @@ export function CatalogProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    fetchCatalogData();
+    // Revalidación asíncrona en idle: no compite con LCP ni bloquea el render inicial
+    let idleId = null;
+    const timer = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(() => fetchCatalogData(), { timeout: 2500 });
+      } else {
+        fetchCatalogData();
+      }
+    }, 1200);
+
+    return () => {
+      clearTimeout(timer);
+      if (idleId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
   }, [fetchCatalogData]);
 
   const getCategory = useCallback(

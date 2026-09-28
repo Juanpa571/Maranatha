@@ -22,33 +22,38 @@ export default function CoreCatalog() {
   }, []);
 
   useEffect(() => {
+    let rAFId = null;
     const checkPositions = () => {
-      const windowH = window.innerHeight;
-      const enterThreshold = windowH * 0.88;
+      if (rAFId) return;
+      rAFId = window.requestAnimationFrame(() => {
+        rAFId = null;
+        const windowH = window.innerHeight;
+        const enterThreshold = windowH * 0.88;
 
-      if (headerRef.current) {
-        const headerRect = headerRef.current.getBoundingClientRect();
-        const headerTopThreshold = window.innerWidth < 768 ? 240 : 320;
-        let newHeaderState = 'visible';
-        if (headerRect.top > enterThreshold) {
-          newHeaderState = 'below';
-        } else if (cardsRef.current && cardsRef.current.getBoundingClientRect().top <= headerTopThreshold) {
-          newHeaderState = 'above';
+        if (headerRef.current) {
+          const headerRect = headerRef.current.getBoundingClientRect();
+          const headerTopThreshold = window.innerWidth < 768 ? 240 : 320;
+          let newHeaderState = 'visible';
+          if (headerRect.top > enterThreshold) {
+            newHeaderState = 'below';
+          } else if (cardsRef.current && cardsRef.current.getBoundingClientRect().top <= headerTopThreshold) {
+            newHeaderState = 'above';
+          }
+          setHeaderState((prev) => (prev !== newHeaderState ? newHeaderState : prev));
         }
-        setHeaderState((prev) => (prev !== newHeaderState ? newHeaderState : prev));
-      }
 
-      if (cardsRef.current) {
-        const cardsRect = cardsRef.current.getBoundingClientRect();
-        const cardsExitThreshold = window.innerWidth < 768 ? 200 : 280;
-        let newCardsState = 'visible';
-        if (cardsRect.top > enterThreshold) {
-          newCardsState = 'below';
-        } else if (cardsRect.bottom <= cardsExitThreshold) {
-          newCardsState = 'above';
+        if (cardsRef.current) {
+          const cardsRect = cardsRef.current.getBoundingClientRect();
+          const cardsExitThreshold = window.innerWidth < 768 ? 200 : 280;
+          let newCardsState = 'visible';
+          if (cardsRect.top > enterThreshold) {
+            newCardsState = 'below';
+          } else if (cardsRect.bottom <= cardsExitThreshold) {
+            newCardsState = 'above';
+          }
+          setCardsState((prev) => (prev !== newCardsState ? newCardsState : prev));
         }
-        setCardsState((prev) => (prev !== newCardsState ? newCardsState : prev));
-      }
+      });
     };
 
     let unsubLenis = null;
@@ -65,10 +70,11 @@ export default function CoreCatalog() {
     }
 
     window.addEventListener('scroll', checkPositions, { passive: true });
-    window.addEventListener('resize', checkPositions);
+    window.addEventListener('resize', checkPositions, { passive: true });
     checkPositions();
 
     return () => {
+      if (rAFId) window.cancelAnimationFrame(rAFId);
       if (unsubLenis) unsubLenis();
       window.removeEventListener('scroll', checkPositions);
       window.removeEventListener('resize', checkPositions);
