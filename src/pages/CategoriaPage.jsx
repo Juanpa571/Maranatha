@@ -140,15 +140,15 @@ export default function CategoriaPage() {
               return (
                 <div
                   key={prod.id}
-                  className="group relative flex flex-row sm:flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300"
+                  className="group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  {/* Contenedor de Imagen: izquierda en móvil (estilo Amazon), superior en desktop */}
-                  <div className="relative w-[115px] xs:w-[130px] sm:w-full shrink-0 flex flex-col justify-start">
+                  {/* Contenedor de Imagen: Foto a ancho completo con proporción limpia */}
+                  <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8FD] shrink-0">
                     <button
                       type="button"
                       onClick={() => handleOpenProduct(prod)}
                       title={`Ver ${prod.title} en alta resolución`}
-                      className="group/img block relative w-full aspect-square overflow-hidden bg-[#FAF8FD] cursor-zoom-in text-left"
+                      className="group/img block relative w-full h-full cursor-zoom-in text-left"
                     >
                       <img
                         src={prod.image}
@@ -161,12 +161,7 @@ export default function CategoriaPage() {
                         draggable={false}
                       />
 
-                      {/* En móvil: Icono de Zoom/Inspección en esquina inferior izquierda */}
-                      <div className="sm:hidden absolute bottom-1.5 left-1.5 w-6 h-6 rounded-md bg-white/95 backdrop-blur-sm border border-gray-200/80 shadow-sm flex items-center justify-center text-gray-700 select-none pointer-events-none">
-                        <ZoomIn className="w-3.5 h-3.5" />
-                      </div>
-
-                      {/* En desktop: Micro badge de zoom al hacer hover */}
+                      {/* En desktop: Micro badge sutil de zoom al hacer hover */}
                       <div className="hidden sm:flex absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-medium items-center gap-1 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none select-none">
                         <ZoomIn className="w-3.5 h-3.5" />
                         <span>Zoom</span>
@@ -174,8 +169,8 @@ export default function CategoriaPage() {
                     </button>
                   </div>
 
-                  {/* Área de Detalles: columna derecha en móvil, inferior en desktop con padding holgado */}
-                  <div className="p-3.5 sm:p-5 sm:pt-4 flex flex-col justify-between flex-1 min-w-0 bg-white">
+                  {/* Área de Detalles: Padding holgado y jerarquía limpia */}
+                  <div className="p-4 sm:p-5 sm:pt-4 flex flex-col justify-between flex-1 min-w-0 bg-white">
                     <div>
                       {/* Título */}
                       <button
@@ -184,19 +179,19 @@ export default function CategoriaPage() {
                         className="block group/title cursor-pointer text-left w-full"
                         title={`Ver detalles de ${prod.title}`}
                       >
-                        <h3 className="font-peridot text-[14px] xs:text-[15px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 group-hover/title:text-[#7E04A1] transition-colors">
+                        <h3 className="font-peridot text-[15.5px] xs:text-[16px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 group-hover/title:text-[#7E04A1] transition-colors">
                           {prod.title}
                         </h3>
                       </button>
 
                       {/* Subtítulo / Descripción real del producto */}
-                      <p className="font-peridot text-[11px] xs:text-[11.5px] sm:text-[12px] text-[#767987] font-normal leading-[1.38] mt-1.5 line-clamp-2">
+                      <p className="font-peridot text-[12px] text-[#6A6C7D] font-normal leading-[1.42] mt-1.5 line-clamp-2">
                         {prod.subtitle}
                       </p>
                     </div>
 
                     {/* Acciones: Fila de Precio + Botón Cotizar WhatsApp */}
-                    <div className="pt-3 sm:pt-3.5 mt-3 sm:mt-4 border-t border-[#F5EEFB] flex items-center justify-between gap-2">
+                    <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex items-center justify-between gap-2">
                       {/* Precio Tipográfico */}
                       <div className="flex flex-col select-text leading-none py-0.5">
                         <span className="text-[10px] sm:text-[10.5px] text-gray-400 font-medium">
@@ -219,7 +214,7 @@ export default function CategoriaPage() {
                         rel="noopener noreferrer"
                         title={`Cotizar ${prod.title} por WhatsApp`}
                         aria-label={`Cotizar ${prod.title} por WhatsApp`}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 h-[34px] sm:h-[40px] px-3.5 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 h-[36px] sm:h-[40px] px-4 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12.5px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
                       >
                         <svg
                           width="16"
