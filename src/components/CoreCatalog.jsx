@@ -180,12 +180,12 @@ export default function CoreCatalog() {
           return (
             <div
               key={prod.id || prod._id || index}
-              className={`group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300 ${
+              className={`group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300 pointer-events-auto touch-manipulation ${
                 cardsState === 'below'
-                  ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96] pointer-events-none'
+                  ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96]'
                   : cardsState === 'above'
-                  ? 'opacity-0 -translate-y-8 scale-[0.98] pointer-events-none'
-                  : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+                  ? 'opacity-0 -translate-y-8 scale-[0.98]'
+                  : 'opacity-100 translate-y-0 scale-100'
               }`}
               style={{ transitionDelay: cardsState === 'visible' ? (prod.delay || `${(index + 1) * 150}ms`) : '0ms' }}
             >
@@ -198,7 +198,7 @@ export default function CoreCatalog() {
                   className="group/img block relative w-full h-full cursor-zoom-in text-left"
                 >
                   <img
-                    src={cardsState !== 'below' ? prod.image : undefined}
+                    src={prod.image}
                     alt={prod.alt || prod.title}
                     width="500"
                     height="500"
