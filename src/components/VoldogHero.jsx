@@ -209,8 +209,14 @@ export default function VoldogHero() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Progreso de scroll normalizado de 0 a 1
-  const [progress, setProgress] = useState(0);
+  // Referencias para Direct DOM Mutation (Cero re-renders en scroll)
+  const headerRef = useRef(null);
+  const navInnerRef = useRef(null);
+  const unicornHeroWhiteRef = useRef(null);
+  const maranathaLogoRef = useRef(null);
+  const heroCardRef = useRef(null);
+  const videoContainerRef = useRef(null);
+  const bottomCtaRef = useRef(null);
 
   // Inicialización sincrónica según dimensiones exactas del viewport para garantizar CLS = 0.000
   const [config, setConfig] = useState(() => {
@@ -219,15 +225,143 @@ export default function VoldogHero() {
     return getHeroConfig(vw, vh);
   });
 
+  const isDarkRef = useRef(isDark);
+  const configRef = useRef(config);
+
+  const applyScrollVisuals = (scrollY) => {
+    const cfg = configRef.current;
+    if (!cfg) return;
+
+    const rawProgress = Math.min(1, Math.max(0, scrollY / (cfg.scrollDistance || 1)));
+    const eased = easeInOutCubic(rawProgress);
+
+    const {
+      viewportHeight = 900,
+      viewportWidth = 1200,
+      exteriorPad = 26,
+      interiorPadY = 26,
+      interiorPadX = 36,
+      initialRadius = 42,
+      compactRadius = 24,
+      compactHeight = 140,
+      stickyPadX = 50,
+      circleMarginTop = 100,
+      logoScale: initialLogoScale = 3.0,
+      logoTranslateY: initialLogoTranslateY = 80,
+    } = cfg;
+
+    const dark = isDarkRef.current;
+    const navHeight = 80;
+    const initialNavTop = exteriorPad + interiorPadY;
+    const navItemTranslateY = (1 - eased) * initialNavTop;
+
+    const initialNavPadX = exteriorPad + interiorPadX;
+    const navPadX = (1 - eased) * initialNavPadX + eased * stickyPadX;
+    const bgEased = Math.max(0, (eased - 0.15) / 0.85);
+
+    // 1. Header Sticky / Transparente
+    if (headerRef.current) {
+      if (dark) {
+        headerRef.current.style.backgroundColor = 'rgba(22, 22, 26, 0.92)';
+        headerRef.current.style.borderBottom = '1px solid rgba(37, 37, 45, 0.85)';
+        headerRef.current.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.35)';
+        headerRef.current.style.backdropFilter = 'blur(12px)';
+        headerRef.current.style.webkitBackdropFilter = 'blur(12px)';
+      } else {
+        headerRef.current.style.backgroundColor = `rgba(255, 255, 255, ${0.85 * bgEased})`;
+        headerRef.current.style.borderBottom = `1px solid rgba(229, 231, 235, ${0.75 * bgEased})`;
+        headerRef.current.style.boxShadow = bgEased <= 0.05 ? 'none' : `0 4px 30px rgba(0, 0, 0, ${0.04 * bgEased})`;
+        headerRef.current.style.backdropFilter = bgEased > 0.05 ? 'blur(12px)' : 'none';
+        headerRef.current.style.webkitBackdropFilter = bgEased > 0.05 ? 'blur(12px)' : 'none';
+      }
+    }
+
+    // 2. Padding y posición interna de la Navbar
+    if (navInnerRef.current) {
+      navInnerRef.current.style.paddingLeft = `${navPadX}px`;
+      navInnerRef.current.style.paddingRight = `${navPadX}px`;
+      navInnerRef.current.style.transform = `translate3d(0, ${navItemTranslateY}px, 0)`;
+    }
+
+    // 3. Isotipo Unicornio Blanco
+    if (unicornHeroWhiteRef.current) {
+      unicornHeroWhiteRef.current.style.opacity = Math.max(0, 1 - eased * 2.8);
+      unicornHeroWhiteRef.current.style.transform = `translate3d(0, 0px, 0) scale(${1 - eased * 0.25})`;
+      unicornHeroWhiteRef.current.style.pointerEvents = eased > 0.3 ? 'none' : 'auto';
+    }
+
+    // 4. Logotipo Maranatha Unificado
+    if (maranathaLogoRef.current) {
+      const logoScale = (1 - eased) * initialLogoScale + eased * 1.0;
+      const logoTranslateY = (1 - eased) * initialLogoTranslateY;
+      const logoR = Math.round((1 - eased) * 255 + eased * 126);
+      const logoG = Math.round((1 - eased) * 255 + eased * 4);
+      const logoB = Math.round((1 - eased) * 255 + eased * 161);
+      const interpolatedLogoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
+      const logoColor = dark && eased >= 0.95 ? '#EDA3FF' : interpolatedLogoColor;
+
+      const shadowAlpha = (1 - eased) * 0.22;
+      const logoFilter = shadowAlpha > 0.01 ? `drop-shadow(0 4px 18px rgba(0, 0, 0, ${shadowAlpha.toFixed(3)}))` : 'none';
+
+      maranathaLogoRef.current.style.color = logoColor;
+      maranathaLogoRef.current.style.transform = `translate3d(-50%, calc(-50% + ${logoTranslateY}px), 0) scale(${logoScale})`;
+      maranathaLogoRef.current.style.filter = logoFilter;
+    }
+
+    // 5. Hero Card Lavanda (Direct DOM Mutation en GPU)
+    if (heroCardRef.current) {
+      const baseHeroHeight = Math.max(480, viewportHeight - exteriorPad * 2);
+      const cardTranslateY = eased * (navHeight - 1 - exteriorPad);
+      const cardScaleY = 1 - eased * (1 - compactHeight / baseHeroHeight);
+
+      const currentTopRadius = (1 - eased) * initialRadius;
+      const currentBottomRadius = initialRadius - eased * (initialRadius - compactRadius);
+
+      heroCardRef.current.style.transform = `translate3d(0, ${cardTranslateY}px, 0) scale(1, ${cardScaleY})`;
+      heroCardRef.current.style.borderTopLeftRadius = `${currentTopRadius}px`;
+      heroCardRef.current.style.borderTopRightRadius = `${currentTopRadius}px`;
+      heroCardRef.current.style.borderBottomLeftRadius = `${currentBottomRadius}px`;
+      heroCardRef.current.style.borderBottomRightRadius = `${currentBottomRadius}px`;
+      heroCardRef.current.style.pointerEvents = eased > 0.35 ? 'none' : 'auto';
+    }
+
+    // 6. Contenedor de Emblema Animado (Direct DOM Mutation con sub-píxeles en hardware 3D)
+    if (videoContainerRef.current) {
+      const videoScale = 1 - eased * 0.45;
+      const videoTranslateY = -eased * (viewportWidth >= 768 ? 80 : 50);
+      const videoOpacity = Math.max(0, 1 - eased * 1.6);
+
+      videoContainerRef.current.style.opacity = videoOpacity;
+      videoContainerRef.current.style.transform = `translate3d(0, ${videoTranslateY - eased * circleMarginTop}px, 0) scale(${videoScale})`;
+    }
+
+    // 7. Botón Inferior / CTA
+    if (bottomCtaRef.current) {
+      const bottomCtaOpacity = Math.max(0, 1 - eased * 2.4);
+      const bottomCtaTranslateY = eased * 40;
+
+      bottomCtaRef.current.style.opacity = bottomCtaOpacity;
+      bottomCtaRef.current.style.transform = `translate3d(0, ${bottomCtaTranslateY}px, 0)`;
+      bottomCtaRef.current.style.pointerEvents = eased > 0.35 ? 'none' : 'auto';
+    }
+  };
+
+  useEffect(() => {
+    isDarkRef.current = isDark;
+    applyScrollVisuals(window.scrollY || 0);
+  }, [isDark]);
+
+  useEffect(() => {
+    configRef.current = config;
+    applyScrollVisuals(window.scrollY || 0);
+  }, [config]);
+
   useEffect(() => {
     let lastWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
 
     const updateConfig = () => {
       const vh = window.innerHeight;
       const vw = window.innerWidth;
-
-      // En móviles, el scroll oculta/muestra la barra de direcciones disparando resize solo vertical.
-      // Si el ancho no ha cambiado y ya se ha iniciado el scroll, evitamos recalcular para prevenir layout shifts.
       const isMobile = vw < 1024;
       const widthChanged = Math.abs(vw - lastWidth) > 2;
       const isAtTop = (window.scrollY || 0) <= 10;
@@ -244,21 +378,23 @@ export default function VoldogHero() {
   }, []);
 
   useEffect(() => {
-    const handleScrollPos = (scrollY) => {
-      const rawProgress = Math.min(1, Math.max(0, scrollY / config.scrollDistance));
-      setProgress((prev) => {
-        if (Math.abs(prev - rawProgress) < 0.0005) return prev;
-        return rawProgress;
-      });
+    let unsubLenis = null;
+    const onLenisScroll = (e) => {
+      const scrollY = typeof e === 'number' ? e : (e?.scroll ?? window.scrollY ?? 0);
+      applyScrollVisuals(scrollY);
     };
 
-    let unsubLenis = null;
     const subscribeLenis = (lenisInstance) => {
-      if (unsubLenis) return;
-      unsubLenis = lenisInstance.on('scroll', ({ scroll }) => {
-        handleScrollPos(scroll);
-      });
-      handleScrollPos(lenisInstance.scroll || window.scrollY || 0);
+      if (!lenisInstance) return;
+      if (typeof lenisInstance.on === 'function') {
+        lenisInstance.on('scroll', onLenisScroll);
+        unsubLenis = () => {
+          if (typeof lenisInstance.off === 'function') {
+            lenisInstance.off('scroll', onLenisScroll);
+          }
+        };
+      }
+      applyScrollVisuals(lenisInstance.scroll || window.scrollY || 0);
     };
 
     if (window.lenis) {
@@ -272,142 +408,67 @@ export default function VoldogHero() {
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          handleScrollPos(window.scrollY || window.pageYOffset || 0);
+          applyScrollVisuals(window.scrollY || window.pageYOffset || 0);
           ticking = false;
         });
         ticking = true;
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    handleScrollPos(window.scrollY || 0);
+    applyScrollVisuals(window.scrollY || 0);
 
     return () => {
-      if (unsubLenis) unsubLenis();
+      if (typeof unsubLenis === 'function') unsubLenis();
       window.removeEventListener('scroll', onScroll);
     };
   }, [config.scrollDistance]);
 
-  const eased = easeInOutCubic(progress);
-
   const {
-    viewportHeight,
-    viewportWidth,
-    exteriorPad,
-    interiorPadY,
-    interiorPadX,
-    initialRadius,
-    compactRadius,
-    compactHeight,
-    stickyPadX,
-    scrollDistance,
+    viewportHeight = 900,
+    viewportWidth = 1200,
+    exteriorPad = 26,
+    interiorPadY = 26,
+    interiorPadX = 36,
+    initialRadius = 42,
+    scrollDistance = 400,
   } = config;
 
-  // 1. POSICIONAMIENTO Y TRANSFORMACIÓN CONTINUA DE LA NAVBAR
-  // Navbar única anclada a top: 0, cuyos elementos internos se interpolan fluidamente sin crear capas duplicadas ni franjas
   const navHeight = 80;
-  const initialNavTop = exteriorPad + interiorPadY;
-  const navItemTranslateY = (1 - eased) * initialNavTop;
-
-  // Padding horizontal de la navbar: de (exteriorPad + interiorPadX) a stickyPadX
-  const initialNavPadX = exteriorPad + interiorPadX;
-  const navPadX = (1 - eased) * initialNavPadX + eased * stickyPadX;
-
-  // Opacidad del fondo blanco y blur sticky: interpolación suave y sincronizada
-  const bgEased = Math.max(0, (eased - 0.15) / 0.85);
-
-  // 2. HERO CONTAINER (#E7D1FF)
-  // Sincronización continua exacta usando 'eased' para evitar cualquier desfasaje con la navbar
-  const initialHeroHeight = Math.max(480, viewportHeight - exteriorPad * 2);
-  const heroHeight = initialHeroHeight - eased * (initialHeroHeight - compactHeight);
-
-  // Posición superior del hero card:
-  // Inicialmente en exteriorPad (35px en desktop). Al compactarse, se acopla exactamente a la base de la navbar sticky (navHeight - 1),
-  // eliminando totalmente cualquier franja o hueco blanco intermedio.
-  const heroCardTop = (1 - eased) * exteriorPad + eased * (navHeight - 1);
-
-  // Radio de esquinas redondeadas:
-  // Las esquinas inferiores conservan su curvatura premium.
-  // Las esquinas superiores se acoplan al ras con la barra sticky para evitar franjas blancas en esquinas.
-  const currentTopRadius = (1 - eased) * initialRadius;
-  const currentBottomRadius = initialRadius - eased * (initialRadius - compactRadius);
-
-  // 3. LOGO 'MARANATHA' UNIFICADO (Transformación continua hero → sticky navbar)
-  // Escala inicial monumental en el hero que se contrae con precisión al tamaño exacto de la navbar (1.0)
-  const initialLogoScale = config.logoScale;
-  const initialLogoTranslateY = config.logoTranslateY;
-
-  const logoScale = (1 - eased) * initialLogoScale + eased * 1.0;
-  const logoTranslateY = (1 - eased) * initialLogoTranslateY;
-
+  const baseHeroHeight = Math.max(480, viewportHeight - exteriorPad * 2);
   const heroCircleSize = config.circleSize;
   const heroMarginTop = config.circleMarginTop;
   const heroButtonConfig = config.buttonConfig;
+  const heroLogoScale = config.logoScale || 3.0;
+  const heroLogoTranslateY = config.logoTranslateY || 80;
 
-  // Interpolación de color continua: de Blanco Puro (#FFFFFF: 255, 255, 255) a Morado Maranatha (#7E04A1: 126, 4, 161)
-  const logoR = Math.round((1 - eased) * 255 + eased * 126);
-  const logoG = Math.round((1 - eased) * 255 + eased * 4);
-  const logoB = Math.round((1 - eased) * 255 + eased * 161);
-  const interpolatedLogoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
-  const logoColor = isDark && eased >= 0.95 ? '#EDA3FF' : interpolatedLogoColor;
-
-  // Sombra volumétrica del hero que se disuelve progresivamente hasta 'none' en la navbar
-  const shadowAlpha = (1 - eased) * 0.22;
-  const logoFilter = shadowAlpha > 0.01 ? `drop-shadow(0 4px 18px rgba(0, 0, 0, ${shadowAlpha.toFixed(3)}))` : 'none';
-
-  // Video circular central: escala y desvanecimiento sutil progresivo (cero cortes bruscos)
-  const videoScale = 1 - eased * 0.45;
-  const videoTranslateY = -eased * (viewportWidth >= 768 ? 80 : 50);
-  // Disolución suave y natural que desaparece de forma gradual y sedosa
-  const videoOpacity = Math.max(0, 1 - eased * 1.6);
-
-  // Padding interior dinámico de la tarjeta lavanda
-  const currentPadY = (1 - eased) * interiorPadY + eased * 16;
-  const currentPadX = (1 - eased) * interiorPadX + eased * 24;
-
-  // Píldora inferior (Papelería Creativa en Cali)
-  const bottomCtaOpacity = Math.max(0, 1 - eased * 2.4);
-  const bottomCtaTranslateY = eased * 40;
-
-  // 4. POSICIONAMIENTO CONTINUO DEL CONTENIDO SIGUIENTE (CERO SOLAPAMIENTO Y CERO HUECOS VACÍOS)
+  // 4. POSICIONAMIENTO CONTINUO DEL CONTENIDO SIGUIENTE
   const trackHeight = viewportHeight + scrollDistance;
-
-  // Margen de separación exacto con el Hero (35px en desktop, 24px en tablet, 16px en móvil):
-  const gapBelowHero = viewportWidth >= 1024 ? 35 : viewportWidth >= 768 ? 24 : 16;
-
-  // Margen estático definitivo: 100% constante, elimina toda mutación de document.scrollHeight durante el scroll
-  // Al ser -scrollDistance, trackHeight + finalMarginBottom = viewportHeight (cero solapamiento a scroll 0)
   const finalMarginBottom = -scrollDistance;
 
   return (
     <>
-      {/* 1. NAVBAR UNIFICADA (Una sola navbar anclada a top: 0 con transformación progresiva continua) */}
+      {/* 1. NAVBAR UNIFICADA */}
       <header
+        ref={headerRef}
         className={`fixed left-0 top-0 w-full z-50 flex items-center font-peridot pointer-events-auto transition-colors duration-500 ${
           isDark ? 'text-white' : ''
         }`}
         style={{
           height: `${navHeight}px`,
-          backgroundColor: isDark
-            ? 'rgba(22, 22, 26, 0.92)'
-            : `rgba(255, 255, 255, ${0.85 * bgEased})`,
-          borderBottom: isDark
-            ? '1px solid rgba(37, 37, 45, 0.85)'
-            : `1px solid rgba(229, 231, 235, ${0.75 * bgEased})`,
-          boxShadow: isDark
-            ? '0 4px 30px rgba(0, 0, 0, 0.35)'
-            : bgEased <= 0.05
-            ? 'none'
-            : `0 4px 30px rgba(0, 0, 0, ${0.04 * bgEased})`,
-          backdropFilter: isDark || bgEased > 0.05 ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: isDark || bgEased > 0.05 ? 'blur(12px)' : 'none',
+          backgroundColor: isDark ? 'rgba(22, 22, 26, 0.92)' : 'rgba(255, 255, 255, 0)',
+          borderBottom: isDark ? '1px solid rgba(37, 37, 45, 0.85)' : '1px solid rgba(229, 231, 235, 0)',
+          boxShadow: isDark ? '0 4px 30px rgba(0, 0, 0, 0.35)' : 'none',
+          backdropFilter: isDark ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: isDark ? 'blur(12px)' : 'none',
         }}
       >
           <div 
-            className="w-full h-full flex items-center justify-between gap-4 will-change-transform"
+            ref={navInnerRef}
+            className="w-full h-full flex items-center justify-between gap-4 will-change-transform transform-gpu"
             style={{
-              paddingLeft: `${navPadX}px`,
-              paddingRight: `${navPadX}px`,
-              transform: `translateY(${navItemTranslateY}px)`,
+              paddingLeft: `${exteriorPad + interiorPadX}px`,
+              paddingRight: `${exteriorPad + interiorPadX}px`,
+              transform: `translate3d(0, ${exteriorPad + interiorPadY}px, 0)`,
             }}
           >
             {/* Navegación Izquierda - Escala generosa y presencia editorial */}
@@ -508,22 +569,24 @@ export default function VoldogHero() {
             <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full flex items-center justify-center pointer-events-none">
               {/* Unicornio visible en estado inicial del Hero - Silueta blanca pura estilo Voldog */}
               <div
-                className="flex items-center justify-center will-change-transform"
+                ref={unicornHeroWhiteRef}
+                className="flex items-center justify-center will-change-transform will-change-opacity transform-gpu"
                 style={{
-                  opacity: Math.max(0, 1 - eased * 2.8),
-                  transform: `scale(${1 - eased * 0.25})`,
-                  pointerEvents: eased > 0.3 ? 'none' : 'auto',
+                  opacity: 1,
+                  transform: 'translate3d(0, 0px, 0) scale(1)',
                 }}
               >
                 <img
                   src="/unicornio-white.svg"
                   alt="Maranatha"
+                  decoding="async"
                   className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[86px] lg:h-[86px] object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.12)]"
                 />
               </div>
 
               {/* Logotipo Único Maranatha: Un solo elemento visual continuo hero → sticky navbar con interpolación de escala, posición y color */}
               <Link
+                ref={maranathaLogoRef}
                 to="/"
                 onClick={(e) => {
                   if (window.location.pathname === '/') {
@@ -536,12 +599,10 @@ export default function VoldogHero() {
                   }
                 }}
                 title="Maranatha - Ir al inicio"
-                className="absolute left-1/2 top-1/2 font-['Pacifico',cursive] text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] tracking-tight leading-none hover:opacity-85 transition-opacity pb-1 whitespace-nowrap select-none pointer-events-auto will-change-transform cursor-pointer"
+                className="absolute left-1/2 top-1/2 font-['Pacifico',cursive] text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] tracking-tight leading-none hover:opacity-85 transition-opacity pb-1 whitespace-nowrap select-none pointer-events-auto will-change-transform will-change-opacity transform-gpu cursor-pointer"
                 style={{
-                  color: logoColor,
-                  transform: `translate3d(-50%, calc(-50% + ${logoTranslateY}px), 0) scale(${logoScale})`,
                   transformOrigin: 'center center',
-                  filter: logoFilter,
+                  transform: `translate3d(-50%, calc(-50% + ${heroLogoTranslateY}px), 0) scale(${heroLogoScale})`,
                 }}
               >
                 maranatha
@@ -632,26 +693,28 @@ export default function VoldogHero() {
           style={{ height: `${viewportHeight}px` }}
         >
 
-          {/* 2. CONTENEDOR LAVANDA DEL HERO (#E7D1FF) CON DIMENSIONES Y PADDING ORIGINALES */}
+          {/* 2. CONTENEDOR LAVANDA DEL HERO (#E7D1FF) CON TAMAÑO DOM FIJO Y TRANSFORMS EN GPU */}
         <div
-          className="absolute left-0 right-0 mx-auto bg-[#E7D1FF] overflow-hidden flex flex-col justify-between will-change-transform"
+          ref={heroCardRef}
+          className="absolute left-0 right-0 mx-auto bg-[#E7D1FF] overflow-hidden flex flex-col justify-between will-change-transform will-change-opacity transform-gpu"
           style={{
-            top: `${heroCardTop}px`,
-            height: `${heroHeight}px`,
+            top: `${exteriorPad}px`,
+            height: `${baseHeroHeight}px`,
             width: `calc(100% - ${exteriorPad * 2}px)`,
-            borderTopLeftRadius: `${currentTopRadius}px`,
-            borderTopRightRadius: `${currentTopRadius}px`,
-            borderBottomLeftRadius: `${currentBottomRadius}px`,
-            borderBottomRightRadius: `${currentBottomRadius}px`,
-            paddingTop: `${currentPadY}px`,
-            paddingBottom: `${currentPadY}px`,
-            paddingLeft: `${currentPadX}px`,
-            paddingRight: `${currentPadX}px`,
-            pointerEvents: eased > 0.35 ? 'none' : 'auto',
+            transformOrigin: 'top center',
+            transform: 'translate3d(0, 0px, 0) scale(1, 1)',
+            borderTopLeftRadius: `${initialRadius}px`,
+            borderTopRightRadius: `${initialRadius}px`,
+            borderBottomLeftRadius: `${initialRadius}px`,
+            borderBottomRightRadius: `${initialRadius}px`,
+            paddingTop: `${interiorPadY}px`,
+            paddingBottom: `${interiorPadY}px`,
+            paddingLeft: `${interiorPadX}px`,
+            paddingRight: `${interiorPadX}px`,
           }}
         >
-          {/* Espacio superior correspondiente al header */}
-          <div className="w-full shrink-0" style={{ height: `${(1 - eased) * navHeight}px` }} />
+          {/* Espacio superior correspondiente al header fijo en DOM */}
+          <div className="w-full shrink-0" style={{ height: `${navHeight}px` }} />
 
           {/* ESCENARIO CENTRAL INTERNO: CAJA TIPOGRÁFICA EXACTA DE VOLDOG (Sin corte de overflow) */}
           <div className="relative flex-grow flex flex-col items-center justify-center w-full my-auto">
@@ -661,16 +724,16 @@ export default function VoldogHero() {
 
 
 
-            {/* Contenedor Central con el Emblema Animado (Desvanecimiento sutil continuo sin cortes) */}
+            {/* Contenedor Central con el Emblema Animado (Consolidado en transform GPU puro, marginTop fijo) */}
             <div
+              ref={videoContainerRef}
               id="hero-video-container"
-              className="relative z-20 flex items-center justify-center aspect-square select-none pointer-events-none will-change-transform"
+              className="relative z-20 flex items-center justify-center aspect-square select-none pointer-events-none will-change-transform will-change-opacity transform-gpu"
               style={{
                 width: `${heroCircleSize}px`,
                 height: `${heroCircleSize}px`,
-                marginTop: `${(1 - eased) * heroMarginTop}px`,
-                opacity: videoOpacity,
-                transform: `translateY(${videoTranslateY}px) scale(${videoScale})`,
+                marginTop: `${heroMarginTop}px`,
+                transform: 'translate3d(0, 0px, 0) scale(1)',
               }}
             >
               {/* Contenedor Flotante del Emblema: Cuerno libre 3D que sobresale de la margen */}
@@ -681,9 +744,9 @@ export default function VoldogHero() {
                 {/* SVG Vectorial Oficial con cuerno sobresaliente y estrellas animadas */}
                 <AnimatedHeroLogo className="w-full h-full relative z-10" />
 
-                {/* Barrido de luz cristalina perfectamente acotado al medallón circular */}
-                <div className="absolute inset-[1.5%] rounded-full overflow-hidden pointer-events-none z-20">
-                  <div className="w-full h-full hero-sheen-sweep" />
+                {/* Barrido de luz cristalina perfectamente acotado al medallón circular con Hardware Clip */}
+                <div className="absolute inset-[1.5%] rounded-full overflow-hidden pointer-events-none z-20 transform-gpu translate-z-0">
+                  <div className="w-full h-full hero-sheen-sweep transform-gpu translate-z-0" />
                 </div>
               </div>
             </div>
@@ -692,11 +755,10 @@ export default function VoldogHero() {
 
           {/* 3. ELEMENTO INFERIOR: BOTÓN PRINCIPAL CON ASIMETRÍA LIMPIA - ESCALA PROTAGÓNICA */}
           <footer 
-            className="relative z-30 w-full flex items-center justify-start font-peridot will-change-transform"
+            ref={bottomCtaRef}
+            className="relative z-30 w-full flex items-center justify-start font-peridot will-change-transform will-change-opacity transform-gpu"
             style={{
-              opacity: bottomCtaOpacity,
-              transform: `translateY(${bottomCtaTranslateY}px)`,
-              pointerEvents: eased > 0.35 ? 'none' : 'auto',
+              transform: 'translate3d(0, 0px, 0)',
             }}
           >
             {/* Botón Izquierdo: Explorar Catálogo */}

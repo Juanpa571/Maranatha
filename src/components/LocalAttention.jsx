@@ -158,7 +158,7 @@ export default function LocalAttention() {
                 asesoría personalizada
               </span>
               <span className="inline-block align-middle ml-2 pointer-events-none">
-                <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
+                <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
               </span>
             </h2>
           </div>

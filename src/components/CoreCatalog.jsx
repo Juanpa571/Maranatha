@@ -102,7 +102,7 @@ export default function CoreCatalog() {
       >
         <div className="relative pt-6 sm:pt-8 md:pt-10">
           <div className="absolute -top-1 sm:-top-2 left-0 pointer-events-none transform -rotate-12 opacity-85">
-            <img src="/faq-heart.webp" alt="" width="28" height="28" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
+            <img src="/faq-heart.webp" alt="" width="28" height="28" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[58px] xl:text-[66px] font-bold tracking-tight text-[#141517] leading-[1.10]">
@@ -143,7 +143,7 @@ export default function CoreCatalog() {
             <br />
             favoritas de papelería
             <span className="inline-block align-middle ml-2 pointer-events-none">
-              <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
+              <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
             </span>
           </h2>
         </div>
@@ -159,6 +159,10 @@ export default function CoreCatalog() {
             <img
               src="/faq-arrow-clean.webp"
               alt=""
+              width="40"
+              height="40"
+              loading="lazy"
+              decoding="async"
               className="w-10 h-auto object-contain transform rotate-[35deg] opacity-75"
             />
           </div>

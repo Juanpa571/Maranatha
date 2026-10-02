@@ -177,55 +177,80 @@
   will-change: transform;
   animation: heroSheenSweep 4.2s ease-in-out infinite;
 }
-
-@keyframes heroSparkle1 {
+/* Animación pura por CSS del cuello y respiración del unicornio */
+@keyframes unicornNeckMove {
   0%, 100% {
-    transform: scale(0.9) rotate(0deg);
-    opacity: 0.88;
+    transform: translateY(0px) rotate(0deg);
   }
-  25% {
-    transform: scale(1.24) rotate(18deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 350px rgba(192, 132, 252, 0.85)) drop-shadow(0 0 700px rgba(126, 4, 161, 0.65));
+  35% {
+    transform: translateY(-140px) rotate(2.2deg);
+  }
+  55% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  82% {
+    transform: translateY(90px) rotate(-1.4deg);
+  }
+}
+
+.animate-unicorn-neck {
+  transform-box: view-box;
+  transform-origin: 10760px 18800px;
+  will-change: transform;
+  animation: unicornNeckMove 6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+/* Estrella 1 (Grande): escala, rotación y variación cromática */
+@keyframes heroStar1Move {
+  0%, 100% {
+    transform: scale(0.85) rotate(0deg);
+    fill: #7E04A1;
+  }
+  35% {
+    fill: #9C15C5;
   }
   50% {
-    transform: scale(0.94) rotate(-6deg);
-    opacity: 0.86;
+    transform: scale(1.25) rotate(24deg);
   }
-  75% {
-    transform: scale(1.08) rotate(8deg);
-    opacity: 0.96;
+  70% {
+    fill: #C084FC;
   }
 }
 
-@keyframes heroSparkle2 {
+.animate-hero-star-1 {
+  transform-box: view-box;
+  transform-origin: 12467.68px 15989.45px;
+  will-change: transform;
+  animation: heroStar1Move 5.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+/* Estrella 2 (Pequeña): escala, rotación y variación cromática */
+@keyframes heroStar2Move {
   0%, 100% {
-    transform: scale(1.18) rotate(12deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 300px rgba(192, 132, 252, 0.8)) drop-shadow(0 0 600px rgba(126, 4, 161, 0.6));
+    transform: scale(1.22) rotate(0deg);
+    fill: #7E04A1;
   }
-  45% {
-    transform: scale(0.82) rotate(-16deg);
-    opacity: 0.75;
+  35% {
+    fill: #C084FC;
   }
-  75% {
-    transform: scale(1.26) rotate(18deg);
-    opacity: 1;
+  50% {
+    transform: scale(0.8) rotate(-25deg);
+  }
+  70% {
+    fill: #9C15C5;
   }
 }
 
-.animate-hero-sparkle-1 {
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform, opacity;
-  animation: heroSparkle1 3.2s ease-in-out infinite;
+.animate-hero-star-2 {
+  transform-box: view-box;
+  transform-origin: 13081.59px 14791.13px;
+  will-change: transform;
+  animation: heroStar2Move 4.9s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 
-.animate-hero-sparkle-2 {
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform, opacity;
-  animation: heroSparkle2 2.7s ease-in-out infinite;
+/* Forzado de renderizado en capa separada del compositor (Hardware Clip) */
+.translate-z-0 {
+  transform: translateZ(0);
 }
 
 

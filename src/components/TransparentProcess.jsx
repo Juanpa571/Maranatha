@@ -113,7 +113,7 @@ export default function TransparentProcess() {
           <div className="text-center max-w-2xl mx-auto relative">
             {/* Corazón doodle flotante */}
             <div className="absolute -top-3.5 left-2 sm:left-8 pointer-events-none transform -rotate-12 opacity-85">
-              <img src="/faq-heart.webp" alt="" width="24" height="24" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
+              <img src="/faq-heart.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
             </div>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-bold tracking-tight text-[#141517] leading-[1.15]">
@@ -122,7 +122,7 @@ export default function TransparentProcess() {
               <span className="text-[#7E04A1]">diseño, aprobación previa</span>{' '}
               y entrega sin mínimos
               <span className="inline-block align-middle ml-2 pointer-events-none">
-                <img src="/faq-rays-clean.webp" alt="" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
+                <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
               </span>
             </h2>
           </div>

@@ -10,41 +10,30 @@ const FinalCta = lazy(() => import('../components/FinalCta'));
 const Footer = lazy(() => import('../components/Footer'));
 
 export default function HomePage() {
-  const [showBelowFold, setShowBelowFold] = React.useState(false);
-  const sentinelRef = React.useRef(null);
+  const [loadHeavySections, setLoadHeavySections] = React.useState(false);
 
   useEffect(() => {
     document.title = 'Maranatha Papelería Creativa | Eventos y Empaques en Cali';
 
-    const triggerMount = () => {
-      setShowBelowFold(true);
-      window.removeEventListener('scroll', triggerMount);
-      window.removeEventListener('touchstart', triggerMount);
-      window.removeEventListener('wheel', triggerMount);
+    const enableSections = () => {
+      setLoadHeavySections(true);
+      window.removeEventListener('scroll', enableSections);
+      window.removeEventListener('wheel', enableSections);
+      window.removeEventListener('touchmove', enableSections);
     };
 
-    window.addEventListener('scroll', triggerMount, { passive: true, once: true });
-    window.addEventListener('touchstart', triggerMount, { passive: true, once: true });
-    window.addEventListener('wheel', triggerMount, { passive: true, once: true });
+    // Montaje diferido tras 800ms o al primer intento de scroll/interacción
+    const timer = setTimeout(enableSections, 800);
 
-    let observer = null;
-    if ('IntersectionObserver' in window && sentinelRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0]?.isIntersecting) {
-            triggerMount();
-          }
-        },
-        { rootMargin: '400px' }
-      );
-      observer.observe(sentinelRef.current);
-    }
+    window.addEventListener('scroll', enableSections, { passive: true, once: true });
+    window.addEventListener('wheel', enableSections, { passive: true, once: true });
+    window.addEventListener('touchmove', enableSections, { passive: true, once: true });
 
     return () => {
-      if (observer) observer.disconnect();
-      window.removeEventListener('scroll', triggerMount);
-      window.removeEventListener('touchstart', triggerMount);
-      window.removeEventListener('wheel', triggerMount);
+      clearTimeout(timer);
+      window.removeEventListener('scroll', enableSections);
+      window.removeEventListener('wheel', enableSections);
+      window.removeEventListener('touchmove', enableSections);
     };
   }, []);
 
@@ -53,11 +42,8 @@ export default function HomePage() {
       {/* 1. Hero Principal Editorial con Navbar Unificada Continua (Estilo Voldog) */}
       <VoldogHero />
 
-      {/* Centinela de Intersección */}
-      <div ref={sentinelRef} className="w-full h-1 pointer-events-none" />
-
-      {/* 2. Secciones del Home: Carga Progresiva Asíncrona bajo Demanda */}
-      {showBelowFold ? (
+      {/* 2. Secciones del Home: Montaje diferido tras estabilización del Hero */}
+      {loadHeavySections && (
         <Suspense fallback={<div className="w-full min-h-[400px] bg-white" />}>
           <main id="contenido" className="w-full bg-white relative z-30">
             <CategoryCards />
@@ -71,8 +57,6 @@ export default function HomePage() {
           {/* 3. Footer de Autor con Navegación Semántica, Datos Locales y Horarios */}
           <Footer />
         </Suspense>
-      ) : (
-        <div className="w-full min-h-[400px] bg-white" />
       )}
     </div>
   );
