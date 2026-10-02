@@ -183,7 +183,7 @@ export default function LocalAttention() {
         >
           
           {/* FOTO PANORÁMICA CENTRAL CON MÁXIMA PRESENCIA CINEMATOGRÁFICA */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-[24px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:shadow-[0_28px_85px_rgba(0,0,0,0.13)] border border-white/90 bg-white group">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-[24px] sm:rounded-[38px] md:rounded-[48px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06),0_24px_65px_rgba(126,4,161,0.08)] bg-white group">
             <img
               src="/espacio-trabajo.webp"
               alt="Espacio de trabajo y taller de Maranatha Papelería en Cali"
@@ -191,7 +191,7 @@ export default function LocalAttention() {
               height="675"
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover object-center transform transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+              className="w-full h-full object-cover object-center transform-gpu will-change-transform transition-transform duration-1000 ease-out sm:group-hover:scale-[1.03]"
               draggable={false}
             />
 

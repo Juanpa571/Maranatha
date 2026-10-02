@@ -196,10 +196,6 @@ export default function FaqSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Línea divisoria arquitectónica de transición superior: oculta en móvil, preservada intacta en PC */}
-      <div className="hidden lg:block w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-8 sm:mb-12 pointer-events-none">
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-[#7E04A1]/20 to-transparent"></div>
-      </div>
 
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-start">
@@ -365,7 +361,7 @@ export default function FaqSection() {
                       </div>
                     </button>
 
-                    {/* Contenedor desplegable con animación fluida y línea morada izquierda */}
+                    {/* Contenedor desplegable con animación fluida y lectura limpia alineada */}
                     <div
                       id={`faq-answer-${item.index}`}
                       role="region"
@@ -376,9 +372,11 @@ export default function FaqSection() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <div className="px-5 sm:px-6 pb-5 pt-0">
-                          <div className="border-l-[3px] border-[#7E04A1] pl-5 ml-11 sm:ml-13 p-4 sm:p-5 rounded-2xl bg-[#FAF6FD] text-xs sm:text-[13.5px] md:text-sm text-[#444448] font-normal leading-relaxed">
-                            {item.answer}
+                        <div className="px-5 sm:px-6 pb-5 pt-1">
+                          <div className="pl-0 sm:pl-[4.25rem] md:pl-[4.75rem] pr-2 sm:pr-8">
+                            <p className="text-[13.5px] sm:text-[14.5px] text-[#4E4E54] font-normal leading-relaxed">
+                              {item.answer}
+                            </p>
                           </div>
                         </div>
                       </div>

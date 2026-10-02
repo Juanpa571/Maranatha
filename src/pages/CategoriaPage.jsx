@@ -157,7 +157,7 @@ export default function CategoriaPage() {
                         height="500"
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
+                        className="w-full h-full aspect-square object-cover object-center transform-gpu will-change-transform transition-transform duration-700 ease-out sm:group-hover/img:scale-105"
                         draggable={false}
                       />
 
@@ -194,14 +194,14 @@ export default function CategoriaPage() {
                     <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex items-center justify-between gap-2">
                       {/* Precio Tipográfico */}
                       <div className="flex flex-col select-text leading-none py-0.5">
-                        <span className="text-[10px] sm:text-[10.5px] text-gray-400 font-medium">
+                        <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-medium tracking-wide">
                           {priceParts.prefix || 'Desde'}
                         </span>
                         <div className="flex items-baseline gap-1 mt-0.5">
                           <span className="text-[17px] xs:text-[19px] sm:text-[21px] font-black text-[#141517] tracking-tight leading-none">
                             {priceParts.val.match(/^(\$[\d.]+)/) ? priceParts.val.match(/^(\$[\d.]+)/)[1] : priceParts.val}
                           </span>
-                          <span className="text-[10px] sm:text-[11px] text-gray-500 font-semibold leading-none">
+                          <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-semibold leading-none">
                             {priceParts.val.replace(/^(\$[\d.]+)\s*/, '')}
                           </span>
                         </div>

@@ -16,19 +16,19 @@
   }
 }
 
-/* Interacción hover física estilo Voldog para el botón cápsula */
+/* Interacción hover física estilo Voldog para el botón cápsula acelerada 100% en GPU (Zero Layout Reflow) */
 .voldog-btn-expand {
   position: absolute;
   right: 10px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(1);
+  transform-origin: center center;
   width: 52px;
   height: 52px;
   border-radius: 9999px;
   background-color: #7E04A1;
-  transition: width 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
-              height 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
-              right 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   pointer-events: none;
   z-index: 1;
 }
@@ -50,9 +50,7 @@
 }
 
 .group:hover .voldog-btn-expand {
-  right: 0;
-  width: 100%;
-  height: 100%;
+  transform: translateY(-50%) scale(16);
 }
 
 /* Interacción hover física estilo Voldog en lila (#E7D1FF) para Destacados en Cali */
@@ -60,14 +58,14 @@
   position: absolute;
   right: 8px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(1);
+  transform-origin: center center;
   width: 40px;
   height: 40px;
   border-radius: 9999px;
   background-color: #E7D1FF;
-  transition: width 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
-              height 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86),
-              right 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   pointer-events: none;
   z-index: 1;
 }
@@ -97,9 +95,7 @@
 }
 
 .group:hover .voldog-btn-expand-lilac {
-  right: 0;
-  width: 100%;
-  height: 100%;
+  transform: translateY(-50%) scale(16);
 }
 
 /* Cinta corrediza infinita (Marquee Ticker estilo Voldog) */
@@ -117,7 +113,119 @@
   width: max-content;
   will-change: transform;
   animation: voldogMarquee 120s linear infinite;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.animate-voldog-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-voldog-marquee {
+    animation: none;
+    transform: none;
+  }
+  .animate-hero-shimmer,
+  .animate-hero-sparkle-1,
+  .animate-hero-sparkle-2 {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Micro-flotación viva del emblema circular */
+@keyframes heroEmblemFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-hero-emblem-float {
+  will-change: transform;
+  animation: heroEmblemFloat 4.5s ease-in-out infinite;
+}
+
+/* Barrido de luz cristalina sobre el emblema (Glass Sheen Sweep) */
+@keyframes heroSheenSweep {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  24% {
+    transform: translateX(160%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(160%) skewX(-20deg);
+  }
+}
+
+.hero-sheen-sweep {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 255, 255, 0.5) 48%,
+    rgba(231, 209, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.5) 52%,
+    rgba(255, 255, 255, 0) 75%,
+    transparent 100%
+  );
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: heroSheenSweep 4.2s ease-in-out infinite;
+}
+
+@keyframes heroSparkle1 {
+  0%, 100% {
+    transform: scale(0.9) rotate(0deg);
+    opacity: 0.88;
+  }
+  25% {
+    transform: scale(1.24) rotate(18deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 350px rgba(192, 132, 252, 0.85)) drop-shadow(0 0 700px rgba(126, 4, 161, 0.65));
+  }
+  50% {
+    transform: scale(0.94) rotate(-6deg);
+    opacity: 0.86;
+  }
+  75% {
+    transform: scale(1.08) rotate(8deg);
+    opacity: 0.96;
+  }
+}
+
+@keyframes heroSparkle2 {
+  0%, 100% {
+    transform: scale(1.18) rotate(12deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 300px rgba(192, 132, 252, 0.8)) drop-shadow(0 0 600px rgba(126, 4, 161, 0.6));
+  }
+  45% {
+    transform: scale(0.82) rotate(-16deg);
+    opacity: 0.75;
+  }
+  75% {
+    transform: scale(1.26) rotate(18deg);
+    opacity: 1;
+  }
+}
+
+.animate-hero-sparkle-1 {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: heroSparkle1 3.2s ease-in-out infinite;
+}
+
+.animate-hero-sparkle-2 {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: heroSparkle2 2.7s ease-in-out infinite;
 }
 
 

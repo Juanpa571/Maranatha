@@ -204,7 +204,7 @@ export default function CoreCatalog() {
                     height="500"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full aspect-square object-cover object-center transform transition-transform duration-700 ease-out group-hover/img:scale-105"
+                    className="w-full h-full aspect-square object-cover object-center transform-gpu will-change-transform transition-transform duration-700 ease-out sm:group-hover/img:scale-105"
                     draggable={false}
                   />
 
@@ -237,12 +237,12 @@ export default function CoreCatalog() {
                   </p>
                 </div>
 
-                {/* Acciones: Fila de Precio + Botón Cotizar WhatsApp + Botón de Categoría */}
-                <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex flex-col gap-2.5">
+                {/* Acciones: Fila de Precio + Botón Cotizar WhatsApp + Enlace de Categoría */}
+                <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-2">
                     {/* Precio Tipográfico */}
                     <div className="flex flex-col select-text leading-none py-0.5">
-                      <span className="text-[10px] sm:text-[10.5px] text-gray-400 font-medium">
+                      <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-medium tracking-wide">
                         {pricePrefix}
                       </span>
                       <div className="flex items-baseline gap-1 mt-0.5">
@@ -250,7 +250,7 @@ export default function CoreCatalog() {
                           {priceMain}
                         </span>
                         {priceSub ? (
-                          <span className="text-[10px] sm:text-[11px] text-gray-500 font-semibold leading-none">
+                          <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-semibold leading-none">
                             {priceSub}
                           </span>
                         ) : null}
@@ -276,13 +276,13 @@ export default function CoreCatalog() {
                     </a>
                   </div>
 
-                  {/* Botón Largo "Ver más en Categoría" */}
+                  {/* Enlace contextual a la Categoría */}
                   <Link
                     to={`/categoria/${prod.categorySlug}`}
-                    className="w-full h-[36px] sm:h-[42px] px-3.5 sm:px-4 rounded-xl bg-[#7E04A1] hover:bg-[#680285] text-white font-bold shadow-[0_2px_8px_rgba(126,4,161,0.18)] sm:shadow-[0_5px_16px_rgba(126,4,161,0.35)] flex items-center justify-between text-[11.5px] sm:text-[12.5px] transition-all duration-200 active:scale-98 group/cat cursor-pointer"
+                    className="w-full pt-1 pb-0.5 text-center text-[12px] sm:text-[12.5px] font-bold text-[#7E04A1] hover:text-[#5E0279] flex items-center justify-center gap-1.5 transition-colors group/cat cursor-pointer"
                   >
                     <span>Ver más en {prod.categoryName}</span>
-                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white shrink-0 transform group-hover/cat:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#7E04A1] shrink-0 transform group-hover/cat:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

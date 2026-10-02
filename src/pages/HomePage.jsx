@@ -59,7 +59,7 @@ export default function HomePage() {
       {/* 2. Secciones del Home: Carga Progresiva Asíncrona bajo Demanda */}
       {showBelowFold ? (
         <Suspense fallback={<div className="w-full min-h-[400px] bg-white" />}>
-          <main id="contenido" className="w-full bg-white relative z-10">
+          <main id="contenido" className="w-full bg-white relative z-30">
             <CategoryCards />
             <CoreCatalog />
             <LocalAttention />

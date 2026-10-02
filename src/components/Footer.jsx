@@ -151,7 +151,7 @@ export default function Footer() {
             </div>
 
             {/* Tarjeta de Karla - Recepcionista del taller */}
-            <div className="mt-6 sm:mt-7 relative rounded-[20px] bg-[#1F1D26] border border-[#2F2C3A] p-3 sm:p-3.5 flex items-center gap-3 sm:gap-3.5 max-w-[340px] sm:max-w-[350px] shadow-[0_6px_20px_rgba(0,0,0,0.25)] group hover:border-[#7E04A1]/40 transition-all duration-300 overflow-hidden">
+            <div className="mt-6 sm:mt-7 relative rounded-[20px] bg-[#1E1B26] border border-white/[0.08] hover:border-[#7E04A1]/50 p-3 sm:p-3.5 flex items-center gap-3 sm:gap-3.5 max-w-[340px] sm:max-w-[350px] group transition-all duration-300 overflow-hidden">
               {/* Foto de Karla sin fondo */}
               <div className="relative w-[90px] sm:w-[96px] h-[86px] sm:h-[92px] shrink-0 flex items-end justify-center">
                 <img
@@ -161,7 +161,7 @@ export default function Footer() {
                   height="92"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-contain object-bottom transform group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain object-bottom transform-gpu will-change-transform sm:group-hover:scale-105 transition-transform duration-300"
                   draggable={false}
                 />
                 {/* Corazón doodle morado flotante sobre Karla */}

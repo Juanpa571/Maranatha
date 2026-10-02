@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HelpCircle, MapPin, Clock, ChevronDown } from 'lucide-react';
 import { useActiveSectionTheme } from '../hooks/useActiveSectionTheme';
+import AnimatedHeroLogo from './AnimatedHeroLogo';
 
 const NavigationDrawer = lazy(() => import('./NavigationDrawer'));
 
@@ -455,7 +456,7 @@ export default function VoldogHero() {
                       : 'opacity-0 -translate-y-2 pointer-events-none invisible'
                   }`}
                 >
-                  <div className={`rounded-2xl p-2 font-peridot transition-colors duration-300 ${isDark ? 'bg-[#1F1D26] border border-[#2F2C3A] text-white shadow-[0_16px_40px_rgba(0,0,0,0.5)]' : 'bg-white border border-[#EBD6FA] shadow-[0_16px_40px_rgba(126,4,161,0.12)]'}`}>
+                  <div className={`rounded-2xl p-2 font-peridot transition-colors duration-300 backdrop-blur-md ${isDark ? 'bg-[#1F1D26]/95 border border-[#2F2C3A]/60 text-white shadow-[0_16px_36px_rgba(0,0,0,0.45),0_2px_8px_rgba(0,0,0,0.25)]' : 'bg-white/95 border border-[#EBD6FA]/60 shadow-[0_12px_32px_rgba(126,4,161,0.08),0_2px_8px_rgba(0,0,0,0.04)]'}`}>
                     <div className="space-y-1">
                       {NAV_CATEGORIES.map((cat) => (
                         <Link
@@ -633,7 +634,7 @@ export default function VoldogHero() {
 
           {/* 2. CONTENEDOR LAVANDA DEL HERO (#E7D1FF) CON DIMENSIONES Y PADDING ORIGINALES */}
         <div
-          className="absolute left-0 right-0 mx-auto bg-[#E7D1FF] overflow-hidden flex flex-col justify-between pointer-events-auto will-change-transform"
+          className="absolute left-0 right-0 mx-auto bg-[#E7D1FF] overflow-hidden flex flex-col justify-between will-change-transform"
           style={{
             top: `${heroCardTop}px`,
             height: `${heroHeight}px`,
@@ -646,6 +647,7 @@ export default function VoldogHero() {
             paddingBottom: `${currentPadY}px`,
             paddingLeft: `${currentPadX}px`,
             paddingRight: `${currentPadX}px`,
+            pointerEvents: eased > 0.35 ? 'none' : 'auto',
           }}
         >
           {/* Espacio superior correspondiente al header */}
@@ -671,26 +673,18 @@ export default function VoldogHero() {
                 transform: `translateY(${videoTranslateY}px) scale(${videoScale})`,
               }}
             >
-              <div
-                className="w-full h-full rounded-full overflow-hidden shadow-[0_12px_45px_rgba(0,0,0,0.18)]"
-                style={{
-                  clipPath: 'circle(48.5% at 50% 50%)',
-                  WebkitClipPath: 'circle(48.5% at 50% 50%)',
-                }}
-              >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="none"
-                  poster="/logo-circle-poster.webp"
-                  aria-hidden="true"
-                  tabIndex={-1}
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/logo-circle.mp4" type="video/mp4" />
-                </video>
+              {/* Contenedor Flotante del Emblema: Cuerno libre 3D que sobresale de la margen */}
+              <div className="w-full h-full animate-hero-emblem-float relative overflow-visible">
+                {/* Sombra circular base del medallón */}
+                <div className="absolute inset-[1.5%] rounded-full shadow-[0_16px_50px_rgba(126,4,161,0.25)] pointer-events-none" />
+
+                {/* SVG Vectorial Oficial con cuerno sobresaliente y estrellas animadas */}
+                <AnimatedHeroLogo className="w-full h-full relative z-10" />
+
+                {/* Barrido de luz cristalina perfectamente acotado al medallón circular */}
+                <div className="absolute inset-[1.5%] rounded-full overflow-hidden pointer-events-none z-20">
+                  <div className="w-full h-full hero-sheen-sweep" />
+                </div>
               </div>
             </div>
 
@@ -714,6 +708,7 @@ export default function VoldogHero() {
                 paddingLeft: `${heroButtonConfig.paddingLeft}px`,
                 paddingRight: `${heroButtonConfig.paddingRight}px`,
                 gap: `${heroButtonConfig.gap}px`,
+                contain: 'paint',
               }}
             >
               <div className="voldog-btn-expand" />
