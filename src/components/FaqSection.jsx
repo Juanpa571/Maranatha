@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
-  Scissors,
+  Package,
   Clock,
   Image as ImageIcon,
   Palette,
@@ -17,7 +17,7 @@ import {
 const FAQ_ITEMS = [
   {
     index: '01',
-    icon: Scissors,
+    icon: Package,
     question: '¿Cuál es la cantidad mínima para hacer un pedido?',
     answer:
       'La cantidad mínima depende del producto que elijas: en papelería para eventos y fiestas trabajamos desde 10 a 20 unidades, y en la línea empresarial (tarjetas de presentación, etiquetas para ropa y volantes) desde solo 50 unidades. Sin mínimos de miles como en litografías industriales.',
@@ -74,93 +74,10 @@ const FAQ_ITEMS = [
 ];
 
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(null); // Todas las pestañas cerradas por defecto
-  const [leftColState, setLeftColState] = useState('below'); // 'below' | 'visible' | 'above'
-  const [accordionState, setAccordionState] = useState('below'); // 'below' | 'visible' | 'above'
-  const [supportState, setSupportState] = useState('below'); // 'below' | 'visible' | 'above'
-  const leftColRef = useRef(null);
-  const accordionRef = useRef(null);
-  const supportRef = useRef(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const toggleAccordion = useCallback((index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
-  }, []);
-
-  useEffect(() => {
-    const checkPosition = () => {
-      const windowH = window.innerHeight;
-      const enterThreshold = windowH * 0.88;
-
-      if (leftColRef.current) {
-        const leftRect = leftColRef.current.getBoundingClientRect();
-        const leftThreshold = window.innerWidth < 768 ? 200 : 280;
-        let newLeftState = 'visible';
-        if (leftRect.top > enterThreshold) {
-          newLeftState = 'below';
-        } else if (leftRect.bottom <= leftThreshold) {
-          newLeftState = 'above';
-        }
-        setLeftColState((prev) => (prev !== newLeftState ? newLeftState : prev));
-      }
-
-      if (accordionRef.current) {
-        const accRect = accordionRef.current.getBoundingClientRect();
-        const accThreshold = window.innerWidth < 768 ? 200 : 280;
-        let newAccState = 'visible';
-        if (accRect.top > enterThreshold) {
-          newAccState = 'below';
-        } else if (accRect.bottom <= accThreshold) {
-          newAccState = 'above';
-        }
-        setAccordionState((prev) => (prev !== newAccState ? newAccState : prev));
-      }
-
-      if (supportRef.current) {
-        const supRect = supportRef.current.getBoundingClientRect();
-        const supThreshold = window.innerWidth < 768 ? 160 : 220;
-        let newSupState = 'visible';
-        if (supRect.top > enterThreshold) {
-          newSupState = 'below';
-        } else if (supRect.bottom <= supThreshold) {
-          newSupState = 'above';
-        }
-        setSupportState((prev) => (prev !== newSupState ? newSupState : prev));
-      }
-    };
-
-    let unsubLenis = null;
-    const subscribeLenis = (lenisInstance) => {
-      if (unsubLenis) return;
-      unsubLenis = lenisInstance.on('scroll', checkPosition);
-      checkPosition();
-    };
-
-    if (window.lenis) {
-      subscribeLenis(window.lenis);
-    } else {
-      window.addEventListener('lenis-init', (e) => subscribeLenis(e.detail), { once: true });
-    }
-
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          checkPosition();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', checkPosition);
-    checkPosition();
-
-    return () => {
-      if (unsubLenis) unsubLenis();
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', checkPosition);
-    };
   }, []);
 
   const whatsappUrl =
@@ -186,182 +103,120 @@ export default function FaqSection() {
       id="preguntas-frecuentes"
       data-theme="light"
       data-theme-color="#FBF8FE"
-      className="relative w-full border-t border-[#E8DAF7] px-4 sm:px-6 md:px-[4.5vw] lg:px-[5.5%] pt-24 sm:pt-28 md:pt-32 pb-20 sm:pb-24 md:pb-28 bg-[#FBF8FE] font-peridot overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#FBF8FE] border-t border-[#EBD6FA] font-peridot overflow-hidden"
     >
       {/* Ancla alternativa #faq para compatibilidad de enlaces */}
       <span id="faq" className="absolute top-0 pointer-events-none" />
+      
       {/* Marcado Schema.org JSON-LD para AEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-start">
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center lg:items-start">
           
           {/* ============================================================== */}
-          {/* COLUMNA IZQUIERDA: TITULARES Y NOTAS ADHESIVAS REALES          */}
+          {/* COLUMNA IZQUIERDA: TEXTOS EDITORIALES                         */}
           {/* ============================================================== */}
-          <div
-            ref={leftColRef}
-            className={`lg:col-span-5 flex flex-col justify-start transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              leftColState === 'below'
-                ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.97] pointer-events-none'
-                : leftColState === 'above'
-                ? 'opacity-0 -translate-y-8 pointer-events-none scale-[0.98]'
-                : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-            }`}
-          >
+          <div className="lg:col-span-5 flex flex-col justify-start lg:self-start text-left lg:pt-1 xl:pt-2">
             
-            {/* Header: Dudas resueltas (ligeramente torcido) + Rayitas + Corazón exacto */}
-            <div className="relative flex items-center justify-between w-full max-w-[420px] mb-2">
-              <div className="inline-flex items-center gap-1.5 transform -rotate-[5deg] origin-bottom-left">
-                <span className="font-['Patrick_Hand',cursive] text-2xl sm:text-[27px] text-[#7E04A1] font-bold tracking-wide">
-                  Dudas resueltas
-                </span>
-                <img
-                  src="/faq-rays-clean.webp"
-                  alt=""
-                  width="20"
-                  height="20"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-5 h-5 object-contain pointer-events-none -mt-1"
-                />
-              </div>
+            {/* Tag superior en tipografía mono/sans espaciada */}
+            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.18em] uppercase text-[#A78BFA] mb-2 sm:mb-3 block">
+              CENTRO DE AYUDA
+            </span>
 
-              {/* Corazón dibujado a mano exacto de la imagen */}
-              <div className="pr-4 sm:pr-8">
-                <img
-                  src="/faq-heart.webp"
-                  alt=""
-                  width="32"
-                  height="32"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-7 h-7 sm:w-8 sm:h-8 object-contain pointer-events-none opacity-90 transform -rotate-6"
-                />
-              </div>
-            </div>
-
-            {/* Titular Monumental */}
-            <h2 className="text-4xl sm:text-[45px] lg:text-[46px] xl:text-[50px] font-extrabold tracking-tight text-[#141517] leading-[1.08]">
-              Preguntas frecuentes:{' '}
+            {/* Titular */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-extrabold tracking-tight text-[#141517] leading-[1.08]">
+              Preguntas Frecuentes:{' '}
               <br />
-              <span className="text-[#7E04A1]">resolvemos tus dudas.</span>
+              Resolvemos todas <br className="hidden sm:inline" />
+              <span className="text-[#74059F]">tus dudas</span>
             </h2>
 
-            {/* Subtítulo explicativo */}
-            <p className="text-sm sm:text-[14.5px] text-[#55555C] font-normal leading-relaxed mt-3.5 sm:mt-4 max-w-sm">
-              Desde cantidades mínimas hasta diseño, materiales y entregas. Aquí encontrarás todo lo que necesitas saber antes de empezar.
+            {/* Subtítulo descriptivo */}
+            <p className="text-sm sm:text-[15px] md:text-base text-[#55555C] font-normal leading-relaxed mt-4 sm:mt-5 max-w-md">
+              Desde cantidades mínimas hasta materiales y entregas. Aquí encontrarás todo lo que necesitas saber antes de hacer tu pedido.
             </p>
 
-            {/* CONTENEDOR DE LAS 2 NOTITAS ADHESIVAS: OCULTAS EN MÓVIL, ORIGINAL INTACTO EN PC */}
-            <div className="hidden lg:block relative mt-8 sm:mt-10 w-full max-w-[480px]">
-              
-              {/* NOTA 1: MORADA (SUPERIOR) - INTERACTIVA INDEPENDIENTE */}
-              <div className="relative z-10 w-[92%] sm:w-[90%] transform -rotate-[2deg] hover:rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:z-30 transition-all duration-300 ease-out cursor-pointer group">
-                <img
-                  src="/purple-note.webp"
-                  alt="Asesoría de persona a persona"
-                  width="1024"
-                  height="682"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-contain select-none"
-                  draggable={false}
-                />
-              </div>
+            {/* Elemento decorativo 3D para móvil y tablet: entrando desde el borde izquierdo */}
+            <div
+              aria-hidden="true"
+              className="block lg:hidden relative mt-6 -ml-4 sm:-ml-6 md:-ml-10 w-[310px] sm:w-[370px] md:w-[430px] pointer-events-none select-none"
+            >
+              {/* Luz ambiental difusa suave detrás de la composición */}
+              <div className="absolute -bottom-6 -left-6 w-full h-full max-w-[400px] max-h-[300px] bg-gradient-to-tr from-[#EBD6FA]/40 via-[#F3E8FD]/20 to-transparent rounded-full blur-2xl -z-10" />
 
-              {/* NOTA 2: ROSA (INFERIOR) - INTERACTIVA INDEPENDIENTE, SUPERPUESTA A LA DERECHA */}
-              <div className="relative z-20 w-[92%] sm:w-[90%] ml-[8%] sm:ml-[10%] -mt-[18%] sm:-mt-[20%] transform rotate-[1.5deg] hover:rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:z-30 transition-all duration-300 ease-out cursor-pointer group">
-                <img
-                  src="/pink-note.webp"
-                  alt="Taller propio en Cali"
-                  width="1024"
-                  height="681"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-contain select-none"
-                  draggable={false}
-                />
-              </div>
-
+              <img
+                src="/Papelería pastel sobre plataforma lila.png"
+                alt="Composición 3D editorial de papelería pastel sobre plataforma lila con flores secas, libros y cintas washi"
+                width="1536"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto object-contain drop-shadow-[0_14px_32px_rgba(116,5,159,0.06)]"
+                draggable={false}
+              />
             </div>
 
           </div>
 
           {/* ============================================================== */}
-          {/* COLUMNA DERECHA: TODAS LAS PESTAÑAS PEGADAS EN UN SOLO BLOQUE  */}
+          {/* COLUMNA DERECHA: ACORDEÓN DE PREGUNTAS + BANNER WHATSAPP       */}
           {/* ============================================================== */}
-          <div
-            ref={accordionRef}
-            className={`lg:col-span-7 flex flex-col relative pt-1 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              accordionState === 'below'
-                ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.97] pointer-events-none'
-                : accordionState === 'above'
-                ? 'opacity-0 -translate-y-8 pointer-events-none scale-[0.98]'
-                : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-            }`}
-          >
+          <div className="lg:col-span-7 flex flex-col relative">
             
-            {/* Rayitas doodle en la esquina superior derecha */}
-            <div className="absolute -top-3.5 right-2 hidden sm:block pointer-events-none">
-              <img src="/faq-rays-clean.webp" alt="" className="w-6 h-5 object-contain opacity-80" />
-            </div>
-
-            {/* UN ÚNICO BLOQUE MAESTRO CON TODAS LAS 8 PREGUNTAS PEGADAS CON DIVIDE-Y */}
-            <div className="rounded-[26px] sm:rounded-[28px] bg-white border border-[#F0E6FA] shadow-[0_6px_25px_rgba(126,4,161,0.04)] divide-y divide-[#F0E6FA] overflow-hidden">
+            {/* Contenedor tipo tarjeta blanca estilizada con esquinas redondeadas */}
+            <div className="rounded-[24px] sm:rounded-[28px] bg-white border border-[#EBD6FA] shadow-[0_8px_32px_rgba(116,5,159,0.04)] divide-y divide-[#F3EBF9] overflow-hidden">
               {FAQ_ITEMS.map((item, index) => {
                 const isOpen = openIndex === index;
                 const IconComponent = item.icon;
 
                 return (
-                  <div key={item.index} className="w-full bg-white transition-colors duration-200">
+                  <div key={item.index} className="w-full bg-white transition-colors duration-150">
                     <button
                       type="button"
                       id={`faq-btn-${item.index}`}
                       onClick={() => toggleAccordion(index)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-answer-${item.index}`}
-                      className="w-full px-5 sm:px-6 py-4 sm:py-4.5 flex items-center justify-between gap-3 sm:gap-4 text-left cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7E04A1] focus-visible:ring-offset-2 rounded-2xl transition-all"
+                      className="w-full px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between gap-3 text-left cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74059F] transition-all"
                     >
-                      <div className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0">
-                        {/* Número morado en negrita grande (01..08) */}
-                        <span className="shrink-0 text-xl sm:text-[22px] font-extrabold text-[#7E04A1] w-8 sm:w-9 text-left">
+                      <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                        {/* Número morado claro 01..08 */}
+                        <span className="shrink-0 text-xs sm:text-sm font-bold text-[#A78BFA] w-5 sm:w-6 text-left">
                           {item.index}
                         </span>
 
-                        {/* Icono temático en cajita cuadrada lila redondeada */}
-                        <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-[13px] bg-[#FAF5FE] border border-[#EBD6FA] text-[#7E04A1] flex items-center justify-center transition-colors group-hover:bg-[#EFE3FB]" aria-hidden="true">
-                          <IconComponent className="w-5 h-5" />
+                        {/* Icono temático dentro de cajita redondeada violeta muy suave */}
+                        <div
+                          className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-[11px] bg-[#FAF5FE] border border-[#EBD6FA] text-[#74059F] flex items-center justify-center transition-colors group-hover:bg-[#F2E4FC]"
+                          aria-hidden="true"
+                        >
+                          <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
                         </div>
 
-                        {/* Pregunta en texto firme y legible */}
-                        <h3 className="font-bold text-[15.5px] sm:text-[17px] text-[#141517] tracking-tight leading-snug group-hover:text-[#7E04A1] transition-colors pr-2 flex-1">
+                        {/* Texto de la pregunta */}
+                        <h3 className="font-semibold text-xs sm:text-[14px] md:text-[15px] text-[#141517] leading-snug group-hover:text-[#74059F] transition-colors pr-2 flex-1">
                           {item.question}
                         </h3>
                       </div>
 
-                      {/* Botón circular con + o − (sólido morado cuando está abierto) */}
+                      {/* Icono + o − a la derecha en violeta */}
                       <div
                         aria-hidden="true"
-                        className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
-                          isOpen
-                            ? 'bg-[#7E04A1] text-white border border-[#7E04A1] shadow-[0_2px_8px_rgba(126,4,161,0.25)]'
-                            : 'bg-[#FAF5FE] border border-[#EBD6FA] text-[#7E04A1] group-hover:bg-[#7E04A1] group-hover:text-white group-hover:border-[#7E04A1]'
-                        }`}
+                        className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-[#74059F] group-hover:scale-110 transition-transform"
                       >
                         {isOpen ? (
-                          <Minus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
+                          <Minus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2]" />
                         ) : (
-                          <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
+                          <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2]" />
                         )}
                       </div>
                     </button>
 
-                    {/* Contenedor desplegable con animación fluida y lectura limpia alineada */}
+                    {/* Respuesta expandible */}
                     <div
                       id={`faq-answer-${item.index}`}
                       role="region"
@@ -372,9 +227,9 @@ export default function FaqSection() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <div className="px-5 sm:px-6 pb-5 pt-1">
-                          <div className="pl-0 sm:pl-[4.25rem] md:pl-[4.75rem] pr-2 sm:pr-8">
-                            <p className="text-[13.5px] sm:text-[14.5px] text-[#4E4E54] font-normal leading-relaxed">
+                        <div className="px-4 sm:px-6 pb-4 pt-1">
+                          <div className="pl-0 sm:pl-[4.2rem] pr-2 sm:pr-6">
+                            <p className="text-xs sm:text-[13.5px] text-[#55555C] font-normal leading-relaxed">
                               {item.answer}
                             </p>
                           </div>
@@ -386,79 +241,61 @@ export default function FaqSection() {
               })}
             </div>
 
-            {/* BANNER INFERIOR "¿No encontraste lo que buscabas?" */}
-            <div
-              ref={supportRef}
-              className={`mt-5 rounded-[26px] bg-[#F5EDFC]/80 border border-[#EBD6FA] px-5 sm:px-6 py-4 sm:py-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative shadow-[0_4px_18px_rgba(126,4,161,0.04)] transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                supportState === 'below'
-                  ? 'opacity-0 translate-y-8 pointer-events-none'
-                  : supportState === 'above'
-                  ? 'opacity-0 -translate-y-8 pointer-events-none scale-[0.98]'
-                  : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-              }`}
-            >
-              
-              <div className="flex items-center gap-3 sm:gap-3.5">
-                {/* Icono de burbuja de diálogo oficial limpio */}
-                <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center shrink-0">
-                  <img
-                    src="/faq-bubble-clean.webp"
-                    alt=""
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-
-                <div>
-                  <p className="text-xs sm:text-[13px] text-[#55555C] font-normal leading-none">
-                    ¿No encontraste lo que buscabas?
-                  </p>
-                  <p className="font-['Patrick_Hand',cursive] text-lg sm:text-[21px] text-[#7E04A1] font-bold leading-tight mt-1">
-                    Hablemos, nos encantará ayudarte.
-                  </p>
-                </div>
-
-                {/* Flecha curva doodle oficial con espiral apuntando al botón */}
-                <div className="hidden md:flex items-center pl-2 pr-1 shrink-0">
-                  <img
-                    src="/faq-arrow-clean.webp"
-                    alt=""
-                    width="80"
-                    height="36"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-16 h-8 sm:w-20 sm:h-9 object-contain"
-                  />
-                </div>
+            {/* Contacto directo "¿No encuentras lo que buscas?" sin cápsulas */}
+            <div className="mt-4 sm:mt-5 px-2 sm:px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
+              <div>
+                <p className="text-[11px] sm:text-xs text-[#6B6B76] font-normal leading-none">
+                  ¿No encuentras lo que buscas?
+                </p>
+                <p className="text-xs sm:text-[14px] md:text-[15px] text-[#74059F] font-bold leading-tight mt-1.5">
+                  Hablemos, nos encantará ayudarte.
+                </p>
               </div>
 
-              {/* Botón de WhatsApp con rayitas doodle */}
-              <div className="relative shrink-0">
-                <div className="absolute -top-3.5 -right-2 hidden sm:block pointer-events-none">
-                  <img src="/faq-rays-clean.webp" alt="" width="20" height="20" loading="lazy" decoding="async" className="w-5 h-5 object-contain" />
-                </div>
-
+              <div className="shrink-0">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Hablar por WhatsApp para resolver dudas adicionales"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm shadow-[0_6px_20px_rgba(126,4,161,0.3)] hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95"
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#74059F] hover:text-[#580379] transition-colors group py-1"
                 >
-                  <MessageCircle className="w-4.5 h-4.5 fill-current shrink-0" />
-                  <span>Hablar por WhatsApp</span>
-                  <ArrowRight className="w-4 h-4 shrink-0" />
+                  <MessageCircle className="w-4 h-4 fill-[#74059F] text-[#74059F] shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-[#74059F]/40 hover:decoration-[#74059F] underline-offset-4">
+                    Hablar por WhatsApp
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0 transform group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
-
             </div>
 
           </div>
 
         </div>
+      </div>
+
+      {/* ============================================================== */}
+      {/* ELEMENTO DECORATIVO 3D: ESQUINA INFERIOR IZQUIERDA DE SECCIÓN   */}
+      {/* Composición editorial integrada entrando desde el borde izquierdo*/}
+      {/* ============================================================== */}
+      <div
+        aria-hidden="true"
+        className="hidden lg:block absolute bottom-0 -left-8 lg:-left-12 xl:-left-14 2xl:-left-16 pointer-events-none select-none z-0 w-[640px] lg:w-[760px] xl:w-[900px] 2xl:w-[1040px] max-w-none"
+      >
+        {/* Luz ambiental difusa suave de estudio pastel */}
+        <div className="absolute -bottom-12 -left-12 w-full h-full max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] max-h-[650px] bg-gradient-to-tr from-[#EBD6FA]/45 via-[#F3E8FD]/25 to-transparent rounded-full blur-3xl -z-10" />
+
+        {/* Composición 3D recortada por overflow-hidden en el borde del viewport */}
+        <img
+          src="/Papelería pastel sobre plataforma lila.png"
+          alt="Composición 3D editorial de papelería pastel sobre plataforma lila con flores secas, libros y cintas washi"
+          width="1536"
+          height="1024"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-auto object-contain drop-shadow-[0_20px_42px_rgba(116,5,159,0.07)] transform translate-y-[2px]"
+          draggable={false}
+        />
       </div>
     </section>
   );

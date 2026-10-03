@@ -21,7 +21,13 @@ export default function SubpageVoldogHero({
         <div className="animate-voldog-marquee flex items-center whitespace-nowrap">
           {loopItems.map((item, idx) => (
             <div key={idx} className="flex items-center shrink-0">
-              <span className="font-extrabold text-[38px] sm:text-[54px] md:text-[70px] lg:text-[84px] xl:text-[96px] tracking-[-0.02em] text-[#141517] uppercase leading-none hover:text-[#7E04A1] transition-colors duration-300">
+              <span
+                className={`font-extrabold text-[38px] sm:text-[54px] md:text-[70px] lg:text-[84px] xl:text-[96px] tracking-[-0.02em] uppercase leading-none transition-colors duration-300 ${
+                  idx % 2 === 0
+                    ? 'text-[#7E04A1] hover:text-[#5E0279]'
+                    : 'text-[#141517] hover:text-[#7E04A1]'
+                }`}
+              >
                 {item}
               </span>
               {/* Asterisco decorativo dorado / lila estilo Voldog */}

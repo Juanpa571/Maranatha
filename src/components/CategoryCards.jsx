@@ -7,21 +7,21 @@ const CATEGORIES = [
   {
     slug: 'papeleria-creativa',
     title: 'Papelería Creativa',
-    image: '/papeleria-creativa.webp',
+    image: '/categoria-creativa-limpia.png',
     alt: 'Papelería Creativa',
     delay: '0ms',
   },
   {
     slug: 'insumos',
     title: 'Insumos de Papelería',
-    image: '/papeleria-insumos.webp',
+    image: '/categoria-insumos-limpia.png',
     alt: 'Insumos de Papelería',
     delay: '150ms',
   },
   {
     slug: 'papeleria-empresarial',
     title: 'Papelería Empresarial',
-    image: '/papeleria-empresarial.webp',
+    image: '/categoria-empresarial-limpia.png',
     alt: 'Papelería Empresarial',
     delay: '300ms',
   },
@@ -39,7 +39,7 @@ export default function CategoryCards() {
     >
       
       {/* H2 Semántico para la sección de categorías principales (SEO Bible) */}
-      <h2 className="sr-only">Líneas Principales de Papelería y Empaques</h2>
+      <h2 className="sr-only">Categorías de empaques personalizados, papelería e insumos</h2>
       
       {/* Grid de 3 Tarjetas con revelado suave por IntersectionObserver */}
       <div 
@@ -64,8 +64,8 @@ export default function CategoryCards() {
             <img
               src={cat.image}
               alt={cat.alt}
-              width="680"
-              height="850"
+              width="1122"
+              height="1402"
               loading="lazy"
               decoding="async"
               className="w-full h-full aspect-[4/5] object-cover object-center transform-gpu will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"

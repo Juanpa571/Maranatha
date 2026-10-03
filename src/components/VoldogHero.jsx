@@ -250,7 +250,8 @@ export default function VoldogHero() {
       logoTranslateY: initialLogoTranslateY = 80,
     } = cfg;
 
-    const dark = isDarkRef.current;
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 1024 : false;
+    const dark = isDarkRef.current && isMobile;
     const navHeight = 80;
     const initialNavTop = exteriorPad + interiorPadY;
     const navItemTranslateY = (1 - eased) * initialNavTop;
@@ -372,7 +373,6 @@ export default function VoldogHero() {
       }
     };
 
-    updateConfig();
     window.addEventListener('resize', updateConfig);
     return () => window.removeEventListener('resize', updateConfig);
   }, []);
@@ -736,18 +736,13 @@ export default function VoldogHero() {
                 transform: 'translate3d(0, 0px, 0) scale(1)',
               }}
             >
-              {/* Contenedor Flotante del Emblema: Cuerno libre 3D que sobresale de la margen */}
-              <div className="w-full h-full animate-hero-emblem-float relative overflow-visible">
-                {/* Sombra circular base del medallón */}
+              {/* Contenedor del Emblema: Cuerno libre 3D que sobresale de la margen con composición GPU aislada */}
+              <div className="w-full h-full relative overflow-visible transform-gpu">
+                {/* Sombra circular base del medallón (estática, renderizada una sola vez en el compositor) */}
                 <div className="absolute inset-[1.5%] rounded-full shadow-[0_16px_50px_rgba(126,4,161,0.25)] pointer-events-none" />
 
                 {/* SVG Vectorial Oficial con cuerno sobresaliente y estrellas animadas */}
                 <AnimatedHeroLogo className="w-full h-full relative z-10" />
-
-                {/* Barrido de luz cristalina perfectamente acotado al medallón circular con Hardware Clip */}
-                <div className="absolute inset-[1.5%] rounded-full overflow-hidden pointer-events-none z-20 transform-gpu translate-z-0">
-                  <div className="w-full h-full hero-sheen-sweep transform-gpu translate-z-0" />
-                </div>
               </div>
             </div>
 

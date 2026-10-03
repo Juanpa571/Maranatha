@@ -1,91 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export default function TransparentProcess() {
-  const [headerState, setHeaderState] = useState('below'); // 'below' | 'visible' | 'above'
-  const [stagesState, setStagesState] = useState('below'); // 'below' | 'visible' | 'above'
-  const [ctaState, setCtaState] = useState('below');       // 'below' | 'visible' | 'above'
-  const headerRef = useRef(null);
-  const stagesRef = useRef(null);
-  const ctaRef = useRef(null);
-
-  useEffect(() => {
-    const checkPositions = () => {
-      const windowH = window.innerHeight;
-      const enterThreshold = windowH * 0.88;
-
-      if (headerRef.current) {
-        const headerRect = headerRef.current.getBoundingClientRect();
-        const headerThreshold = window.innerWidth < 768 ? 240 : 320;
-        let newHeaderState = 'visible';
-        if (headerRect.top > enterThreshold) {
-          newHeaderState = 'below';
-        } else if (stagesRef.current && stagesRef.current.getBoundingClientRect().top <= headerThreshold) {
-          newHeaderState = 'above';
-        }
-        setHeaderState((prev) => (prev !== newHeaderState ? newHeaderState : prev));
-      }
-
-      if (stagesRef.current) {
-        const stagesRect = stagesRef.current.getBoundingClientRect();
-        const stagesThreshold = window.innerWidth < 768 ? 200 : 280;
-        let newStagesState = 'visible';
-        if (stagesRect.top > enterThreshold) {
-          newStagesState = 'below';
-        } else if (stagesRect.bottom <= stagesThreshold) {
-          newStagesState = 'above';
-        }
-        setStagesState((prev) => (prev !== newStagesState ? newStagesState : prev));
-      }
-
-      if (ctaRef.current) {
-        const ctaRect = ctaRef.current.getBoundingClientRect();
-        const ctaThreshold = window.innerWidth < 768 ? 160 : 220;
-        let newCtaState = 'visible';
-        if (ctaRect.top > enterThreshold) {
-          newCtaState = 'below';
-        } else if (ctaRect.bottom <= ctaThreshold) {
-          newCtaState = 'above';
-        }
-        setCtaState((prev) => (prev !== newCtaState ? newCtaState : prev));
-      }
-    };
-
-    let unsubLenis = null;
-    const subscribeLenis = (lenisInstance) => {
-      if (unsubLenis) return;
-      unsubLenis = lenisInstance.on('scroll', checkPositions);
-      checkPositions();
-    };
-
-    if (window.lenis) {
-      subscribeLenis(window.lenis);
-    } else {
-      window.addEventListener('lenis-init', (e) => subscribeLenis(e.detail), { once: true });
-    }
-
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          checkPositions();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', checkPositions);
-    checkPositions();
-
-    return () => {
-      if (unsubLenis) unsubLenis();
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', checkPositions);
-    };
-  }, []);
-
   const whatsappUrl =
     'https://wa.me/573145854213?text=' +
     encodeURIComponent('Hola Maranatha 👋, me gustaría cotizar e iniciar un pedido con ustedes.');
@@ -95,194 +11,221 @@ export default function TransparentProcess() {
       id="proceso"
       data-theme="light"
       data-theme-color="#FAF8FD"
-      className="relative w-full px-4 sm:px-8 md:px-[6vw] lg:px-[8.5%] pt-24 sm:pt-28 md:pt-32 pb-20 sm:pb-24 md:pb-28 bg-[#FAF8FD] border-t border-gray-200/80 overflow-hidden font-peridot"
+      className="relative w-full min-h-screen flex flex-col justify-between px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[85px] sm:pt-[95px] pb-16 sm:pb-20 bg-[#FAF8FD] font-peridot overflow-hidden text-center"
     >
-      <div className="max-w-[1400px] mx-auto">
+      {/* ============================================================== */}
+      {/* OLAS DECORATIVAS ORGÁNICAS (CALCADAS DE LA PREVISUALIZACIÓN)   */}
+      {/* ============================================================== */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0" aria-hidden="true">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 900"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          {/* 1. Ola lateral izquierda (forma curva orgánica pura) */}
+          <path
+            d="M-80,-20 C80,90 140,240 100,420 C50,600 -20,740 -90,850 L-90,-20 Z"
+            fill="#F4E6F8"
+            fillOpacity="0.65"
+          />
+          {/* Línea curva tenue que abraza la ola izquierda */}
+          <path
+            d="M-40,80 C120,180 180,320 140,490 C100,640 20,770 -50,860"
+            stroke="#E3BEF0"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            opacity="0.75"
+          />
+
+          {/* 2. Ola lateral derecha (forma elíptica orgánica) */}
+          <path
+            d="M1520,60 C1340,160 1260,340 1330,560 C1390,720 1470,820 1540,920 L1540,60 Z"
+            fill="#F4E6F8"
+            fillOpacity="0.65"
+          />
+          {/* Línea curva tenue superior que entra desde la derecha */}
+          <path
+            d="M1490,-30 C1380,100 1320,240 1360,400 C1400,540 1470,660 1530,760"
+            stroke="#E3BEF0"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            opacity="0.75"
+          />
+          {/* Trazo inferior suave en el cuadrante inferior derecho */}
+          <path
+            d="M1360,670 C1410,740 1460,820 1510,880"
+            stroke="#EBD1F4"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            opacity="0.6"
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto w-full flex-1 flex flex-col justify-between items-center relative z-10">
         
-        {/* 1. TÍTULO PRINCIPAL DE LA SECCIÓN */}
-        <div
-          ref={headerRef}
-          className={`relative z-20 w-full mb-12 sm:mb-16 md:mb-20 flex justify-center transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            headerState === 'below'
-              ? 'opacity-0 translate-y-8 pointer-events-none'
-              : headerState === 'above'
-              ? 'opacity-0 -translate-y-8 pointer-events-none scale-[0.98]'
-              : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-          }`}
-        >
-          <div className="text-center max-w-2xl mx-auto relative">
-            {/* Corazón doodle flotante */}
-            <div className="absolute -top-3.5 left-2 sm:left-8 pointer-events-none transform -rotate-12 opacity-85">
-              <img src="/faq-heart.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
-            </div>
+        {/* ============================================================== */}
+        {/* 1. ENCABEZADO DE LA SECCIÓN                                    */}
+        {/* ============================================================== */}
+        <div className="text-center max-w-4xl mx-auto mb-2 sm:mb-4 shrink-0">
+          {/* Eyebrow / Tag */}
+          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-[#A78BFA] mb-1.5 sm:mb-2 block">
+            NUESTRO PROCESO
+          </span>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-bold tracking-tight text-[#141517] leading-[1.15]">
-              Cómo trabajamos:{' '}
-              <br />
-              <span className="text-[#7E04A1]">diseño, aprobación previa</span>{' '}
-              y entrega sin mínimos
-              <span className="inline-block align-middle ml-2 pointer-events-none">
-                <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
-              </span>
-            </h2>
-          </div>
+          {/* Titular Principal */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold tracking-tight text-[#141517] leading-[1.12]">
+            Cómo trabajamos:{' '}
+            <br className="hidden sm:inline" />
+            <span className="text-[#74059F]">diseño, aprobación previa</span>{' '}
+            <br className="hidden sm:inline" />
+            y entrega sin mínimos
+          </h2>
+
+          {/* Subtítulo con margen despegado del titular */}
+          <p className="text-xs sm:text-sm md:text-base text-[#55555C] font-normal leading-relaxed mt-4 sm:mt-6 max-w-xl mx-auto">
+            De tu idea a tus manos. Un proceso simple, rápido y personalizado.
+          </p>
         </div>
 
-        {/* 2. ESCENARIO DE LAS 3 FASES FÍSICAS EN PARALELO (TODO VISIBLE AL TIEMPO) */}
-        <div
-          ref={stagesRef}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 items-end max-w-6xl mx-auto transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            stagesState === 'below'
-              ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96] pointer-events-none'
-              : stagesState === 'above'
-              ? 'opacity-0 -translate-y-8 scale-[0.98] pointer-events-none'
-              : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-          }`}
-        >
-          {/* ============================================================== */}
-          {/* FASE 01: BOCETO Y NOTAS                                        */}
-          {/* ============================================================== */}
-          <div className="flex flex-col items-center md:items-start w-full">
-            <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4 select-none">
-              <span className="text-2xl sm:text-3xl md:text-[32px] font-extrabold text-[#7E04A1] tracking-tight leading-none shrink-0">
-                01
-              </span>
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-[22px] font-bold text-[#141517] tracking-tight whitespace-nowrap">
-                Cuéntanos tu idea
-              </h3>
-            </div>
-
-            <div className="relative w-full max-w-[420px] mx-auto md:mx-0">
-              <img
-                src="/escritorio/fase-01.webp"
-                alt="Fase 01 - Cuéntanos tu idea"
-                width="420"
-                height="350"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-auto object-contain select-none transform transition-transform duration-500 hover:scale-[1.02]"
-                draggable={false}
-              />
-            </div>
-          </div>
-
-          {/* ============================================================== */}
-          {/* FASE 02: TELÉFONO WHATSAPP CON APROBACIÓN                      */}
-          {/* ============================================================== */}
-          <div className="flex flex-col items-center w-full">
-            <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4 select-none">
-              <span className="text-2xl sm:text-3xl md:text-[32px] font-extrabold text-[#7E04A1] tracking-tight leading-none shrink-0">
-                02
-              </span>
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-[22px] font-bold text-[#141517] tracking-tight whitespace-nowrap">
-                Aprobación previa
-              </h3>
-            </div>
-
-            <div className="relative w-full max-w-[280px] sm:max-w-[300px] mx-auto">
-              {/* Burbujita doodle artesanal flotando sobre el teléfono */}
-              <div className="absolute -top-3.5 -right-2 sm:-top-5 sm:-right-4 z-20 pointer-events-none transform rotate-12">
-                <img
-                  src="/faq-bubble-clean.webp"
-                  alt=""
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-[0_3px_8px_rgba(126,4,161,0.25)]"
-                />
-              </div>
-
-              <img
-                src="/escritorio/fase-02.webp"
-                alt="Fase 02 - Aprobación previa"
-                width="300"
-                height="420"
-                loading="lazy"
-                decoding="async"
-                className="w-full max-h-[380px] sm:max-h-[420px] h-auto object-contain select-none mx-auto transform transition-transform duration-500 hover:scale-[1.02]"
-                draggable={false}
-              />
-            </div>
-          </div>
-
-          {/* ============================================================== */}
-          {/* FASE 03: PRODUCTO FÍSICO TERMINADO                             */}
-          {/* ============================================================== */}
-          <div className="flex flex-col items-center md:items-end w-full">
-            <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4 select-none">
-              <span className="text-2xl sm:text-3xl md:text-[32px] font-extrabold text-[#7E04A1] tracking-tight leading-none shrink-0">
-                03
-              </span>
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-[22px] font-bold text-[#141517] tracking-tight whitespace-nowrap">
-                Producción y entrega
-              </h3>
-            </div>
-
-            <div className="relative w-full max-w-[420px] mx-auto md:mx-0">
-              <img
-                src="/escritorio/fase-03.webp"
-                alt="Fase 03 - Producción y entrega"
-                width="420"
-                height="350"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-auto object-contain select-none transform transition-transform duration-500 hover:scale-[1.02]"
-                draggable={false}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 3. FASE FINAL EDITORIAL + LLAMADO A LA ACCIÓN A WHATSAPP */}
-        <div
-          ref={ctaRef}
-          className={`w-full max-w-6xl mx-auto pt-8 sm:pt-10 md:pt-12 mt-12 sm:mt-16 md:mt-20 border-t border-[#7E04A1]/12 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            ctaState === 'below'
-              ? 'opacity-0 translate-y-8 pointer-events-none'
-              : ctaState === 'above'
-              ? 'opacity-0 -translate-y-8 scale-[0.98] pointer-events-none'
-              : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-          }`}
-        >
-          {/* Texto editorial de cierre */}
-          <div className="text-center sm:text-left">
-            <h4 className="text-base sm:text-lg md:text-xl font-bold text-[#141517] tracking-tight">
-              De la idea a tus manos.
-            </h4>
-            <p className="text-xs sm:text-sm text-[#444448] font-normal mt-0.5">
-              Cada pedido pasa por nuestras manos antes de llegar a las tuyas.
-            </p>
-          </div>
-
-          {/* CTA directo a WhatsApp */}
-          <div className="flex items-center gap-3 sm:gap-5">
-            <span className="text-xs sm:text-sm md:text-base text-[#141517] font-medium hidden md:inline-block">
-              ¿Listo para empezar tu idea?
-            </span>
-            <div className="relative inline-flex items-center">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Hablar por WhatsApp para asesoría sobre las etapas del proceso"
-                className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm md:text-base shadow-[0_10px_30px_rgba(126,4,161,0.30)] hover:shadow-[0_14px_40px_rgba(126,4,161,0.40)] transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer relative"
-              >
-                {/* Rayitas arriba del botón */}
-                <div className="absolute -top-2.5 -right-2 pointer-events-none">
-                  <img
-                    src="/faq-rays-clean.webp"
-                    alt=""
-                    className="w-4 h-4 sm:w-5 sm:h-5 object-contain transform rotate-12 opacity-85"
-                  />
+        {/* ============================================================== */}
+        {/* 2. ETAPAS 01, 02 Y 03 EN PARALELO - IMÁGENES PROTAGÓNICAS      */}
+        {/* ============================================================== */}
+        <div className="w-full max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 lg:gap-10 items-center relative flex-1 my-auto py-2">
+          
+          {/* FASE 01: CUÉNTANOS TU IDEA */}
+          <div className="flex flex-col items-center text-left w-full relative">
+            {/* Header de la etapa: 01 + Título y descripción alineada */}
+            <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
+              <div className="inline-flex items-start gap-3 text-left">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                  01
+                </span>
+                <div className="inline-flex flex-col items-start max-w-[190px] sm:max-w-[210px] md:max-w-[220px]">
+                  <h3 className="text-sm sm:text-base lg:text-[18px] font-extrabold text-[#141517] leading-snug">
+                    Cuéntanos tu idea
+                  </h3>
+                  <p className="text-xs text-[#55555C] leading-snug mt-1">
+                    Nos cuentas qué necesitas, compartes referencias y definimos los detalles.
+                  </p>
                 </div>
+              </div>
+            </div>
 
-                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
-                <span>Hablar por WhatsApp</span>
-                <ArrowRight className="w-4 h-4 shrink-0" />
-              </a>
+            {/* Ilustración / Cuaderno con boceto (PROTAGÓNICA) */}
+            <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
+              <img
+                src="/escritorio/proceso-01-cuaderno.webp"
+                alt="Fase 01 - Cuéntanos tu idea en cuaderno con boceto"
+                width="951"
+                height="773"
+                loading="lazy"
+                decoding="async"
+                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)] transform hover:scale-[1.03] transition-transform duration-300"
+                draggable={false}
+              />
+            </div>
+
+            {/* Flecha conectora a la fase 2 (visible solo en desktop) */}
+            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#D5B8F6] z-10 pointer-events-none">
+              <ArrowRight className="w-7 h-7 stroke-[2]" />
             </div>
           </div>
+
+          {/* FASE 02: APROBACIÓN PREVIA */}
+          <div className="flex flex-col items-center text-left w-full relative">
+            {/* Header de la etapa: 02 + Título y descripción alineada */}
+            <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
+              <div className="inline-flex items-start gap-3 text-left">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                  02
+                </span>
+                <div className="inline-flex flex-col items-start max-w-[190px] sm:max-w-[210px] md:max-w-[220px]">
+                  <h3 className="text-sm sm:text-base lg:text-[18px] font-extrabold text-[#141517] leading-snug">
+                    Aprobación previa
+                  </h3>
+                  <p className="text-xs text-[#55555C] leading-snug mt-1">
+                    Te enviamos una vista previa de tu diseño para que lo revises y nos des el visto bueno.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Ilustración / Celular WhatsApp (PROTAGÓNICA) */}
+            <div className="relative w-full max-w-[240px] sm:max-w-[270px] lg:max-w-[290px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
+              <img
+                src="/escritorio/proceso-02-telefono.webp"
+                alt="Fase 02 - Aprobación previa en WhatsApp"
+                width="489"
+                height="936"
+                loading="lazy"
+                decoding="async"
+                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_18px_40px_rgba(116,5,159,0.14)] transform hover:scale-[1.03] transition-transform duration-300"
+                draggable={false}
+              />
+            </div>
+
+            {/* Flecha conectora a la fase 3 (visible solo en desktop) */}
+            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#D5B8F6] z-10 pointer-events-none">
+              <ArrowRight className="w-7 h-7 stroke-[2]" />
+            </div>
+          </div>
+
+          {/* FASE 03: PRODUCCIÓN Y ENTREGA */}
+          <div className="flex flex-col items-center text-left w-full relative">
+            {/* Header de la etapa: 03 + Título y descripción alineada */}
+            <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
+              <div className="inline-flex items-start gap-3 text-left">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                  03
+                </span>
+                <div className="inline-flex flex-col items-start max-w-[200px] sm:max-w-[220px] md:max-w-[230px]">
+                  <h3 className="text-sm sm:text-base lg:text-[18px] font-extrabold text-[#141517] leading-snug">
+                    Producción y entrega
+                  </h3>
+                  <p className="text-xs text-[#55555C] leading-snug mt-1">
+                    Fabricamos tu pedido con los mejores materiales y te lo enviamos a donde estés.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Ilustración / Caja lista con accesorios (PROTAGÓNICA) */}
+            <div className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[460px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
+              <img
+                src="/escritorio/proceso-03-caja.webp"
+                alt="Fase 03 - Producción y entrega de caja finalizada con accesorios"
+                width="1013"
+                height="634"
+                loading="lazy"
+                decoding="async"
+                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)] transform hover:scale-[1.03] transition-transform duration-300"
+                draggable={false}
+              />
+            </div>
+          </div>
+
+        </div>
+
+        {/* ============================================================== */}
+        {/* 3. CTA INFERIOR LIMPIO (SIN CÁPSULAS BLANCA NI MORADA)         */}
+        {/* ============================================================== */}
+        <div className="mt-3 sm:mt-5 flex items-center justify-center gap-2 sm:gap-3 text-center shrink-0">
+          <span className="text-xs sm:text-sm md:text-base text-[#55555C] font-normal">
+            ¿Listo para empezar tu idea?
+          </span>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hablar por WhatsApp para empezar tu idea"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm md:text-base text-[#74059F] hover:text-[#5c037e] font-bold underline decoration-[#74059F]/40 hover:decoration-[#74059F] underline-offset-4 transition-colors group"
+          >
+            <span>Hablar por WhatsApp</span>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 transform group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
 
       </div>

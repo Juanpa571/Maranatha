@@ -112,148 +112,61 @@
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: voldogMarquee 120s linear infinite;
+  animation: voldogMarquee 38s linear infinite;
   pointer-events: auto;
 }
 
-.animate-voldog-marquee:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media (min-width: 1024px) {
   .animate-voldog-marquee {
-    animation: none;
-    transform: none;
-  }
-  .animate-hero-shimmer,
-  .animate-hero-sparkle-1,
-  .animate-hero-sparkle-2 {
-    animation: none !important;
-    transform: none !important;
+    animation-duration: 48s;
   }
 }
 
-/* Micro-flotación viva del emblema circular */
-@keyframes heroEmblemFloat {
+/* Animaciones Oficiales del Emblema Maranatha: 0% Layout Thrashing, pivotes fijos matemáticos */
+@keyframes unicornBreath {
   0%, 100% {
-    transform: translateY(0px);
+    transform: rotate(0deg) translateY(0px);
   }
   50% {
-    transform: translateY(-8px);
+    transform: rotate(2deg) translateY(-35px);
   }
 }
 
-.animate-hero-emblem-float {
+.animate-unicorn-breath {
+  transform-origin: 10840px 18500px;
   will-change: transform;
-  animation: heroEmblemFloat 4.5s ease-in-out infinite;
+  animation: unicornBreath 4.2s ease-in-out infinite;
 }
 
-/* Barrido de luz cristalina sobre el emblema (Glass Sheen Sweep) */
-@keyframes heroSheenSweep {
-  0% {
-    transform: translateX(-160%) skewX(-20deg);
-  }
-  24% {
-    transform: translateX(160%) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(160%) skewX(-20deg);
-  }
-}
-
-.hero-sheen-sweep {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0) 25%,
-    rgba(255, 255, 255, 0.5) 48%,
-    rgba(231, 209, 255, 0.8) 50%,
-    rgba(255, 255, 255, 0.5) 52%,
-    rgba(255, 255, 255, 0) 75%,
-    transparent 100%
-  );
-  width: 100%;
-  height: 100%;
-  will-change: transform;
-  animation: heroSheenSweep 4.2s ease-in-out infinite;
-}
-/* Animación pura por CSS del cuello y respiración del unicornio */
-@keyframes unicornNeckMove {
+@keyframes starTwinkle1 {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  35% {
-    transform: translateY(-140px) rotate(2.2deg);
-  }
-  55% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  82% {
-    transform: translateY(90px) rotate(-1.4deg);
-  }
-}
-
-.animate-unicorn-neck {
-  transform-box: view-box;
-  transform-origin: 10760px 18800px;
-  will-change: transform;
-  animation: unicornNeckMove 6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
-}
-
-/* Estrella 1 (Grande): escala, rotación y variación cromática */
-@keyframes heroStar1Move {
-  0%, 100% {
-    transform: scale(0.85) rotate(0deg);
-    fill: #7E04A1;
-  }
-  35% {
-    fill: #9C15C5;
+    opacity: 0.35;
+    transform: scale(0.75) rotate(-14deg);
   }
   50% {
-    transform: scale(1.25) rotate(24deg);
-  }
-  70% {
-    fill: #C084FC;
+    opacity: 1;
+    transform: scale(1.25) rotate(16deg);
   }
 }
 
-.animate-hero-star-1 {
-  transform-box: view-box;
-  transform-origin: 12467.68px 15989.45px;
-  will-change: transform;
-  animation: heroStar1Move 5.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+.animate-star-twinkle-1 {
+  will-change: transform, opacity;
+  animation: starTwinkle1 2s ease-in-out infinite;
 }
 
-/* Estrella 2 (Pequeña): escala, rotación y variación cromática */
-@keyframes heroStar2Move {
+@keyframes starTwinkle2 {
   0%, 100% {
-    transform: scale(1.22) rotate(0deg);
-    fill: #7E04A1;
-  }
-  35% {
-    fill: #C084FC;
+    opacity: 1;
+    transform: scale(1.25) rotate(16deg);
   }
   50% {
-    transform: scale(0.8) rotate(-25deg);
-  }
-  70% {
-    fill: #9C15C5;
+    opacity: 0.3;
+    transform: scale(0.7) rotate(-14deg);
   }
 }
 
-.animate-hero-star-2 {
-  transform-box: view-box;
-  transform-origin: 13081.59px 14791.13px;
-  will-change: transform;
-  animation: heroStar2Move 4.9s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+.animate-star-twinkle-2 {
+  will-change: transform, opacity;
+  animation: starTwinkle2 1.6s ease-in-out infinite;
 }
-
-/* Forzado de renderizado en capa separada del compositor (Hardware Clip) */
-.translate-z-0 {
-  transform: translateZ(0);
-}
-
-
-
-
 

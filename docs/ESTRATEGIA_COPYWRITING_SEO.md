@@ -21,11 +21,17 @@ graph TD
 
 ### Ficha Técnica SEO
 * **Oración más buscada (Target Principal):** `Papelería creativa en Cali` (100 - 1.000 búsquedas/mes, alta intención local).
-* **Keywords Transaccionales Núcleo:** 
-  - `cajas personalizadas` (10 - 100 búsquedas/mes | CPC: $404 - $1.947 COP — *Intención de compra directa para dulceros de eventos y empaque de emprendedores*).
-  - `stickers personalizados en cali` (100 - 1.000 búsquedas/mes).
-  - `vinilos adhesivos para pared` (100 - 1.000 búsquedas/mes | CPC hasta $3.334 COP).
-* **Keywords Secundarias:** `taller de papelería en cali`, `cajas temáticas para fiestas cali`, `detalles personalizados cali`, `empaques y papelería cali`.
+* **Keywords Transaccionales Núcleo (Validadas Google Ads Colombia):** 
+  - `empaques personalizados` (100 - 1.000 búsquedas/mes | CPC hasta $2.617 COP).
+  - `cajas personalizadas` (100 - 1.000 búsquedas/mes | CPC hasta $1.870 COP) y `cajas de carton personalizadas` (100 - 1.000 búsquedas/mes | +900% | CPC hasta $1.977 COP).
+  - `cajas para recordatorios` (10 - 100 búsquedas/mes | CPC hasta **$5.938 COP** — *Pujas récord en eventos y celebraciones*).
+  - `stickers personalizados` (100 - 1.000 búsquedas/mes | CPC hasta $1.586 COP) y `stickers troquelados` (100 - 1.000 búsquedas/mes | CPC hasta $1.916 COP).
+  - `vinilos adhesivos` (1.000 - 10.000 búsquedas/mes | CPC hasta $1.295 COP).
+  - `insumos de papeleria` (100 - 1.000 búsquedas/mes | CPC hasta $2.308 COP).
+* **Keywords de Búsqueda Local Transaccional ("Dónde mandar a hacer"):** 
+  - `donde hacen cajas de carton personalizadas` (CPC hasta $2.327 COP).
+  - `donde hacen cajas personalizadas` / `donde hacer cajas personalizadas` (CPC hasta $1.445 COP).
+  - `donde mandar a hacer stickers` (CPC hasta $1.363 COP).
 * **Meta Title (60 caracteres):**  
   `Maranatha | Papelería Creativa, Cajas y Stickers en Cali`
 * **Meta Description (155 caracteres):**  
@@ -33,31 +39,23 @@ graph TD
 
 ---
 
-### Copywriting por Secciones (Home)
-
-#### Hero Section (Versión Oficial Aprobada)
-* **Pre-título:** Taller de Autor en Cali
-* **H1 (Visual / Semántico):** `maranatha` *(Tipografía Pacifico)* / `Papelería Creativa en Cali`
-* **Botón Interactivo Principal:**  
-  - Texto: `Papelería Creativa en Cali`
-  - Acción hover: Expansión física del círculo morado oscuro (`#7E04A1`) con flecha `→`.
-* **CTA Superior Navbar:** `COTIZAR` *(Enlace directo a WhatsApp)*
-
-#### Sección 2: Vitrina de Líneas Matrices (Tarjetas de Entrada)
-* **Concepto:** 3 puertas de acceso con fotografías de autor de alta resolución.
-* **Tarjeta 1:** `Papelería Creativa`  
-  - *Bajada rápida:* Fiestas infantiles, cake toppers, recordatorios y celebraciones únicas.
-* **Tarjeta 2:** `Insumos & Vinilos Adhesivos`  
-  - *Bajada rápida:* Murales para pared, rotulación y papeles especiales para creadores.
-* **Tarjeta 3:** `Papelería Empresarial`  
-  - *Bajada rápida:* Stickers desde 50 unidades, tarjetas y etiquetas para marcas locales.
-
-#### Sección 3: El Dolor del Cliente vs. Nuestra Promesa (Diferenciadores)
-* **H2:** Sin mínimos exagerados. Con la dedicación que tu evento o marca merece.
-* **Puntos de confianza:**
-  1. **Tirajes a tu medida:** Olvídate de mandar a hacer 1.000 unidades obligadas en litografías frías. Aquí produces desde 50 stickers o 12 cajitas para tu evento.
-  2. **Acabados y texturas reales:** Corte digital computarizado, capas en relieve 3D, foil metalizado y vinilo impermeable que no se desprende con la humedad.
-  3. **Atención directa en Cali:** Hablas con personas reales que te asesoran sobre el gramaje, colores y ensamble de cada pieza.
+### Copywriting y Jerarquía de Encabezados (Home Oficial)
+* **H1:** `Maranatha | Papelería Creativa y Empaques Personalizados en Cali`
+* **H2 (Categorías):** `Categorías de empaques personalizados, papelería e insumos`
+  - **H3:** `Papelería Creativa`
+  - **H3:** `Insumos de Papelería`
+  - **H3:** `Papelería Empresarial`
+* **H2 (Catálogo Principal):** `Cajas personalizadas, stickers troquelados y vinilos adhesivos`
+  - **H3s (Productos Destacados):** `Cajas Personalizadas`, `Stickers Personalizados`, `Vinilos Adhesivos`
+* **H2 (Entidad Local / Taller):** `Taller de papelería en Cali: asesoría personalizada`
+* **H2 (Proceso & Diferenciador CRO):** `Cómo trabajamos: diseño, aprobación previa y entrega sin mínimos`
+  - **H3 (Paso 1):** `Cuéntanos tu idea`
+  - **H3 (Paso 2):** `Aprobación previa`
+  - **H3 (Paso 3):** `Producción y entrega`
+  - *(Nota: "De la idea a tus manos" formateado como párrafo semántico `<p>`, sin polucionar el DOM outline como H4)*
+* **H2 (Preguntas Frecuentes / AEO / FAQPage Schema):** `Preguntas frecuentes: resolvemos tus dudas.`
+  - **H3s:** 8 preguntas de cola larga y dudas pre-compra
+* **H2 (Cierre BoFu / Conversión):** `¿Tienes una idea para tu evento o marca? Hagámosla realidad`
 
 ---
 

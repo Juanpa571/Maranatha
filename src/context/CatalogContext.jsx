@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
-import { sanityClient } from '../lib/sanity';
-import { ALL_CATEGORIES_QUERY, ALL_PRODUCTS_QUERY, FEATURED_PRODUCTS_QUERY } from '../lib/sanityQueries';
 import { CATEGORIES_DATA } from '../data/categoriesData';
 
 const CatalogContext = createContext(null);
@@ -26,7 +24,7 @@ export function CatalogProvider({ children }) {
       description: 'Diseñamos empaques que cuentan tu historia.',
       pricePrefix: 'Desde',
       priceVal: '$2.800 COP',
-      image: '/catalogo/cajas-personalizadas.webp',
+      image: '/catalogo/cajas-personalizadas.png',
       alt: 'Cajas personalizadas para fiestas y marcas en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar cajas personalizadas para un evento o marca en Cali.',
       categorySlug: 'papeleria-creativa',
@@ -39,7 +37,7 @@ export function CatalogProvider({ children }) {
       description: 'Vinilo impermeable troquelado al contorno para tu marca.',
       pricePrefix: 'Desde',
       priceVal: '$25.000 / 50 und',
-      image: '/catalogo/stickers-personalizados.webp',
+      image: '/catalogo/stickers-personalizados.png',
       alt: 'Stickers personalizados troquelados en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar stickers personalizados desde 50 unidades en Cali.',
       categorySlug: 'papeleria-creativa',
@@ -52,7 +50,7 @@ export function CatalogProvider({ children }) {
       description: 'Para paredes, vitrinas y espacios que quieras transformar.',
       pricePrefix: 'Desde',
       priceVal: '$35.000 COP',
-      image: '/catalogo/vinilos-adhesivos.webp',
+      image: '/catalogo/vinilos-adhesivos.png',
       alt: 'Vinilos adhesivos para paredes y vitrinas en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar vinilos adhesivos para pared o vitrinas en Cali.',
       categorySlug: 'insumos',
@@ -65,6 +63,14 @@ export function CatalogProvider({ children }) {
 
   const fetchCatalogData = useCallback(async () => {
     try {
+      const [
+        { sanityClient },
+        { ALL_CATEGORIES_QUERY, ALL_PRODUCTS_QUERY, FEATURED_PRODUCTS_QUERY },
+      ] = await Promise.all([
+        import('../lib/sanity'),
+        import('../lib/sanityQueries'),
+      ]);
+
       const [sanityCategories, sanityProducts, sanityFeatured] = await Promise.all([
         sanityClient.fetch(ALL_CATEGORIES_QUERY),
         sanityClient.fetch(ALL_PRODUCTS_QUERY),

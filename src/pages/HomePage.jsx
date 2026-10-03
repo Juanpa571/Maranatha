@@ -6,7 +6,6 @@ const CoreCatalog = lazy(() => import('../components/CoreCatalog'));
 const LocalAttention = lazy(() => import('../components/LocalAttention'));
 const TransparentProcess = lazy(() => import('../components/TransparentProcess'));
 const FaqSection = lazy(() => import('../components/FaqSection'));
-const FinalCta = lazy(() => import('../components/FinalCta'));
 const Footer = lazy(() => import('../components/Footer'));
 
 export default function HomePage() {
@@ -15,25 +14,38 @@ export default function HomePage() {
   useEffect(() => {
     document.title = 'Maranatha Papelería Creativa | Eventos y Empaques en Cali';
 
-    const enableSections = () => {
-      setLoadHeavySections(true);
+    let isCleanedUp = false;
+    let idleId = null;
+    let timerId = null;
+
+    const cleanupListeners = () => {
       window.removeEventListener('scroll', enableSections);
       window.removeEventListener('wheel', enableSections);
       window.removeEventListener('touchmove', enableSections);
     };
 
-    // Montaje diferido tras 800ms o al primer intento de scroll/interacción
-    const timer = setTimeout(enableSections, 800);
+    const enableSections = () => {
+      if (isCleanedUp) return;
+      cleanupListeners();
+      setLoadHeavySections(true);
+    };
 
     window.addEventListener('scroll', enableSections, { passive: true, once: true });
     window.addEventListener('wheel', enableSections, { passive: true, once: true });
     window.addEventListener('touchmove', enableSections, { passive: true, once: true });
 
+    // Carga de secciones inferiores por interacción o en tiempo ocioso (requestIdleCallback)
+    if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(enableSections, { timeout: 3500 });
+    } else {
+      timerId = setTimeout(enableSections, 2500);
+    }
+
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', enableSections);
-      window.removeEventListener('wheel', enableSections);
-      window.removeEventListener('touchmove', enableSections);
+      isCleanedUp = true;
+      cleanupListeners();
+      if (idleId && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId);
+      if (timerId) clearTimeout(timerId);
     };
   }, []);
 
@@ -51,7 +63,6 @@ export default function HomePage() {
             <LocalAttention />
             <TransparentProcess />
             <FaqSection />
-            <FinalCta />
           </main>
 
           {/* 3. Footer de Autor con Navegación Semántica, Datos Locales y Horarios */}

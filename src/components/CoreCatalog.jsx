@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
 import { useCatalog } from '../hooks/useCatalog';
@@ -6,11 +6,7 @@ import ProductQuickViewModal from './ProductQuickViewModal';
 
 export default function CoreCatalog() {
   const { featuredProducts } = useCatalog();
-  const [headerState, setHeaderState] = useState('below'); // 'below' | 'visible' | 'above'
-  const [cardsState, setCardsState] = useState('below');   // 'below' | 'visible' | 'above'
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const headerRef = useRef(null);
-  const cardsRef = useRef(null);
   const getWhatsappUrl = (text) => `https://wa.me/573145854213?text=${encodeURIComponent(text)}`;
 
   const handleOpenProduct = useCallback((prod) => {
@@ -21,289 +17,175 @@ export default function CoreCatalog() {
     setSelectedProduct(null);
   }, []);
 
-  useEffect(() => {
-    let rAFId = null;
-    const checkPositions = () => {
-      if (rAFId) return;
-      rAFId = window.requestAnimationFrame(() => {
-        rAFId = null;
-        const windowH = window.innerHeight;
-        const enterThreshold = windowH * 0.88;
-
-        if (headerRef.current) {
-          const headerRect = headerRef.current.getBoundingClientRect();
-          const headerTopThreshold = window.innerWidth < 768 ? 240 : 320;
-          let newHeaderState = 'visible';
-          if (headerRect.top > enterThreshold) {
-            newHeaderState = 'below';
-          } else if (cardsRef.current && cardsRef.current.getBoundingClientRect().top <= headerTopThreshold) {
-            newHeaderState = 'above';
-          }
-          setHeaderState((prev) => (prev !== newHeaderState ? newHeaderState : prev));
-        }
-
-        if (cardsRef.current) {
-          const cardsRect = cardsRef.current.getBoundingClientRect();
-          const cardsExitThreshold = window.innerWidth < 768 ? 200 : 280;
-          let newCardsState = 'visible';
-          if (cardsRect.top > enterThreshold) {
-            newCardsState = 'below';
-          } else if (cardsRect.bottom <= cardsExitThreshold) {
-            newCardsState = 'above';
-          }
-          setCardsState((prev) => (prev !== newCardsState ? newCardsState : prev));
-        }
-      });
-    };
-
-    let unsubLenis = null;
-    const subscribeLenis = (lenisInstance) => {
-      if (unsubLenis) return;
-      unsubLenis = lenisInstance.on('scroll', checkPositions);
-      checkPositions();
-    };
-
-    if (window.lenis) {
-      subscribeLenis(window.lenis);
-    } else {
-      window.addEventListener('lenis-init', (e) => subscribeLenis(e.detail), { once: true });
-    }
-
-    window.addEventListener('scroll', checkPositions, { passive: true });
-    window.addEventListener('resize', checkPositions, { passive: true });
-    checkPositions();
-
-    return () => {
-      if (rAFId) window.cancelAnimationFrame(rAFId);
-      if (unsubLenis) unsubLenis();
-      window.removeEventListener('scroll', checkPositions);
-      window.removeEventListener('resize', checkPositions);
-    };
-  }, []);
-
   return (
     <section 
       id="catalogo-destacado" 
       data-theme="light"
       data-theme-color="#FAF8FD"
-      className="w-full px-4 sm:px-8 md:px-[6vw] lg:px-[8.5%] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-28 bg-[#FAF8FD] border-t border-gray-200/80 font-peridot transition-colors"
+      className="w-full min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#FAF8FD] border-t border-gray-200/80 font-peridot transition-colors flex flex-col justify-center"
     >
-      
-      {/* Encabezado Asimétrico Playful Monumental */}
-      <div 
-        ref={headerRef}
-        className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 mb-14 sm:mb-20 md:mb-24 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          headerState === 'below'
-            ? 'opacity-0 translate-y-8 pointer-events-none'
-            : headerState === 'above'
-            ? 'opacity-0 -translate-y-8 pointer-events-none scale-[0.98]'
-            : 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-        }`}
-      >
-        <div className="relative pt-6 sm:pt-8 md:pt-10">
-          <div className="absolute -top-1 sm:-top-2 left-0 pointer-events-none transform -rotate-12 opacity-85">
-            <img src="/faq-heart.webp" alt="" width="28" height="28" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
+      <div className="max-w-[1400px] mx-auto w-full flex flex-col justify-center gap-7 sm:gap-9 md:gap-11 lg:gap-13">
+        {/* Encabezado Asimétrico - Mismo ancho exacto que las tarjetas */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8">
+          <div>
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.24em] text-[#A855F7] uppercase font-peridot block mb-1.5 sm:mb-2">
+              PERSONALIZA TU MARCA
+            </span>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-extrabold tracking-tight text-[#141517] leading-[1.12]">
+              Cajas personalizadas,{' '}
+              <br className="hidden sm:inline" />
+              <span className="text-[#7E04A1]">stickers</span> y vinilos adhesivos
+              <span className="inline-block align-middle ml-2 sm:ml-3 text-[#A855F7] -translate-y-1 sm:-translate-y-1.5">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="12" y1="3" x2="12" y2="7" />
+                  <line x1="4.22" y1="6.22" x2="7.05" y2="9.05" />
+                  <line x1="19.78" y1="6.22" x2="16.95" y2="9.05" />
+                </svg>
+              </span>
+            </h2>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[58px] xl:text-[66px] font-bold tracking-tight text-[#141517] leading-[1.10]">
-            Cajas, stickers y{' '}
-            <span className="relative inline-block text-[#7E04A1]">
-              piezas
-              <svg 
-                className="absolute -top-8 sm:-top-11 md:-top-13 -right-2 sm:-right-4 w-8 h-10 sm:w-10 sm:h-12 md:w-12 md:h-14 pointer-events-none transform rotate-[14deg] drop-shadow-[0_4px_10px_rgba(126,4,161,0.28)]" 
-                viewBox="0 0 24 28" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="unicornHornGrad" x1="12" y1="28" x2="16" y2="4" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#7E04A1" />
-                    <stop offset="60%" stopColor="#9C27B0" />
-                    <stop offset="100%" stopColor="#E7D1FF" />
-                  </linearGradient>
-                </defs>
-                <path 
-                  d="M7 26C8.5 25 12 25 15 26L16.5 4C14.5 10 9 20 7 26Z" 
-                  fill="url(#unicornHornGrad)" 
-                />
-                <path 
-                  d="M7.8 21.5C9.5 20.8 12.5 21.2 14.8 20" 
-                  stroke="#FFFFFF" 
-                  strokeWidth="1.2" 
-                  strokeLinecap="round" 
-                />
-                <path 
-                  d="M9.2 16C10.8 15.3 13.2 15.6 15.2 14.8" 
-                  stroke="#FFFFFF" 
-                  strokeWidth="1.2" 
-                  strokeLinecap="round" 
-                />
-              </svg>
-            </span>{' '}
-            <br />
-            favoritas de papelería
-            <span className="inline-block align-middle ml-2 pointer-events-none">
-              <img src="/faq-rays-clean.webp" alt="" width="24" height="24" loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 object-contain inline-block transform rotate-12 opacity-85" />
-            </span>
-          </h2>
-        </div>
-
-        <div className="max-w-md lg:pb-2">
-          <p className="text-base sm:text-lg md:text-xl text-[#2B2B2E] font-medium leading-relaxed">
-            Sin mínimos de litografía. Acabados de autor, corte digital y materiales finos listos para tu celebración o marca.
-          </p>
-          <div className="hidden sm:inline-flex items-center gap-2 mt-2 pointer-events-none">
-            <span className="font-['Patrick_Hand',cursive] text-base text-[#7E04A1] font-bold tracking-wide">
-              directo del taller
-            </span>
-            <img
-              src="/faq-arrow-clean.webp"
-              alt=""
-              width="40"
-              height="40"
-              loading="lazy"
-              decoding="async"
-              className="w-10 h-auto object-contain transform rotate-[35deg] opacity-75"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Grid de 3 Tarjetas en Fila Curadas para la Home */}
-      <div 
-        ref={cardsRef}
-        className="max-w-[1080px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch w-full"
-      >
-        {featuredProducts.map((prod, index) => {
-          const rawPrice = prod.priceVal || prod.price || '';
-          const pricePrefix = prod.pricePrefix || (rawPrice.startsWith('Desde ') ? 'Desde' : 'Desde');
-          const cleanPrice = rawPrice.replace(/^Desde\s+/, '');
-          const priceMain = cleanPrice.match(/^(\$[\d.]+)/) ? cleanPrice.match(/^(\$[\d.]+)/)[1] : cleanPrice;
-          const priceSub = cleanPrice.replace(/^(\$[\d.]+)\s*/, '');
-
-          return (
-            <div
-              key={prod.id || prod._id || index}
-              className={`group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300 pointer-events-auto touch-manipulation ${
-                cardsState === 'below'
-                  ? 'opacity-0 translate-y-12 sm:translate-y-16 scale-[0.96]'
-                  : cardsState === 'above'
-                  ? 'opacity-0 -translate-y-8 scale-[0.98]'
-                  : 'opacity-100 translate-y-0 scale-100'
-              }`}
-              style={{ transitionDelay: cardsState === 'visible' ? (prod.delay || `${(index + 1) * 150}ms`) : '0ms' }}
+          <div className="border-l-2 border-gray-200/90 pl-5 sm:pl-7 max-w-md shrink-0 lg:pb-1">
+            <p className="text-sm sm:text-[15px] lg:text-base text-[#4A4B53] font-medium leading-relaxed">
+              Acabados de autor, corte digital y materiales premium para dar vida a tus ideas.
+            </p>
+            <a
+              href="#proceso"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('proceso');
+                if (target) {
+                  if (window.lenis) {
+                    window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+                  } else {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
+              className="text-[#7E04A1] font-bold text-sm sm:text-[15px] hover:underline inline-flex items-center gap-2 mt-2.5 transition-colors cursor-pointer group"
             >
-              {/* Contenedor de Imagen: Foto a ancho completo con proporción limpia */}
-              <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8FD] shrink-0">
-                <button
-                  type="button"
-                  onClick={() => handleOpenProduct(prod)}
-                  title={`Ver ${prod.title} en alta resolución`}
-                  className="group/img block relative w-full h-full cursor-zoom-in text-left"
-                >
-                  <img
-                    src={prod.image}
-                    alt={prod.alt || prod.title}
-                    width="500"
-                    height="500"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full aspect-square object-cover object-center transform-gpu will-change-transform transition-transform duration-700 ease-out sm:group-hover/img:scale-105"
-                    draggable={false}
-                  />
+              <span>Directo del taller</span>
+              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
+            </a>
+          </div>
+        </div>
 
-                  {/* En desktop: Micro badge sutil de zoom al hacer hover */}
-                  <div className="hidden sm:flex absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-medium items-center gap-1 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none select-none">
-                    <ZoomIn className="w-3.5 h-3.5" />
-                    <span>Zoom</span>
-                  </div>
-                </button>
-              </div>
+        {/* Grid de 3 Tarjetas - Siempre visible y estable */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch w-full">
+          {featuredProducts.map((prod, index) => {
+            const rawPrice = prod.priceVal || prod.price || '';
+            const pricePrefix = prod.pricePrefix || 'Desde';
+            const cleanPrice = rawPrice.replace(/^Desde\s+/, '');
+            const priceMain = cleanPrice.match(/^(\$[\d.]+)/) ? cleanPrice.match(/^(\$[\d.]+)/)[1] : cleanPrice;
+            const priceSub = cleanPrice.replace(/^(\$[\d.]+)\s*/, '');
 
-              {/* Área de Detalles: Padding holgado y jerarquía limpia */}
-              <div className="p-4 sm:p-5 sm:pt-4 flex flex-col justify-between flex-1 min-w-0 bg-white">
-                <div>
-                  {/* Título */}
+            return (
+              <div
+                key={prod.id || prod._id || index}
+                className="group relative flex flex-col w-full rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white border border-gray-100 shadow-[0_6px_26px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(126,4,161,0.14)] hover:-translate-y-1.5 transition-all duration-300 pointer-events-auto touch-manipulation opacity-100"
+              >
+                {/* Contenedor de Imagen: Proporción 1:1 cuadrada natural que muestra el producto completo sin zoom ni recortes */}
+                <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8FD] shrink-0">
                   <button
                     type="button"
                     onClick={() => handleOpenProduct(prod)}
-                    className="block group/title cursor-pointer text-left w-full"
-                    title={`Ver detalles de ${prod.title}`}
+                    title={`Ver ${prod.title} en alta resolución`}
+                    className="group/img block relative w-full h-full cursor-zoom-in text-left"
                   >
-                    <h3 className="font-peridot text-[15.5px] xs:text-[16px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 group-hover/title:text-[#7E04A1] transition-colors">
-                      {prod.title}
-                    </h3>
-                  </button>
+                    <img
+                      src={prod.image}
+                      alt={prod.alt || prod.title}
+                      width="500"
+                      height="500"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full aspect-square object-cover object-center transform-gpu will-change-transform"
+                      draggable={false}
+                    />
 
-                  {/* Descripción real del producto */}
-                  <p className="font-peridot text-[12px] text-[#6A6C7D] font-normal leading-[1.42] mt-1.5 line-clamp-2">
-                    {prod.description}
-                  </p>
+                    <div className="hidden sm:flex absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium items-center gap-1.5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none select-none">
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span>Zoom</span>
+                    </div>
+                  </button>
                 </div>
 
-                {/* Acciones: Fila de Precio + Botón Cotizar WhatsApp + Enlace de Categoría */}
-                <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex flex-col gap-2">
-                  <div className="flex items-center justify-between gap-2">
-                    {/* Precio Tipográfico */}
-                    <div className="flex flex-col select-text leading-none py-0.5">
-                      <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-medium tracking-wide">
+                {/* Área de Detalles: Padding generoso y equilibrado */}
+                <div className="p-5 sm:p-6 lg:p-7 flex flex-col justify-between flex-1 min-w-0 bg-white">
+                  <div>
+                    {/* Título */}
+                    <button
+                      type="button"
+                      onClick={() => handleOpenProduct(prod)}
+                      className="block group/title cursor-pointer text-left w-full"
+                      title={`Ver detalles de ${prod.title}`}
+                    >
+                      <h3 className="font-peridot text-[17px] sm:text-[19px] lg:text-[21px] font-bold text-[#141517] tracking-tight leading-snug line-clamp-1 group-hover/title:text-[#7E04A1] transition-colors">
+                        {prod.title}
+                      </h3>
+                    </button>
+
+                    {/* Descripción concisa */}
+                    <p className="font-peridot text-[13px] sm:text-[14px] text-[#555] font-normal leading-relaxed mt-1.5 line-clamp-2">
+                      {prod.description}
+                    </p>
+                  </div>
+
+                  {/* Fila Inferior: Precio + Botón Cotizar */}
+                  <div className="mt-5 pt-4 flex items-center justify-between gap-3 border-t border-gray-100">
+                    <div className="flex flex-col select-text leading-tight">
+                      <span className="text-[11.5px] sm:text-xs text-gray-400 font-medium tracking-wide">
                         {pricePrefix}
                       </span>
                       <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-[17px] xs:text-[19px] sm:text-[21px] font-black text-[#141517] tracking-tight leading-none">
+                        <span className="text-[20px] sm:text-[22px] lg:text-[24px] font-extrabold text-[#141517] tracking-tight">
                           {priceMain}
                         </span>
                         {priceSub ? (
-                          <span className="text-[11.5px] sm:text-xs text-[#6A6C7D] font-semibold leading-none">
+                          <span className="text-xs sm:text-[13px] text-gray-500 font-normal">
                             {priceSub}
                           </span>
                         ) : null}
                       </div>
                     </div>
 
-                    {/* Botón WhatsApp Cotizar Original */}
                     <a
                       href={getWhatsappUrl(prod.whatsapp)}
                       target="_blank"
                       rel="noopener noreferrer"
                       title={`Cotizar ${prod.title} por WhatsApp`}
                       aria-label={`Cotizar ${prod.title} por WhatsApp`}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 h-[36px] sm:h-[40px] px-4 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12.5px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#F3E8FF] hover:bg-[#E9D5FF] text-[#7E04A1] text-[13px] sm:text-[14px] font-bold transition-all duration-200 active:scale-95 shrink-0 cursor-pointer shadow-sm hover:shadow"
                     >
                       <svg
-                        className="w-3.5 h-3.5 sm:w-[17px] sm:h-[17px] fill-current shrink-0"
+                        className="w-4 h-4 fill-current shrink-0"
                         viewBox="0 0 24 24"
                       >
                         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.134 8.134 0 0 1-1.25-4.38c0-4.5 3.66-8.16 8.16-8.16 2.18 0 4.23.85 5.77 2.39a8.106 8.106 0 0 1 2.39 5.77c0 4.51-3.66 8.16-8.16 8.16zm4.47-6.11c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.35-.77-1.85c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.43 1.03 2.6c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z" />
                       </svg>
                       <span>Cotizar</span>
+                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                     </a>
                   </div>
-
-                  {/* Enlace contextual a la Categoría */}
-                  <Link
-                    to={`/categoria/${prod.categorySlug}`}
-                    className="w-full pt-1 pb-0.5 text-center text-[12px] sm:text-[12.5px] font-bold text-[#7E04A1] hover:text-[#5E0279] flex items-center justify-center gap-1.5 transition-colors group/cat cursor-pointer"
-                  >
-                    <span>Ver más en {prod.categoryName}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#7E04A1] shrink-0 transform group-hover/cat:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-      {/* Enlace limpio para ir a la subpágina del catálogo completo */}
-      <div className="mt-12 text-center">
-        <Link
-          to="/catalogo"
-          className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#7E04A1] hover:text-[#5E0279] group transition-colors"
-        >
-          <span>Ver catálogo completo con todos los productos de Maranatha</span>
-          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </Link>
+        {/* Enlace sutil con divisores laterales a juego */}
+        <div className="flex items-center justify-center">
+          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#EBD6FA]" />
+          <Link
+            to="/catalogo"
+            className="px-4 sm:px-6 text-sm sm:text-[15px] font-semibold text-[#7E04A1] hover:text-[#5E0279] inline-flex items-center gap-2 transition-colors group"
+          >
+            <span>Ver catálogo completo de Maranatha</span>
+            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
+          </Link>
+          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#EBD6FA]" />
+        </div>
       </div>
 
       {/* Modal de Zoom y Vista Rápida en Alta Resolución */}
@@ -312,7 +194,6 @@ export default function CoreCatalog() {
         isOpen={!!selectedProduct}
         onClose={handleCloseModal}
       />
-
     </section>
   );
 }

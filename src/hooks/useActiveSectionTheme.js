@@ -92,22 +92,27 @@ export function useActiveSectionTheme({
         }
       }
 
-      const darkActive = detectedTheme === 'dark';
+      // La barra sticky se oscurece única y exclusivamente en la versión móvil (< 1024px)
+      // En la versión de PC (pantallas >= 1024px), la barra sticky se mantiene siempre en su estado claro editorial
+      const isMobile = window.innerWidth < 1024;
+      const darkActive = isMobile && detectedTheme === 'dark';
+      const effectiveTheme = isMobile ? detectedTheme : 'light';
+      const effectiveColor = isMobile ? detectedColor : defaultColor;
 
       // 3. Sincronizar estado de React
-      setTheme((prev) => (prev !== detectedTheme ? detectedTheme : prev));
-      setThemeColor((prev) => (prev !== detectedColor ? detectedColor : prev));
+      setTheme((prev) => (prev !== effectiveTheme ? effectiveTheme : prev));
+      setThemeColor((prev) => (prev !== effectiveColor ? effectiveColor : prev));
       setIsDark((prev) => (prev !== darkActive ? darkActive : prev));
 
       // 4. Actualizar <meta name="theme-color">, document.documentElement y document.body
-      if (metaTag && metaTag.getAttribute('content') !== detectedColor) {
-        metaTag.setAttribute('content', detectedColor);
+      if (metaTag && metaTag.getAttribute('content') !== effectiveColor) {
+        metaTag.setAttribute('content', effectiveColor);
       }
-      if (document.documentElement.style.backgroundColor !== detectedColor) {
-        document.documentElement.style.backgroundColor = detectedColor;
+      if (document.documentElement.style.backgroundColor !== effectiveColor) {
+        document.documentElement.style.backgroundColor = effectiveColor;
       }
-      if (document.body.style.backgroundColor !== detectedColor) {
-        document.body.style.backgroundColor = detectedColor;
+      if (document.body.style.backgroundColor !== effectiveColor) {
+        document.body.style.backgroundColor = effectiveColor;
       }
     };
 

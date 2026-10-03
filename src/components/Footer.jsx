@@ -27,8 +27,9 @@ export default function Footer() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        const isMobile = window.innerWidth < 1024;
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && isMobile) {
             metaThemeColor.setAttribute('content', footerColor);
             document.documentElement.style.backgroundColor = footerColor;
             document.body.style.backgroundColor = footerColor;
@@ -113,11 +114,12 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      id="footer"
+      id="contacto"
       data-theme="dark"
       data-theme-color="#16161A"
       className="w-full bg-[#16161A] text-white font-peridot border-t border-[#25252D] selection:bg-[#7E04A1] selection:text-white relative overflow-hidden"
     >
+      <span id="footer" className="absolute top-0 pointer-events-none" />
       {/* Contenedor Principal del Footer */}
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8 md:px-10 lg:px-12 pt-16 sm:pt-20 md:pt-22 pb-10 sm:pb-12">
         
