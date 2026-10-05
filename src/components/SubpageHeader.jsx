@@ -62,7 +62,7 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
           {/* Navegación Izquierda: Catálogo desplegable con las 3 categorías + enlaces editoriales */}
           <nav
             className={`flex items-center space-x-4 sm:space-x-8 text-[14px] sm:text-[16px] font-semibold tracking-[-0.01em] shrink-0 transition-colors duration-500 ${
-              isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+              isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'
             }`}
           >
             {/* Dropdown Desplegable: Catálogo */}
@@ -92,30 +92,30 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                     isCatalogDropdownOpen
                       ? 'rotate-180'
                       : 'group-hover/btn:rotate-180'
-                  } ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
+                  } ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}`}
                 />
                 <span
                   className={`absolute bottom-1 left-0 h-[2.5px] transition-all duration-300 ${
                     isCatalogDropdownOpen || location.pathname === '/catalogo'
                       ? 'w-full'
                       : 'w-0 group-hover/btn:w-full'
-                  } ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`}
+                  } ${isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'}`}
                 />
               </Link>
 
               {/* Menú Desplegable Minimalista con Auténtico Estilo Maranatha */}
               <div
-                className={`absolute left-0 top-full pt-2 z-50 min-w-[240px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`absolute left-0 top-full pt-2 z-50 min-w-[240px] origin-top-left transition-[transform,opacity] duration-[180ms] ${
                   isCatalogDropdownOpen
-                    ? 'opacity-100 translate-y-0 pointer-events-auto visible'
-                    : 'opacity-0 -translate-y-2 pointer-events-none invisible'
+                    ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto visible ease-[cubic-bezier(0.16,1,0.3,1)]'
+                    : 'opacity-0 scale-95 -translate-y-1 pointer-events-none invisible ease-out'
                 }`}
               >
                 <div
                   className={`rounded-2xl p-2.5 font-peridot transition-colors duration-300 ${
                     isDark
-                      ? 'bg-[#1F1D26] border border-[#2F2C3A] shadow-[0_16px_40px_rgba(0,0,0,0.5)]'
-                      : 'bg-white border border-[#EBD6FA] shadow-[0_16px_40px_rgba(126,4,161,0.14)]'
+                      ? 'bg-[#141517] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.5)]'
+                      : 'bg-white border border-[#DBC9DF] shadow-[0_16px_40px_rgba(126,4,161,0.14)]'
                   }`}
                 >
                   <div className="space-y-1">
@@ -125,18 +125,18 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                       className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-200 ${
                         location.pathname === '/catalogo'
                           ? isDark
-                            ? 'bg-[#2E2838] text-[#EDA3FF]'
-                            : 'bg-[#FAF3FF] text-[#7E04A1]'
+                            ? 'bg-[#25252D] text-[#E7D1FF]'
+                            : 'bg-[#E7D1FF]/25 text-[#7E04A1]'
                           : isDark
-                          ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]'
-                          : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'
+                          ? 'text-[#E2E2EA] hover:text-[#E7D1FF] hover:bg-white/10'
+                          : 'text-[#141517] hover:text-[#7E04A1] hover:bg-[#E7D1FF]/25'
                       }`}
                     >
                       <span className="leading-snug tracking-tight font-bold">Ver Catálogo Completo</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#EDA3FF] shrink-0 ml-2" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#E7D1FF] shrink-0 ml-2" />
                     </Link>
 
-                    <div className={`my-1 border-t ${isDark ? 'border-[#2F2C3A]' : 'border-[#F0E6FA]'}`} />
+                    <div className={`my-1 border-t ${isDark ? 'border-white/10' : 'border-[#DBC9DF]/40'}`} />
 
                     {NAV_CATEGORIES.map((cat) => {
                       const isActive = activeCategorySlug === cat.slug;
@@ -148,18 +148,18 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
                           className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-200 whitespace-nowrap ${
                             isActive
                               ? isDark
-                                ? 'bg-[#2E2838] text-[#EDA3FF] font-bold'
-                                : 'bg-[#FAF3FF] text-[#7E04A1] font-bold'
+                                ? 'bg-[#25252D] text-[#E7D1FF] font-bold'
+                                : 'bg-[#E7D1FF]/25 text-[#7E04A1] font-bold'
                               : isDark
-                              ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]'
-                              : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'
+                              ? 'text-[#E2E2EA] hover:text-[#E7D1FF] hover:bg-white/10'
+                              : 'text-[#141517] hover:text-[#7E04A1] hover:bg-[#E7D1FF]/25'
                           }`}
                         >
                           <span className="leading-snug tracking-tight">
                             {cat.title}
                           </span>
                           <ArrowRight
-                            className={`w-3.5 h-3.5 text-[#EDA3FF] shrink-0 ml-3 transition-all duration-200 ${
+                            className={`w-3.5 h-3.5 text-[#E7D1FF] shrink-0 ml-3 transition-all duration-200 ${
                               isActive
                                 ? 'opacity-100 translate-x-0'
                                 : 'opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0'
@@ -182,7 +182,7 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               Eventos
               <span
                 className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${
-                  isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'
+                  isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'
                 }`}
               />
             </button>
@@ -194,7 +194,7 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               Cómo trabajamos
               <span
                 className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${
-                  isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'
+                  isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'
                 }`}
               />
             </Link>
@@ -206,7 +206,7 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               to="/"
               title="Maranatha - Ir al inicio"
               className={`font-['Pacifico',cursive] text-[22px] xs:text-[25px] sm:text-[30px] md:text-[36px] tracking-tight leading-none hover:opacity-85 transition-colors duration-500 pb-1 whitespace-nowrap select-none cursor-pointer pointer-events-auto ${
-                isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+                isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'
               }`}
             >
               maranatha
@@ -221,7 +221,7 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               aria-label="Preguntas Frecuentes"
               title="Preguntas frecuentes y tiempos de entrega"
               className={`p-1.5 sm:p-2 hover:opacity-75 transition-colors duration-500 hidden md:inline-flex ${
-                isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'
+                isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'
               }`}
             >
               <HelpCircle className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] stroke-[2.2]" />
@@ -232,10 +232,10 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               href="https://wa.me/573145854213?text=Hola%20Maranatha%20%F0%9F%91%8B%2C%20quisiera%20recibir%20asesor%C3%ADa%20sobre%20sus%20productos."
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center gap-2 w-[38px] h-[38px] sm:w-auto sm:h-[46px] p-0 sm:px-5 text-white text-[13.5px] sm:text-[14.5px] font-bold rounded-full transition-all duration-300 active:scale-95 cursor-pointer group/btn shrink-0 ${
+              className={`inline-flex items-center justify-center gap-2 w-[38px] h-[38px] sm:w-auto sm:h-[46px] p-0 sm:px-5 text-white text-[13.5px] sm:text-[14.5px] font-bold rounded-full transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] cursor-pointer group/btn shrink-0 ${
                 isDark
-                  ? 'bg-[#7E04A1] hover:bg-[#9B12C4] shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#C084FC]/30'
-                  : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
+                  ? 'bg-[#7E04A1] hover:brightness-110 shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#E7D1FF]/30'
+                  : 'bg-[#7E04A1] hover:brightness-95 shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
               }`}
               title="Asesoría y cotizaciones por WhatsApp"
             >
@@ -257,10 +257,10 @@ export default function SubpageHeader({ activeCategorySlug = null }) {
               type="button"
               onClick={() => setIsMenuOpen(true)}
               aria-label="Abrir menú"
-              className={`w-[38px] h-[38px] sm:w-[46px] sm:h-[46px] rounded-full text-white flex flex-col items-center justify-center gap-[4.5px] transition-all duration-500 active:scale-95 shrink-0 cursor-pointer ${
+              className={`w-[38px] h-[38px] sm:w-[46px] sm:h-[46px] rounded-full text-white flex flex-col items-center justify-center gap-[4.5px] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] shrink-0 cursor-pointer ${
                 isDark
-                  ? 'bg-[#2A2736] hover:bg-[#383448] border border-[#3E3A4E] shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
-                  : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
+                  ? 'bg-[#25252D] hover:bg-white/10 border border-white/10 shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
+                  : 'bg-[#7E04A1] hover:brightness-95 shadow-[0_4px_18px_rgba(126,4,161,0.22)]'
               }`}
             >
               <span className="w-4 sm:w-5 h-[2.5px] bg-white rounded-full" />

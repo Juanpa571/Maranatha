@@ -10,8 +10,8 @@ export default function TransparentProcess() {
     <section
       id="proceso"
       data-theme="light"
-      data-theme-color="#FAF8FD"
-      className="relative w-full min-h-screen flex flex-col justify-between px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[85px] sm:pt-[95px] pb-16 sm:pb-20 bg-[#FAF8FD] font-peridot overflow-hidden text-center"
+      data-theme-color="#ffffff"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[85px] sm:pt-[95px] pb-16 sm:pb-20 bg-[#DBC9DF]/15 font-peridot overflow-hidden text-center scroll-mt-20 sm:scroll-mt-24"
     >
       {/* ============================================================== */}
       {/* OLAS DECORATIVAS ORGÁNICAS (CALCADAS DE LA PREVISUALIZACIÓN)   */}
@@ -27,13 +27,13 @@ export default function TransparentProcess() {
           {/* 1. Ola lateral izquierda (forma curva orgánica pura) */}
           <path
             d="M-80,-20 C80,90 140,240 100,420 C50,600 -20,740 -90,850 L-90,-20 Z"
-            fill="#F4E6F8"
-            fillOpacity="0.65"
+            fill="#DBC9DF"
+            fillOpacity="0.45"
           />
           {/* Línea curva tenue que abraza la ola izquierda */}
           <path
             d="M-40,80 C120,180 180,320 140,490 C100,640 20,770 -50,860"
-            stroke="#E3BEF0"
+            stroke="#DBC9DF"
             strokeWidth="1.6"
             strokeLinecap="round"
             opacity="0.75"
@@ -42,13 +42,13 @@ export default function TransparentProcess() {
           {/* 2. Ola lateral derecha (forma elíptica orgánica) */}
           <path
             d="M1520,60 C1340,160 1260,340 1330,560 C1390,720 1470,820 1540,920 L1540,60 Z"
-            fill="#F4E6F8"
-            fillOpacity="0.65"
+            fill="#DBC9DF"
+            fillOpacity="0.45"
           />
           {/* Línea curva tenue superior que entra desde la derecha */}
           <path
             d="M1490,-30 C1380,100 1320,240 1360,400 C1400,540 1470,660 1530,760"
-            stroke="#E3BEF0"
+            stroke="#DBC9DF"
             strokeWidth="1.6"
             strokeLinecap="round"
             opacity="0.75"
@@ -56,7 +56,7 @@ export default function TransparentProcess() {
           {/* Trazo inferior suave en el cuadrante inferior derecho */}
           <path
             d="M1360,670 C1410,740 1460,820 1510,880"
-            stroke="#EBD1F4"
+            stroke="#DBC9DF"
             strokeWidth="1.2"
             strokeLinecap="round"
             opacity="0.6"
@@ -71,7 +71,7 @@ export default function TransparentProcess() {
         {/* ============================================================== */}
         <div className="text-center max-w-4xl mx-auto mb-2 sm:mb-4 shrink-0">
           {/* Eyebrow / Tag */}
-          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-[#A78BFA] mb-1.5 sm:mb-2 block">
+          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-[#7E04A1] mb-1.5 sm:mb-2 block">
             NUESTRO PROCESO
           </span>
 
@@ -79,7 +79,7 @@ export default function TransparentProcess() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold tracking-tight text-[#141517] leading-[1.12]">
             Cómo trabajamos:{' '}
             <br className="hidden sm:inline" />
-            <span className="text-[#74059F]">diseño, aprobación previa</span>{' '}
+            <span className="text-[#7E04A1]">diseño, aprobación previa</span>{' '}
             <br className="hidden sm:inline" />
             y entrega sin mínimos
           </h2>
@@ -96,11 +96,11 @@ export default function TransparentProcess() {
         <div className="w-full max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 lg:gap-10 items-center relative flex-1 my-auto py-2">
           
           {/* FASE 01: CUÉNTANOS TU IDEA */}
-          <div className="flex flex-col items-center text-left w-full relative">
+          <div className="group flex flex-col items-center text-left w-full relative cursor-default">
             {/* Header de la etapa: 01 + Título y descripción alineada */}
             <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
               <div className="inline-flex items-start gap-3 text-left">
-                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                <span className="process-step-num text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#E7D1FF] leading-none shrink-0">
                   01
                 </span>
                 <div className="inline-flex flex-col items-start max-w-[190px] sm:max-w-[210px] md:max-w-[220px]">
@@ -114,7 +114,7 @@ export default function TransparentProcess() {
               </div>
             </div>
 
-            {/* Ilustración / Cuaderno con boceto (PROTAGÓNICA) */}
+            {/* Ilustración / Cuaderno con boceto (PROTAGÓNICA CON FÍSICA ARTESANAL) */}
             <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
               <img
                 src="/escritorio/proceso-01-cuaderno.webp"
@@ -123,23 +123,23 @@ export default function TransparentProcess() {
                 height="773"
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)] transform hover:scale-[1.03] transition-transform duration-300"
+                className="process-illustration process-illustration-1 max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)]"
                 draggable={false}
               />
             </div>
 
             {/* Flecha conectora a la fase 2 (visible solo en desktop) */}
-            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#D5B8F6] z-10 pointer-events-none">
+            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#E7D1FF] group-hover:text-[#7E04A1]/50 group-hover:translate-x-1 transition-all duration-300 z-10 pointer-events-none">
               <ArrowRight className="w-7 h-7 stroke-[2]" />
             </div>
           </div>
 
           {/* FASE 02: APROBACIÓN PREVIA */}
-          <div className="flex flex-col items-center text-left w-full relative">
+          <div className="group flex flex-col items-center text-left w-full relative cursor-default">
             {/* Header de la etapa: 02 + Título y descripción alineada */}
             <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
               <div className="inline-flex items-start gap-3 text-left">
-                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                <span className="process-step-num text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#E7D1FF] leading-none shrink-0">
                   02
                 </span>
                 <div className="inline-flex flex-col items-start max-w-[190px] sm:max-w-[210px] md:max-w-[220px]">
@@ -153,7 +153,7 @@ export default function TransparentProcess() {
               </div>
             </div>
 
-            {/* Ilustración / Celular WhatsApp (PROTAGÓNICA) */}
+            {/* Ilustración / Celular WhatsApp (PROTAGÓNICA CON FÍSICA ARTESANAL) */}
             <div className="relative w-full max-w-[240px] sm:max-w-[270px] lg:max-w-[290px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
               <img
                 src="/escritorio/proceso-02-telefono.webp"
@@ -162,23 +162,23 @@ export default function TransparentProcess() {
                 height="936"
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_18px_40px_rgba(116,5,159,0.14)] transform hover:scale-[1.03] transition-transform duration-300"
+                className="process-illustration process-illustration-2 max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_18px_40px_rgba(116,5,159,0.14)]"
                 draggable={false}
               />
             </div>
 
             {/* Flecha conectora a la fase 3 (visible solo en desktop) */}
-            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#D5B8F6] z-10 pointer-events-none">
+            <div className="hidden md:flex absolute -right-4 lg:-right-6 top-[62%] transform -translate-y-1/2 text-[#E7D1FF] group-hover:text-[#7E04A1]/50 group-hover:translate-x-1 transition-all duration-300 z-10 pointer-events-none">
               <ArrowRight className="w-7 h-7 stroke-[2]" />
             </div>
           </div>
 
           {/* FASE 03: PRODUCCIÓN Y ENTREGA */}
-          <div className="flex flex-col items-center text-left w-full relative">
+          <div className="group flex flex-col items-center text-left w-full relative cursor-default">
             {/* Header de la etapa: 03 + Título y descripción alineada */}
             <div className="w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mb-3 sm:mb-4 flex justify-start">
               <div className="inline-flex items-start gap-3 text-left">
-                <span className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#D5B8F6] leading-none shrink-0">
+                <span className="process-step-num text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#E7D1FF] leading-none shrink-0">
                   03
                 </span>
                 <div className="inline-flex flex-col items-start max-w-[200px] sm:max-w-[220px] md:max-w-[230px]">
@@ -192,7 +192,7 @@ export default function TransparentProcess() {
               </div>
             </div>
 
-            {/* Ilustración / Caja lista con accesorios (PROTAGÓNICA) */}
+            {/* Ilustración / Caja lista con accesorios (PROTAGÓNICA CON FÍSICA ARTESANAL) */}
             <div className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[460px] h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px] flex items-center justify-center">
               <img
                 src="/escritorio/proceso-03-caja.webp"
@@ -201,7 +201,7 @@ export default function TransparentProcess() {
                 height="634"
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)] transform hover:scale-[1.03] transition-transform duration-300"
+                className="process-illustration process-illustration-3 max-h-full max-w-full w-auto h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(116,5,159,0.10)]"
                 draggable={false}
               />
             </div>
@@ -221,7 +221,7 @@ export default function TransparentProcess() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Hablar por WhatsApp para empezar tu idea"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm md:text-base text-[#74059F] hover:text-[#5c037e] font-bold underline decoration-[#74059F]/40 hover:decoration-[#74059F] underline-offset-4 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm md:text-base text-[#7E04A1] hover:brightness-90 font-bold underline decoration-[#7E04A1]/40 hover:decoration-[#7E04A1] underline-offset-4 transition-colors group"
           >
             <span>Hablar por WhatsApp</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 transform group-hover:translate-x-1 transition-transform" />

@@ -299,7 +299,7 @@ export default function VoldogHero() {
       const logoG = Math.round((1 - eased) * 255 + eased * 4);
       const logoB = Math.round((1 - eased) * 255 + eased * 161);
       const interpolatedLogoColor = `rgb(${logoR}, ${logoG}, ${logoB})`;
-      const logoColor = dark && eased >= 0.95 ? '#EDA3FF' : interpolatedLogoColor;
+      const logoColor = dark && eased >= 0.95 ? '#E7D1FF' : interpolatedLogoColor;
 
       const shadowAlpha = (1 - eased) * 0.22;
       const logoFilter = shadowAlpha > 0.01 ? `drop-shadow(0 4px 18px rgba(0, 0, 0, ${shadowAlpha.toFixed(3)}))` : 'none';
@@ -379,13 +379,38 @@ export default function VoldogHero() {
 
   useEffect(() => {
     let unsubLenis = null;
+    let fallbackScrollListener = null;
+
     const onLenisScroll = (e) => {
       const scrollY = typeof e === 'number' ? e : (e?.scroll ?? window.scrollY ?? 0);
       applyScrollVisuals(scrollY);
     };
 
+    const attachFallbackScroll = () => {
+      if (fallbackScrollListener) return;
+      let ticking = false;
+      fallbackScrollListener = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            applyScrollVisuals(window.scrollY || window.pageYOffset || 0);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', fallbackScrollListener, { passive: true });
+    };
+
+    const removeFallbackScroll = () => {
+      if (fallbackScrollListener) {
+        window.removeEventListener('scroll', fallbackScrollListener);
+        fallbackScrollListener = null;
+      }
+    };
+
     const subscribeLenis = (lenisInstance) => {
       if (!lenisInstance) return;
+      removeFallbackScroll();
       if (typeof lenisInstance.on === 'function') {
         lenisInstance.on('scroll', onLenisScroll);
         unsubLenis = () => {
@@ -394,32 +419,24 @@ export default function VoldogHero() {
           }
         };
       }
-      applyScrollVisuals(lenisInstance.scroll || window.scrollY || 0);
+      applyScrollVisuals(lenisInstance.scroll ?? window.scrollY ?? 0);
     };
 
     if (window.lenis) {
       subscribeLenis(window.lenis);
     } else {
-      const onInit = (e) => subscribeLenis(e.detail);
+      attachFallbackScroll();
+      const onInit = (e) => {
+        subscribeLenis(e.detail || window.lenis);
+      };
       window.addEventListener('lenis-init', onInit, { once: true });
     }
 
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          applyScrollVisuals(window.scrollY || window.pageYOffset || 0);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
     applyScrollVisuals(window.scrollY || 0);
 
     return () => {
       if (typeof unsubLenis === 'function') unsubLenis();
-      window.removeEventListener('scroll', onScroll);
+      removeFallbackScroll();
     };
   }, [config.scrollDistance]);
 
@@ -472,7 +489,7 @@ export default function VoldogHero() {
             }}
           >
             {/* Navegación Izquierda - Escala generosa y presencia editorial */}
-            <nav className={`flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold tracking-[-0.01em] transition-colors duration-500 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}>
+            <nav className={`flex items-center space-x-7 sm:space-x-9 text-[15px] sm:text-[16px] md:text-[17px] font-semibold tracking-[-0.01em] transition-colors duration-500 ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}`}>
               {/* Dropdown Desplegable: Catálogo y las 3 Categorías */}
               <div
                 ref={catalogDropdownRef}
@@ -500,36 +517,36 @@ export default function VoldogHero() {
                       isCatalogDropdownOpen
                         ? 'rotate-180'
                         : 'group-hover/btn:rotate-180'
-                    } ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
+                    } ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}`}
                   />
                   <span
                     className={`absolute bottom-1 left-0 h-[2.5px] transition-all duration-300 ${
                       isCatalogDropdownOpen ? 'w-full' : 'w-0 group-hover/btn:w-full'
-                    } ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`}
+                    } ${isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'}`}
                   />
                 </Link>
 
                 {/* Menú Desplegable Minimalista con Auténtico Estilo Maranatha */}
                 <div
-                  className={`absolute left-0 top-full pt-2 z-50 min-w-[230px] sm:min-w-[245px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`absolute left-0 top-full pt-2 z-50 min-w-[230px] sm:min-w-[245px] origin-top-left transition-[transform,opacity] duration-[180ms] ${
                     isCatalogDropdownOpen
-                      ? 'opacity-100 translate-y-0 pointer-events-auto visible'
-                      : 'opacity-0 -translate-y-2 pointer-events-none invisible'
+                      ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto visible ease-[cubic-bezier(0.16,1,0.3,1)]'
+                      : 'opacity-0 scale-95 -translate-y-1 pointer-events-none invisible ease-out'
                   }`}
                 >
-                  <div className={`rounded-2xl p-2 font-peridot transition-colors duration-300 backdrop-blur-md ${isDark ? 'bg-[#1F1D26]/95 border border-[#2F2C3A]/60 text-white shadow-[0_16px_36px_rgba(0,0,0,0.45),0_2px_8px_rgba(0,0,0,0.25)]' : 'bg-white/95 border border-[#EBD6FA]/60 shadow-[0_12px_32px_rgba(126,4,161,0.08),0_2px_8px_rgba(0,0,0,0.04)]'}`}>
+                  <div className={`rounded-2xl p-2 font-peridot transition-colors duration-300 backdrop-blur-md ${isDark ? 'bg-[#141517]/95 border border-white/10 text-white shadow-[0_16px_36px_rgba(0,0,0,0.45),0_2px_8px_rgba(0,0,0,0.25)]' : 'bg-white/95 border border-[#DBC9DF]/60 shadow-[0_12px_32px_rgba(126,4,161,0.08),0_2px_8px_rgba(0,0,0,0.04)]'}`}>
                     <div className="space-y-1">
                       {NAV_CATEGORIES.map((cat) => (
                         <Link
                           key={cat.slug}
                           to={`/categoria/${cat.slug}`}
                           onClick={() => setIsCatalogDropdownOpen(false)}
-                          className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] sm:text-[14.5px] font-semibold transition-all duration-200 whitespace-nowrap ${isDark ? 'text-[#E2E2EA] hover:text-[#EDA3FF] hover:bg-[#2A2736]' : 'text-[#34076E] hover:text-[#7E04A1] hover:bg-[#FAF3FF]'}`}
+                          className={`group/item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14px] sm:text-[14.5px] font-semibold transition-all duration-200 whitespace-nowrap ${isDark ? 'text-[#E2E2EA] hover:text-[#E7D1FF] hover:bg-white/10' : 'text-[#141517] hover:text-[#7E04A1] hover:bg-[#E7D1FF]/25'}`}
                         >
                           <span className="leading-snug tracking-tight">
                             {cat.title}
                           </span>
-                          <ArrowRight className={`w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 shrink-0 ml-3 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`} />
+                          <ArrowRight className={`w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 shrink-0 ml-3 ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}`} />
                         </Link>
                       ))}
                     </div>
@@ -543,7 +560,7 @@ export default function VoldogHero() {
                 title="Próximamente: Temporadas y eventos especiales"
               >
                 Eventos
-                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`} />
+                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'}`} />
               </button>
               <a
                 href="#proceso"
@@ -552,7 +569,7 @@ export default function VoldogHero() {
                   const target = document.getElementById('proceso');
                   if (target) {
                     if (window.lenis) {
-                      window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+                      window.lenis.scrollTo(target, { offset: -84, duration: 1.2 });
                     } else {
                       target.scrollIntoView({ behavior: 'smooth' });
                     }
@@ -561,7 +578,7 @@ export default function VoldogHero() {
                 className="hover:opacity-75 transition-opacity duration-150 relative py-1 group hidden md:inline-block cursor-pointer"
               >
                 Cómo trabajamos
-                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#EDA3FF]' : 'bg-[#7E04A1]'}`} />
+                <span className={`absolute bottom-0 left-0 w-0 h-[2.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-[#E7D1FF]' : 'bg-[#7E04A1]'}`} />
               </a>
             </nav>
 
@@ -611,7 +628,7 @@ export default function VoldogHero() {
 
             {/* Acciones Derecha - Escala Protagónica */}
             <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
-              <div className={`flex items-center gap-2.5 transition-colors duration-500 ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}>
+              <div className={`flex items-center gap-2.5 transition-colors duration-500 ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}`}>
                 {/* FAQ / Preguntas Frecuentes - Icono puro */}
                 <a
                   href="#preguntas-frecuentes"
@@ -620,7 +637,7 @@ export default function VoldogHero() {
                     const target = document.getElementById('preguntas-frecuentes');
                     if (target) {
                       if (window.lenis) {
-                        window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+                        window.lenis.scrollTo(target, { offset: -84, duration: 1.2 });
                       } else {
                         target.scrollIntoView({ behavior: 'smooth' });
                       }
@@ -628,7 +645,7 @@ export default function VoldogHero() {
                   }}
                   aria-label="Preguntas Frecuentes"
                   title="Preguntas frecuentes y tiempos de entrega"
-                  className={`p-2 hover:opacity-75 transition-colors duration-500 cursor-pointer ${isDark ? 'text-[#EDA3FF]' : 'text-[#7E04A1]'}`}
+                  className={`p-2 hover:opacity-75 transition-colors duration-500 cursor-pointer ${isDark ? 'text-[#E7D1FF]' : 'text-[#7E04A1]'}` }
                 >
                   <HelpCircle className="w-[22px] h-[22px] sm:w-[25px] sm:h-[25px] stroke-[2.2]" />
                 </a>
@@ -639,10 +656,10 @@ export default function VoldogHero() {
                 href="https://wa.me/573145854213?text=Hola%20Maranatha%20%F0%9F%91%8B%2C%20quisiera%20recibir%20asesor%C3%ADa%20sobre%20sus%20productos."
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`hidden sm:inline-flex items-center justify-center gap-2.5 h-[48px] sm:h-[52px] px-6 sm:px-8 text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 active:scale-95 font-peridot cursor-pointer group/btn ${
+                className={`hidden sm:inline-flex items-center justify-center gap-2.5 h-[48px] sm:h-[52px] px-6 sm:px-8 text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] font-peridot cursor-pointer group/btn ${
                   isDark
-                    ? 'bg-[#7E04A1] hover:bg-[#9B12C4] shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#C084FC]/30'
-                    : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
+                    ? 'bg-[#7E04A1] hover:brightness-110 shadow-[0_4px_18px_rgba(126,4,161,0.45)] border border-[#E7D1FF]/30'
+                    : 'bg-[#7E04A1] hover:brightness-95 shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
                 }`}
               >
                 <svg
@@ -663,10 +680,10 @@ export default function VoldogHero() {
                 type="button"
                 onClick={() => setIsMenuOpen(true)}
                 aria-label="Abrir menú"
-                className={`w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex flex-col items-center justify-center gap-[5px] transition-all duration-500 active:scale-95 shrink-0 cursor-pointer ${
+                className={`w-[48px] h-[48px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex flex-col items-center justify-center gap-[5px] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] shrink-0 cursor-pointer ${
                   isDark
-                    ? 'bg-[#2A2736] hover:bg-[#383448] border border-[#3E3A4E] shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
-                    : 'bg-[#7E04A1] hover:bg-[#5E0279] shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
+                    ? 'bg-[#25252D] hover:bg-white/10 border border-white/10 shadow-[0_4px_18px_rgba(0,0,0,0.35)]'
+                    : 'bg-[#7E04A1] hover:brightness-95 shadow-[0_4px_18px_rgba(126,4,161,0.28)]'
                 }`}
               >
                 <span className="w-5 sm:w-6 h-[2.5px] bg-white rounded-full" />
@@ -759,7 +776,7 @@ export default function VoldogHero() {
             {/* Botón Izquierdo: Explorar Catálogo */}
             <Link
               to="/catalogo"
-              className="relative w-full md:w-auto inline-flex items-center justify-between rounded-full bg-white text-gray-900 shadow-[0_16px_50px_rgba(0,0,0,0.22)] hover:shadow-[0_20px_60px_rgba(126,4,161,0.38)] transition-shadow duration-300 group active:scale-95 overflow-hidden select-none cursor-pointer"
+              className="relative w-full md:w-auto inline-flex items-center justify-between rounded-full bg-white text-gray-900 shadow-[0_16px_50px_rgba(0,0,0,0.22)] hover:shadow-[0_20px_60px_rgba(126,4,161,0.38)] transition-all duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] group active:scale-[0.97] overflow-hidden select-none cursor-pointer"
               style={{
                 height: `${heroButtonConfig.height}px`,
                 paddingLeft: `${heroButtonConfig.paddingLeft}px`,

@@ -134,7 +134,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
           <button
             onClick={onClose}
             aria-label="Cerrar menú"
-            className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#FAF5FE] hover:text-[#7E04A1] text-gray-700 flex items-center justify-center transition-colors duration-200 cursor-pointer"
+            className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#E7D1FF]/30 hover:text-[#7E04A1] text-gray-700 flex items-center justify-center transition-colors duration-200 cursor-pointer"
           >
             <X className="w-5 h-5 stroke-[2.2]" />
           </button>
@@ -151,7 +151,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
         >
           
           {/* Card de Estado del Taller en Vivo en Cali */}
-          <div className="rounded-2xl bg-[#FAF6FD] border border-[#EBD6FA] p-4">
+          <div className="rounded-2xl bg-[#DBC9DF]/15 border border-[#DBC9DF] p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span
@@ -170,7 +170,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
             <p className="text-xs text-gray-600 mt-1.5 leading-snug">
               {caliStatus.detail}
             </p>
-            <div className="mt-2.5 pt-2 border-t border-[#EBD6FA]/60 flex items-center justify-between text-[11px] text-gray-500 font-medium">
+            <div className="mt-2.5 pt-2 border-t border-[#DBC9DF]/60 flex items-center justify-between text-[11px] text-gray-500 font-medium">
               <span>Lun a Vie: 09:00 – 18:00</span>
               <button
                 type="button"
@@ -192,7 +192,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
                 <Link
                   to="/catalogo"
                   onClick={onClose}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-base font-semibold text-[#7E04A1] flex items-center justify-between group transition-colors"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-base font-semibold text-[#7E04A1] flex items-center justify-between group transition-colors"
                 >
                   <span>Catálogo Completo (Todos los productos)</span>
                   <ChevronRight className="w-4 h-4 text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -201,7 +201,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               <li>
                 <button
                   onClick={() => handleNavClick('#productos')}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <span>Categorías Principales</span>
                   <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -211,7 +211,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
                 <Link
                   to="/categoria/papeleria-creativa"
                   onClick={onClose}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
                 >
                   <span>• Papelería Creativa</span>
                   <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -221,7 +221,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
                 <Link
                   to="/categoria/insumos"
                   onClick={onClose}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
                 >
                   <span>• Insumos de Papelería</span>
                   <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -231,7 +231,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
                 <Link
                   to="/categoria/papeleria-empresarial"
                   onClick={onClose}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-sm font-medium text-gray-700 hover:text-[#7E04A1] flex items-center justify-between group transition-colors pl-6"
                 >
                   <span>• Papelería Empresarial</span>
                   <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -240,7 +240,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               <li className="pt-2">
                 <button
                   onClick={() => handleNavClick('#proceso')}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <span>Cómo trabajamos (Proceso)</span>
                   <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#7E04A1] group-hover:translate-x-0.5 transition-all" />
@@ -249,7 +249,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               <li>
                 <button
                   onClick={() => handleNavClick('#preguntas-frecuentes')}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <HelpCircle className="w-4 h-4 text-[#7E04A1]" />
@@ -261,7 +261,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               <li>
                 <button
                   onClick={() => handleNavClick('#contacto')}
-                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#FAF5FE] text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
+                  className="w-full px-3 py-2.5 rounded-xl hover:bg-[#E7D1FF]/25 text-left text-base font-semibold text-gray-900 hover:text-[#7E04A1] flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[#7E04A1]" />
@@ -274,8 +274,8 @@ export default function NavigationDrawer({ isOpen, onClose }) {
           </nav>
 
           {/* Tarjeta de Karla en el menú */}
-          <div className="rounded-2xl bg-[#FAF8FD] border border-gray-100 p-3.5 flex items-center gap-3">
-            <div className="w-14 h-14 rounded-full overflow-hidden bg-[#EBD6FA] shrink-0 flex items-center justify-center">
+          <div className="rounded-2xl bg-[#DBC9DF]/15 border border-gray-100 p-3.5 flex items-center gap-3">
+            <div className="w-14 h-14 rounded-full overflow-hidden bg-[#DBC9DF] shrink-0 flex items-center justify-center">
               <img
                 src="/karla-face.webp"
                 alt="Karla"
@@ -302,13 +302,13 @@ export default function NavigationDrawer({ isOpen, onClose }) {
         </div>
 
         {/* Footer del Drawer con Botón Principal de WhatsApp */}
-        <div className="p-4 sm:p-6 border-t border-gray-100 bg-[#FAF8FD] shrink-0">
+        <div className="p-4 sm:p-6 border-t border-gray-100 bg-white shrink-0">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Hablar por WhatsApp desde el menú lateral"
-            className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl bg-[#7E04A1] hover:bg-[#680385] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 sm:gap-2.5 shadow-[0_6px_20px_rgba(126,4,161,0.28)] hover:shadow-xl transition-all duration-300 active:scale-95"
+            className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl bg-[#7E04A1] hover:brightness-95 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 sm:gap-2.5 shadow-[0_6px_20px_rgba(126,4,161,0.28)] hover:shadow-xl transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
           >
             <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
             <span>Hablar por WhatsApp</span>
@@ -319,12 +319,12 @@ export default function NavigationDrawer({ isOpen, onClose }) {
           </p>
 
           {/* Enlaces a Redes Sociales Oficiales */}
-          <div className="flex items-center justify-center gap-3.5 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-[#EBD6FA]/70 text-[#7E04A1]">
+          <div className="flex items-center justify-center gap-3.5 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-[#DBC9DF]/60 text-[#7E04A1]">
             <a
               href="https://www.instagram.com/maranathacalico"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full hover:bg-white hover:text-[#5E0279] transition-colors"
+              className="p-1.5 rounded-full hover:bg-white hover:brightness-90 transition-colors"
               title="Instagram: @maranathacalico"
               aria-label="Instagram de Maranatha"
             >
@@ -338,7 +338,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               href="https://www.tiktok.com/@maranathacalico"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full hover:bg-white hover:text-[#5E0279] transition-colors"
+              className="p-1.5 rounded-full hover:bg-white hover:brightness-90 transition-colors"
               title="TikTok: @maranathacalico"
               aria-label="TikTok de Maranatha"
             >
@@ -350,7 +350,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
               href="https://www.facebook.com/maranatha.calico"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full hover:bg-white hover:text-[#5E0279] transition-colors"
+              className="p-1.5 rounded-full hover:bg-white hover:brightness-90 transition-colors"
               title="Facebook: @maranatha.calico"
               aria-label="Facebook de Maranatha"
             >

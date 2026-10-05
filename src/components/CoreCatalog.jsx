@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
 import { useCatalog } from '../hooks/useCatalog';
 import ProductQuickViewModal from './ProductQuickViewModal';
+import { getProductTactileSpecs } from '../utils/productSpecs';
 
 export default function CoreCatalog() {
   const { featuredProducts } = useCatalog();
@@ -21,22 +22,18 @@ export default function CoreCatalog() {
     <section 
       id="catalogo-destacado" 
       data-theme="light"
-      data-theme-color="#FAF8FD"
-      className="w-full min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#FAF8FD] border-t border-gray-200/80 font-peridot transition-colors flex flex-col justify-center"
+      data-theme-color="#ffffff"
+      className="w-full min-h-[100dvh] px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#DBC9DF]/15 border-t border-gray-200/80 font-peridot transition-colors flex flex-col justify-center scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-[1400px] mx-auto w-full flex flex-col justify-center gap-7 sm:gap-9 md:gap-11 lg:gap-13">
         {/* Encabezado Asimétrico - Mismo ancho exacto que las tarjetas */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8">
           <div>
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.24em] text-[#A855F7] uppercase font-peridot block mb-1.5 sm:mb-2">
-              PERSONALIZA TU MARCA
-            </span>
-
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-extrabold tracking-tight text-[#141517] leading-[1.12]">
               Cajas personalizadas,{' '}
               <br className="hidden sm:inline" />
               <span className="text-[#7E04A1]">stickers</span> y vinilos adhesivos
-              <span className="inline-block align-middle ml-2 sm:ml-3 text-[#A855F7] -translate-y-1 sm:-translate-y-1.5">
+              <span className="inline-block align-middle ml-2 sm:ml-3 text-[#7E04A1] -translate-y-1 sm:-translate-y-1.5">
                 <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <line x1="12" y1="3" x2="12" y2="7" />
                   <line x1="4.22" y1="6.22" x2="7.05" y2="9.05" />
@@ -57,7 +54,7 @@ export default function CoreCatalog() {
                 const target = document.getElementById('proceso');
                 if (target) {
                   if (window.lenis) {
-                    window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+                    window.lenis.scrollTo(target, { offset: -84, duration: 1.2 });
                   } else {
                     target.scrollIntoView({ behavior: 'smooth' });
                   }
@@ -83,10 +80,10 @@ export default function CoreCatalog() {
             return (
               <div
                 key={prod.id || prod._id || index}
-                className="group relative flex flex-col w-full rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white border border-gray-100 shadow-[0_6px_26px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(126,4,161,0.14)] hover:-translate-y-1.5 transition-all duration-300 pointer-events-auto touch-manipulation opacity-100"
+                className="group relative flex flex-col w-full rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white border border-gray-100 shadow-[0_6px_26px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(126,4,161,0.14)] hover-lift-sm transition-all duration-300 pointer-events-auto touch-manipulation opacity-100"
               >
                 {/* Contenedor de Imagen: Proporción 1:1 cuadrada natural que muestra el producto completo sin zoom ni recortes */}
-                <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8FD] shrink-0">
+                <div className="relative w-full aspect-square overflow-hidden bg-[#DBC9DF]/15 shrink-0">
                   <button
                     type="button"
                     onClick={() => handleOpenProduct(prod)}
@@ -127,9 +124,24 @@ export default function CoreCatalog() {
                     </button>
 
                     {/* Descripción concisa */}
-                    <p className="font-peridot text-[13px] sm:text-[14px] text-[#555] font-normal leading-relaxed mt-1.5 line-clamp-2">
+                    <p className="font-peridot text-[13px] sm:text-[14px] text-[#55555C] font-normal leading-relaxed mt-1.5 line-clamp-2">
                       {prod.description}
                     </p>
+
+                    {/* Micro-fichas táctiles (Build in Amsterdam) */}
+                    {(() => {
+                      const specs = getProductTactileSpecs(prod);
+                      return (
+                        <div className="mt-3 flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[11px] font-semibold text-[#7E04A1] bg-[#DBC9DF]/30 px-2 py-0.5 rounded-md">
+                            {specs.acabado.value}
+                          </span>
+                          <span className="text-[11px] font-medium text-[#55555C] bg-gray-100 px-2 py-0.5 rounded-md">
+                            {specs.tiraje.value}
+                          </span>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Fila Inferior: Precio + Botón Cotizar */}
@@ -156,7 +168,7 @@ export default function CoreCatalog() {
                       rel="noopener noreferrer"
                       title={`Cotizar ${prod.title} por WhatsApp`}
                       aria-label={`Cotizar ${prod.title} por WhatsApp`}
-                      className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#F3E8FF] hover:bg-[#E9D5FF] text-[#7E04A1] text-[13px] sm:text-[14px] font-bold transition-all duration-200 active:scale-95 shrink-0 cursor-pointer shadow-sm hover:shadow"
+                      className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#E7D1FF]/30 hover:bg-[#E7D1FF]/50 text-[#7E04A1] text-[13px] sm:text-[14px] font-bold transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] shrink-0 cursor-pointer shadow-sm hover:shadow"
                     >
                       <svg
                         className="w-4 h-4 fill-current shrink-0"
@@ -176,15 +188,15 @@ export default function CoreCatalog() {
 
         {/* Enlace sutil con divisores laterales a juego */}
         <div className="flex items-center justify-center">
-          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#EBD6FA]" />
+          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#DBC9DF]" />
           <Link
             to="/catalogo"
-            className="px-4 sm:px-6 text-sm sm:text-[15px] font-semibold text-[#7E04A1] hover:text-[#5E0279] inline-flex items-center gap-2 transition-colors group"
+            className="px-4 sm:px-6 text-sm sm:text-[15px] font-semibold text-[#7E04A1] hover:brightness-90 inline-flex items-center gap-2 transition-colors group"
           >
             <span>Ver catálogo completo de Maranatha</span>
             <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
           </Link>
-          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#EBD6FA]" />
+          <div className="flex-1 max-w-[100px] sm:max-w-[220px] h-[1px] bg-[#DBC9DF]" />
         </div>
       </div>
 

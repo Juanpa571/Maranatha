@@ -10,8 +10,8 @@ export default function FinalCta() {
     <section
       id="contacto"
       data-theme="light"
-      data-theme-color="#F6F0FC"
-      className="relative z-20 w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#F6F0FC] font-peridot overflow-hidden text-center"
+      data-theme-color="#ffffff"
+      className="relative z-20 w-full min-h-[100dvh] flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#DBC9DF]/15 font-peridot overflow-hidden text-center"
     >
       {/* ============================================================== */}
       {/* ELEMENTOS DECORATIVOS PERIFÉRICOS (ESTÁTICOS Y COMPACTOS)      */}
@@ -164,7 +164,7 @@ export default function FinalCta() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Hablar por WhatsApp para iniciar tu pedido o proyecto"
-            className="inline-flex items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto max-w-[280px] sm:max-w-none px-6 sm:px-9 py-3 sm:py-3.5 rounded-full bg-[#74059F] hover:bg-[#620387] text-white font-bold text-sm sm:text-base shadow-[0_10px_25px_rgba(116,5,159,0.30)] hover:shadow-[0_16px_36px_rgba(116,5,159,0.42)] transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 group mx-auto"
+            className="inline-flex items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto max-w-[280px] sm:max-w-none px-6 sm:px-9 py-3 sm:py-3.5 rounded-full bg-[#7E04A1] hover:brightness-95 text-white font-bold text-sm sm:text-base shadow-[0_10px_25px_rgba(126,4,161,0.30)] hover:shadow-[0_16px_36px_rgba(126,4,161,0.42)] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] group mx-auto"
           >
             <svg
               width="24"
@@ -185,7 +185,7 @@ export default function FinalCta() {
         <div className="mt-7 sm:mt-10 grid grid-cols-3 sm:flex sm:items-center sm:justify-center gap-2 xs:gap-3 sm:gap-8 md:gap-12 max-w-sm sm:max-w-none mx-auto">
           {/* Beneficio 1: Atención 1 a 1 */}
           <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <Headset className="w-5 h-5 sm:w-6 sm:h-6 text-[#74059F] stroke-[2] shrink-0" />
+            <Headset className="w-5 h-5 sm:w-6 sm:h-6 text-[#7E04A1] stroke-[2] shrink-0" />
             <div className="flex flex-col text-[11px] sm:text-xs md:text-sm text-[#141517] leading-tight">
               <span className="font-normal text-[#55555C]">Atención</span>
               <span className="font-bold text-[#141517]">1 a 1</span>
@@ -193,11 +193,11 @@ export default function FinalCta() {
           </div>
 
           {/* Divisor vertical */}
-          <div className="h-6 sm:h-7 w-px bg-[#D9CBE8] hidden sm:block" />
+          <div className="h-6 sm:h-7 w-px bg-[#DBC9DF] hidden sm:block" />
 
           {/* Beneficio 2: Hecho en Cali */}
           <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#74059F] stroke-[2] shrink-0" />
+            <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#7E04A1] stroke-[2] shrink-0" />
             <div className="flex flex-col text-[11px] sm:text-xs md:text-sm text-[#141517] leading-tight">
               <span className="font-normal text-[#55555C]">Hecho en</span>
               <span className="font-bold text-[#141517]">Cali</span>
@@ -205,11 +205,11 @@ export default function FinalCta() {
           </div>
 
           {/* Divisor vertical */}
-          <div className="h-6 sm:h-7 w-px bg-[#D9CBE8] hidden sm:block" />
+          <div className="h-6 sm:h-7 w-px bg-[#DBC9DF] hidden sm:block" />
 
           {/* Beneficio 3: Envíos a toda Colombia */}
           <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-[#74059F] stroke-[2] shrink-0" />
+            <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-[#7E04A1] stroke-[2] shrink-0" />
             <div className="flex flex-col text-[11px] sm:text-xs md:text-sm text-[#141517] leading-tight">
               <span className="font-normal text-[#55555C]">Envíos a</span>
               <span className="font-bold text-[#141517]">toda Colombia</span>
@@ -218,7 +218,7 @@ export default function FinalCta() {
         </div>
 
         {/* Telemetría honesta del taller */}
-        <p className="text-[11px] sm:text-xs md:text-sm text-[#666670] font-normal mt-6 sm:mt-8 max-w-sm sm:max-w-none mx-auto leading-relaxed">
+        <p className="text-[11px] sm:text-xs md:text-sm text-[#55555C] font-normal mt-6 sm:mt-8 max-w-sm sm:max-w-none mx-auto leading-relaxed">
           Atención de lunes a viernes (09:00 – 18:00) en Cali • WhatsApp oficial:{' '}
           <a href="https://wa.me/573145854213" target="_blank" rel="noopener noreferrer" className="text-[#141517] font-bold hover:text-[#7E04A1] transition-colors">
             +57 314 5854213

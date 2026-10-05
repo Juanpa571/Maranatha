@@ -63,7 +63,7 @@ export default function CatalogoPage() {
   const currentCategoryData = categories[activeTab] || null;
 
   return (
-    <div className="min-h-screen bg-white font-peridot text-[#141517] selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
+    <div className="min-h-[100dvh] bg-white font-peridot text-[#141517] selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
       
       {/* 1. Header Minimalista y Funcional con Dropdown de Catálogo, WhatsApp oficial y Drawer */}
       <SubpageHeader />
@@ -139,10 +139,10 @@ export default function CatalogoPage() {
               return (
                 <div
                   key={prod.id}
-                  className="group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#EBD6FA] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover:-translate-y-1 transition-all duration-300"
+                  className="group relative flex flex-col w-full rounded-2xl sm:rounded-[22px] md:rounded-[24px] overflow-hidden bg-white border border-[#DBC9DF] shadow-[0_4px_18px_rgba(126,4,161,0.06)] hover:shadow-[0_16px_40px_rgba(126,4,161,0.14)] hover-lift-sm transition-all duration-300"
                 >
                   {/* Contenedor de Imagen: Foto a ancho completo con proporción limpia */}
-                  <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8FD] shrink-0">
+                  <div className="relative w-full aspect-square overflow-hidden bg-[#DBC9DF]/15 shrink-0">
                     <button
                       type="button"
                       onClick={() => handleOpenProduct(prod)}
@@ -178,7 +178,7 @@ export default function CatalogoPage() {
                         className="block group/title cursor-pointer text-left w-full"
                         title={`Ver detalles de ${prod.title}`}
                       >
-                        <h3 className="font-peridot text-[15.5px] xs:text-[16px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#34076E] tracking-tight leading-snug line-clamp-2 group-hover/title:text-[#7E04A1] transition-colors">
+                        <h3 className="font-peridot text-[15.5px] xs:text-[16px] sm:text-[16.5px] font-bold sm:font-extrabold text-[#7E04A1] tracking-tight leading-snug line-clamp-2 group-hover/title:brightness-90 transition-colors">
                           {prod.title}
                         </h3>
                       </button>
@@ -189,7 +189,7 @@ export default function CatalogoPage() {
                       </p>
                     </div>
 
-                      <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#F5EEFB] flex flex-col gap-2">
+                      <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#DBC9DF]/40 flex flex-col gap-2">
                         <div className="flex items-center justify-between gap-2">
                           {/* Precio Tipográfico */}
                           <div className="flex flex-col select-text leading-none py-0.5">
@@ -213,7 +213,7 @@ export default function CatalogoPage() {
                             rel="noopener noreferrer"
                             title={`Cotizar ${prod.title} por WhatsApp`}
                             aria-label={`Cotizar ${prod.title} por WhatsApp`}
-                            className="inline-flex items-center gap-1.5 sm:gap-2 h-[36px] sm:h-[40px] px-4 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12.5px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-all duration-300 transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                            className="inline-flex items-center gap-1.5 sm:gap-2 h-[36px] sm:h-[40px] px-4 sm:px-5 rounded-full bg-[#25D366] hover:bg-[#1faa4f] text-white text-[12.5px] sm:text-[13.5px] font-extrabold shadow-[0_3px_12px_rgba(37,211,102,0.30)] hover:shadow-[0_6px_18px_rgba(37,211,102,0.50)] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:scale-105 active:scale-[0.97] shrink-0 cursor-pointer"
                           >
                             <svg
                               width="16"
@@ -232,7 +232,7 @@ export default function CatalogoPage() {
                         {/* Enlace contextual a la Categoría */}
                         <Link
                           to={`/categoria/${prod.categorySlug}`}
-                          className="w-full pt-1 pb-0.5 text-center text-[12px] sm:text-[12.5px] font-bold text-[#7E04A1] hover:text-[#5E0279] flex items-center justify-center gap-1.5 transition-colors group/cat cursor-pointer"
+                          className="w-full pt-1 pb-0.5 text-center text-[12px] sm:text-[12.5px] font-bold text-[#7E04A1] hover:brightness-90 flex items-center justify-center gap-1.5 transition-colors group/cat cursor-pointer"
                         >
                           <span>Ver más en {prod.categoryName || prod.categoryTitle}</span>
                           <ArrowRight className="w-3.5 h-3.5 text-[#7E04A1] shrink-0 transform group-hover/cat:translate-x-1 transition-transform" />

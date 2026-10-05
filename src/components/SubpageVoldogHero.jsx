@@ -12,7 +12,7 @@ export default function SubpageVoldogHero({
   const loopItems = [...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems];
 
   return (
-    <section className="relative w-full bg-[#F8F4FD] pt-10 sm:pt-14 md:pt-16 lg:pt-20 overflow-hidden font-peridot select-none">
+    <section className="relative w-full bg-[#DBC9DF]/15 pt-10 sm:pt-14 md:pt-16 lg:pt-20 overflow-hidden font-peridot select-none">
       {/* Título semántico invisible para motores de búsqueda (SEO) */}
       <h1 className="sr-only">{seoTitle}</h1>
 
@@ -24,7 +24,7 @@ export default function SubpageVoldogHero({
               <span
                 className={`font-extrabold text-[38px] sm:text-[54px] md:text-[70px] lg:text-[84px] xl:text-[96px] tracking-[-0.02em] uppercase leading-none transition-colors duration-300 ${
                   idx % 2 === 0
-                    ? 'text-[#7E04A1] hover:text-[#5E0279]'
+                    ? 'text-[#7E04A1] hover:brightness-90'
                     : 'text-[#141517] hover:text-[#7E04A1]'
                 }`}
               >
@@ -69,7 +69,7 @@ export default function SubpageVoldogHero({
 
         {/* Subtítulo editorial si se especifica */}
         {description && (
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-[#3C3C43] font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-[#55555C] font-normal leading-relaxed max-w-2xl mx-auto">
             {description}
           </p>
         )}

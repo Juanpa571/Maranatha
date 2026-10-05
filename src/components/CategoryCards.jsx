@@ -35,7 +35,7 @@ export default function CategoryCards() {
       id="productos" 
       data-theme="light"
       data-theme-color="#ffffff"
-      className="relative z-30 w-full px-3 sm:px-5 md:px-7 lg:px-[35px] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-28 font-peridot"
+      className="relative z-30 w-full px-3 sm:px-5 md:px-7 lg:px-[35px] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-28 font-peridot scroll-mt-20 sm:scroll-mt-24"
     >
       
       {/* H2 Semántico para la sección de categorías principales (SEO Bible) */}
@@ -52,7 +52,7 @@ export default function CategoryCards() {
             to={`/categoria/${cat.slug}`}
             role="button"
             tabIndex={0}
-            className={`group relative block w-full aspect-[4/5] rounded-[24px] sm:rounded-[32px] md:rounded-[40px] lg:rounded-[46px] overflow-hidden bg-[#FAF8FD] shadow-[0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5 hover:ring-2 hover:ring-[#7E04A1]/35 hover:shadow-[0_24px_65px_rgba(126,4,161,0.22)] md:hover:-translate-y-2 sm:hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer pointer-events-auto touch-manipulation active:scale-[0.98] active:translate-y-0 ${
+            className={`group relative block w-full aspect-[4/5] rounded-[24px] sm:rounded-[32px] md:rounded-[40px] lg:rounded-[46px] overflow-hidden bg-[#DBC9DF]/20 shadow-[0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5 hover:ring-2 hover:ring-[#7E04A1]/35 hover:shadow-[0_24px_65px_rgba(126,4,161,0.22)] hover-lift-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer pointer-events-auto touch-manipulation active:scale-[0.97] active:translate-y-0 ${
               isVisible
                 ? 'opacity-100 translate-y-0 scale-100'
                 : 'opacity-0 translate-y-10 sm:translate-y-14 scale-[0.97]'

@@ -102,8 +102,8 @@ export default function FaqSection() {
     <section
       id="preguntas-frecuentes"
       data-theme="light"
-      data-theme-color="#FBF8FE"
-      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#FBF8FE] border-t border-[#EBD6FA] font-peridot overflow-hidden"
+      data-theme-color="#ffffff"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 pt-[100px] pb-12 sm:pb-16 bg-[#ffffff] border-t border-[#DBC9DF] font-peridot overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Ancla alternativa #faq para compatibilidad de enlaces */}
       <span id="faq" className="absolute top-0 pointer-events-none" />
@@ -122,17 +122,12 @@ export default function FaqSection() {
           {/* ============================================================== */}
           <div className="lg:col-span-5 flex flex-col justify-start lg:self-start text-left lg:pt-1 xl:pt-2">
             
-            {/* Tag superior en tipografía mono/sans espaciada */}
-            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.18em] uppercase text-[#A78BFA] mb-2 sm:mb-3 block">
-              CENTRO DE AYUDA
-            </span>
-
             {/* Titular */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-extrabold tracking-tight text-[#141517] leading-[1.08]">
               Preguntas Frecuentes:{' '}
               <br />
               Resolvemos todas <br className="hidden sm:inline" />
-              <span className="text-[#74059F]">tus dudas</span>
+              <span className="text-[#7E04A1]">tus dudas</span>
             </h2>
 
             {/* Subtítulo descriptivo */}
@@ -146,7 +141,7 @@ export default function FaqSection() {
               className="block lg:hidden relative mt-6 -ml-4 sm:-ml-6 md:-ml-10 w-[310px] sm:w-[370px] md:w-[430px] pointer-events-none select-none"
             >
               {/* Luz ambiental difusa suave detrás de la composición */}
-              <div className="absolute -bottom-6 -left-6 w-full h-full max-w-[400px] max-h-[300px] bg-gradient-to-tr from-[#EBD6FA]/40 via-[#F3E8FD]/20 to-transparent rounded-full blur-2xl -z-10" />
+              <div className="absolute -bottom-6 -left-6 w-full h-full max-w-[400px] max-h-[300px] bg-gradient-to-tr from-[#DBC9DF]/40 via-[#E7D1FF]/20 to-transparent rounded-full blur-2xl -z-10" />
 
               <img
                 src="/Papelería pastel sobre plataforma lila.png"
@@ -168,7 +163,7 @@ export default function FaqSection() {
           <div className="lg:col-span-7 flex flex-col relative">
             
             {/* Contenedor tipo tarjeta blanca estilizada con esquinas redondeadas */}
-            <div className="rounded-[24px] sm:rounded-[28px] bg-white border border-[#EBD6FA] shadow-[0_8px_32px_rgba(116,5,159,0.04)] divide-y divide-[#F3EBF9] overflow-hidden">
+            <div className="rounded-[24px] sm:rounded-[28px] bg-white border border-[#DBC9DF] shadow-[0_8px_32px_rgba(126,4,161,0.04)] divide-y divide-[#DBC9DF]/30 overflow-hidden">
               {FAQ_ITEMS.map((item, index) => {
                 const isOpen = openIndex === index;
                 const IconComponent = item.icon;
@@ -181,24 +176,24 @@ export default function FaqSection() {
                       onClick={() => toggleAccordion(index)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-answer-${item.index}`}
-                      className="w-full px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between gap-3 text-left cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74059F] transition-all"
+                      className="w-full px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between gap-3 text-left cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7E04A1] transition-all"
                     >
                       <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                         {/* Número morado claro 01..08 */}
-                        <span className="shrink-0 text-xs sm:text-sm font-bold text-[#A78BFA] w-5 sm:w-6 text-left">
+                        <span className="shrink-0 text-xs sm:text-sm font-bold text-[#7E04A1] w-5 sm:w-6 text-left">
                           {item.index}
                         </span>
 
                         {/* Icono temático dentro de cajita redondeada violeta muy suave */}
                         <div
-                          className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-[11px] bg-[#FAF5FE] border border-[#EBD6FA] text-[#74059F] flex items-center justify-center transition-colors group-hover:bg-[#F2E4FC]"
+                          className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-[11px] bg-[#DBC9DF]/20 border border-[#DBC9DF] text-[#7E04A1] flex items-center justify-center transition-colors group-hover:bg-[#E7D1FF]/30"
                           aria-hidden="true"
                         >
                           <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
                         </div>
 
                         {/* Texto de la pregunta */}
-                        <h3 className="font-semibold text-xs sm:text-[14px] md:text-[15px] text-[#141517] leading-snug group-hover:text-[#74059F] transition-colors pr-2 flex-1">
+                        <h3 className="font-semibold text-xs sm:text-[14px] md:text-[15px] text-[#141517] leading-snug group-hover:text-[#7E04A1] transition-colors pr-2 flex-1">
                           {item.question}
                         </h3>
                       </div>
@@ -206,7 +201,7 @@ export default function FaqSection() {
                       {/* Icono + o − a la derecha en violeta */}
                       <div
                         aria-hidden="true"
-                        className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-[#74059F] group-hover:scale-110 transition-transform"
+                        className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-[#7E04A1] group-hover:scale-110 transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
                       >
                         {isOpen ? (
                           <Minus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2]" />
@@ -222,8 +217,10 @@ export default function FaqSection() {
                       role="region"
                       aria-labelledby={`faq-btn-${item.index}`}
                       aria-hidden={!isOpen}
-                      className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                        isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                      className={`grid transition-[grid-template-rows,opacity] ${
+                        isOpen
+                          ? 'grid-rows-[1fr] opacity-100 duration-[260ms] ease-[cubic-bezier(0.16,1,0.3,1)]'
+                          : 'grid-rows-[0fr] opacity-0 duration-[200ms] ease-out'
                       }`}
                     >
                       <div className="overflow-hidden">
@@ -244,10 +241,10 @@ export default function FaqSection() {
             {/* Contacto directo "¿No encuentras lo que buscas?" sin cápsulas */}
             <div className="mt-4 sm:mt-5 px-2 sm:px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
               <div>
-                <p className="text-[11px] sm:text-xs text-[#6B6B76] font-normal leading-none">
+                <p className="text-[11px] sm:text-xs text-[#55555C] font-normal leading-none">
                   ¿No encuentras lo que buscas?
                 </p>
-                <p className="text-xs sm:text-[14px] md:text-[15px] text-[#74059F] font-bold leading-tight mt-1.5">
+                <p className="text-xs sm:text-[14px] md:text-[15px] text-[#7E04A1] font-bold leading-tight mt-1.5">
                   Hablemos, nos encantará ayudarte.
                 </p>
               </div>
@@ -258,10 +255,10 @@ export default function FaqSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Hablar por WhatsApp para resolver dudas adicionales"
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#74059F] hover:text-[#580379] transition-colors group py-1"
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#7E04A1] hover:brightness-90 transition-colors group py-1"
                 >
-                  <MessageCircle className="w-4 h-4 fill-[#74059F] text-[#74059F] shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="underline decoration-[#74059F]/40 hover:decoration-[#74059F] underline-offset-4">
+                  <MessageCircle className="w-4 h-4 fill-[#7E04A1] text-[#7E04A1] shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-[#7E04A1]/40 hover:decoration-[#7E04A1] underline-offset-4">
                     Hablar por WhatsApp
                   </span>
                   <ArrowRight className="w-3.5 h-3.5 shrink-0 transform group-hover:translate-x-1 transition-transform" />
@@ -283,7 +280,7 @@ export default function FaqSection() {
         className="hidden lg:block absolute bottom-0 -left-8 lg:-left-12 xl:-left-14 2xl:-left-16 pointer-events-none select-none z-0 w-[640px] lg:w-[760px] xl:w-[900px] 2xl:w-[1040px] max-w-none"
       >
         {/* Luz ambiental difusa suave de estudio pastel */}
-        <div className="absolute -bottom-12 -left-12 w-full h-full max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] max-h-[650px] bg-gradient-to-tr from-[#EBD6FA]/45 via-[#F3E8FD]/25 to-transparent rounded-full blur-3xl -z-10" />
+        <div className="absolute -bottom-12 -left-12 w-full h-full max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] max-h-[650px] bg-gradient-to-tr from-[#DBC9DF]/40 via-[#E7D1FF]/20 to-transparent rounded-full blur-3xl -z-10" />
 
         {/* Composición 3D recortada por overflow-hidden en el borde del viewport */}
         <img

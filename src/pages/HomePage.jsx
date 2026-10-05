@@ -50,7 +50,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
+    <div className="min-h-[100dvh] bg-white text-gray-900 selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
       {/* 1. Hero Principal Editorial con Navbar Unificada Continua (Estilo Voldog) */}
       <VoldogHero />
 

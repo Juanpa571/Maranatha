@@ -16,12 +16,12 @@ export default function PrivacidadPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-peridot text-[#141517] selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
+    <div className="min-h-[100dvh] bg-white font-peridot text-[#141517] selection:bg-[#E7D1FF] selection:text-[#7E04A1]">
       {/* 1. Header con navegación unificada */}
       <SubpageHeader />
 
       {/* 2. Hero de Cabecera Institucional */}
-      <section className="w-full bg-[#F8F4FD] pt-10 sm:pt-14 pb-12 sm:pb-16 border-b border-[#EBD6FA]/60">
+      <section className="w-full bg-[#DBC9DF]/15 pt-10 sm:pt-14 pb-12 sm:pb-16 border-b border-[#DBC9DF]/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           {/* Breadcrumbs */}
           <nav aria-label="Ruta de navegación" className="inline-flex items-center justify-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500 font-medium mb-4 sm:mb-6">
@@ -34,7 +34,7 @@ export default function PrivacidadPage() {
             </span>
           </nav>
 
-          <div className="w-12 h-12 rounded-2xl bg-white border border-[#EBD6FA] text-[#7E04A1] flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <div className="w-12 h-12 rounded-2xl bg-white border border-[#DBC9DF] text-[#7E04A1] flex items-center justify-center mx-auto mb-4 shadow-sm">
             <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
           </div>
 
@@ -57,7 +57,7 @@ export default function PrivacidadPage() {
         <article className="space-y-10 sm:space-y-12 text-[#2B2B2E] text-sm sm:text-base leading-relaxed">
 
           {/* Sección 1 */}
-          <section className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF8FD] border border-[#F0E6FA]">
+          <section className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#DBC9DF]/15 border border-[#DBC9DF]/40">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#141517] tracking-tight flex items-center gap-2.5 mb-3">
               <FileText className="w-5 h-5 text-[#7E04A1] shrink-0" />
               <span>1. Responsable del Tratamiento de los Datos</span>
@@ -134,7 +134,7 @@ export default function PrivacidadPage() {
           </section>
 
           {/* Sección 6 */}
-          <section className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6FD] border border-[#EBD6FA]">
+          <section className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#DBC9DF]/15 border border-[#DBC9DF]">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#141517] tracking-tight mb-2">
               6. Canales para Ejercer sus Derechos
             </h2>
@@ -146,14 +146,14 @@ export default function PrivacidadPage() {
                 href="https://wa.me/573145854213?text=Hola%20Maranatha%2C%20quisiera%20consultar%20sobre%20el%20tratamiento%20de%20mis%20datos"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#7E04A1] text-white font-bold text-xs hover:bg-[#680285] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#7E04A1] text-white font-bold text-xs hover:brightness-95 transition-all"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Contactar por WhatsApp (+57 314 5854213)</span>
               </a>
               <a
                 href="mailto:hola@maranathapapeleria.com"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#EBD6FA] text-[#7E04A1] font-bold text-xs hover:bg-gray-50 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#DBC9DF] text-[#7E04A1] font-bold text-xs hover:bg-gray-50 transition-all"
               >
                 <Mail className="w-4 h-4" />
                 <span>hola@maranathapapeleria.com</span>
