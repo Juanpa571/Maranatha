@@ -86,7 +86,7 @@ export default function NavigationDrawer({ isOpen, onClose }) {
       if (el) {
         if (window.lenis) {
           window.lenis.resize();
-          window.lenis.scrollTo(el, { offset: 0, duration: 1.2 });
+          window.lenis.scrollTo(el, { offset: -84, duration: 1.2 });
         } else {
           el.scrollIntoView({ behavior: 'smooth' });
         }

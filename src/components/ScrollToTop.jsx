@@ -28,7 +28,7 @@ export default function ScrollToTop() {
             const element = document.querySelector(hash);
             if (element) {
               if (window.lenis) {
-                window.lenis.scrollTo(element, { offset: 0, duration: 1.2 });
+                window.lenis.scrollTo(element, { offset: -84, duration: 1.2 });
               } else {
                 element.scrollIntoView({ behavior: 'smooth' });
               }

@@ -6,6 +6,7 @@ import SubpageHeader from '../components/SubpageHeader';
 import SubpageVoldogHero from '../components/SubpageVoldogHero';
 import Footer from '../components/Footer';
 import ProductQuickViewModal from '../components/ProductQuickViewModal';
+import { getProductTactileSpecs } from '../utils/productSpecs';
 
 export default function CatalogoPage() {
   const { allProducts, categories, categoriesList } = useCatalog();
@@ -187,6 +188,21 @@ export default function CatalogoPage() {
                       <p className="font-peridot text-[12px] text-[#6A6C7D] font-normal leading-[1.42] mt-1.5 line-clamp-2">
                         {prod.subtitle}
                       </p>
+
+                      {/* Micro-fichas táctiles (Build in Amsterdam) */}
+                      {(() => {
+                        const specs = getProductTactileSpecs(prod);
+                        return (
+                          <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
+                            <span className="text-[10.5px] font-semibold text-[#7E04A1] bg-[#DBC9DF]/30 px-2 py-0.5 rounded-md truncate max-w-[140px]">
+                              {specs.acabado.value}
+                            </span>
+                            <span className="text-[10.5px] font-medium text-[#55555C] bg-gray-100 px-2 py-0.5 rounded-md">
+                              {specs.tiraje.value}
+                            </span>
+                          </div>
+                        );
+                      })()}
                     </div>
 
                       <div className="pt-3.5 mt-3.5 sm:mt-4 border-t border-[#DBC9DF]/40 flex flex-col gap-2">
