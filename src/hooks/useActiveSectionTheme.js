@@ -39,72 +39,17 @@ export function useActiveSectionTheme({
       document.head.appendChild(metaTag);
     }
 
-    // 2. Función de comprobación de la sección activa
-    const updateActiveTheme = () => {
-      tickingRef.current = false;
-
-      const elements = Array.from(document.querySelectorAll('[data-theme]'));
-      if (elements.length === 0) return;
-
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      const viewportHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-      const isAtBottom = scrollY + viewportHeight >= docHeight - 70;
-
-      let detectedTheme = defaultTheme;
-      let detectedColor = defaultColor;
-
-      if (isAtBottom) {
-        // En el extremo inferior de la página, la última sección (ej. el Footer) es la activa
-        const lastEl = elements[elements.length - 1];
-        detectedTheme = lastEl.getAttribute('data-theme') || 'dark';
-        detectedColor =
-          lastEl.getAttribute('data-theme-color') ||
-          (detectedTheme === 'dark' ? '#16161A' : '#ffffff');
-      } else {
-        // Buscar el elemento que intersecta la línea de sondeo (probeOffset)
-        let found = false;
-        for (const el of elements) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= probeOffset && rect.bottom > probeOffset) {
-            detectedTheme = el.getAttribute('data-theme') || 'light';
-            detectedColor =
-              el.getAttribute('data-theme-color') ||
-              (detectedTheme === 'dark' ? '#16161A' : '#ffffff');
-            found = true;
-            break;
-          }
-        }
-
-        // Si ninguna sección cubre exactamente probeOffset (ej. espacio al inicio o transición),
-        // tomamos la sección más cercana arriba de la línea de sondeo
-        if (!found) {
-          for (let i = elements.length - 1; i >= 0; i--) {
-            const rect = elements[i].getBoundingClientRect();
-            if (rect.top <= probeOffset) {
-              detectedTheme = elements[i].getAttribute('data-theme') || 'light';
-              detectedColor =
-                elements[i].getAttribute('data-theme-color') ||
-                (detectedTheme === 'dark' ? '#16161A' : '#ffffff');
-              break;
-            }
-          }
-        }
-      }
-
-      // La barra sticky se oscurece única y exclusivamente en la versión móvil (< 1024px)
-      // En la versión de PC (pantallas >= 1024px), la barra sticky se mantiene siempre en su estado claro editorial
+    // 2. Función de comprobación basada en IntersectionObserver (Cero Reflows Forzados)
+    const updateHeaderTheme = (detectedTheme, detectedColor) => {
       const isMobile = window.innerWidth < 1024;
       const darkActive = isMobile && detectedTheme === 'dark';
       const effectiveTheme = isMobile ? detectedTheme : 'light';
       const effectiveColor = isMobile ? detectedColor : defaultColor;
 
-      // 3. Sincronizar estado de React
       setTheme((prev) => (prev !== effectiveTheme ? effectiveTheme : prev));
       setThemeColor((prev) => (prev !== effectiveColor ? effectiveColor : prev));
       setIsDark((prev) => (prev !== darkActive ? darkActive : prev));
 
-      // 4. Actualizar <meta name="theme-color">, document.documentElement y document.body
       if (metaTag && metaTag.getAttribute('content') !== effectiveColor) {
         metaTag.setAttribute('content', effectiveColor);
       }
@@ -116,38 +61,59 @@ export function useActiveSectionTheme({
       }
     };
 
-    const requestUpdate = () => {
-      if (!tickingRef.current) {
-        tickingRef.current = true;
-        window.requestAnimationFrame(updateActiveTheme);
+    let observer = null;
+    const observedElements = new Set();
+
+    const setupObserver = () => {
+      if (observer) {
+        observer.disconnect();
+        observedElements.clear();
       }
+
+      // Root margin que sondea la franja superior alrededor de probeOffset (navbar)
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const detectedTheme = el.getAttribute('data-theme') || defaultTheme;
+              const detectedColor =
+                el.getAttribute('data-theme-color') ||
+                (detectedTheme === 'dark' ? '#16161A' : '#ffffff');
+              updateHeaderTheme(detectedTheme, detectedColor);
+            }
+          });
+        },
+        {
+          rootMargin: `-${probeOffset}px 0px -70% 0px`,
+          threshold: [0, 0.1],
+        }
+      );
+
+      const elements = document.querySelectorAll('[data-theme]');
+      elements.forEach((el) => {
+        observer.observe(el);
+        observedElements.add(el);
+      });
     };
 
-    // 5. Escuchar eventos de scroll nativo y resize
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate, { passive: true });
+    setupObserver();
 
-    // 6. Integración con Lenis Smooth Scroll si está activo
-    if (window.lenis && typeof window.lenis.on === 'function') {
-      window.lenis.on('scroll', requestUpdate);
-    }
-
-    // 7. MutationObserver para detectar secciones montadas bajo demanda (Lazy loading / Suspense)
+    // MutationObserver ligero para detectar secciones montadas en diferido sin forzar lecturas geométricas
     const mutationObserver = new MutationObserver(() => {
-      requestUpdate();
+      const elements = document.querySelectorAll('[data-theme]');
+      elements.forEach((el) => {
+        if (!observedElements.has(el) && observer) {
+          observer.observe(el);
+          observedElements.add(el);
+        }
+      });
     });
     mutationObserver.observe(document.body, { childList: true, subtree: true });
 
-    // Ejecutar verificación inicial
-    requestUpdate();
-
-    // 8. Limpieza al desmontar: restaurar colores base
+    // Limpieza al desmontar: restaurar colores base
     return () => {
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-      if (window.lenis && typeof window.lenis.off === 'function') {
-        window.lenis.off('scroll', requestUpdate);
-      }
+      if (observer) observer.disconnect();
       mutationObserver.disconnect();
       document.documentElement.style.backgroundColor = defaultColor;
       document.body.style.backgroundColor = defaultColor;

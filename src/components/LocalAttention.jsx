@@ -108,7 +108,7 @@ export default function LocalAttention() {
           <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[500px] lg:max-w-none aspect-[3/4] rounded-[24px] sm:rounded-[32px] lg:rounded-[36px] overflow-hidden shadow-[0_16px_45px_rgba(126,4,161,0.12),0_4px_16px_rgba(0,0,0,0.04)] bg-white border border-[#DBC9DF] group">
               <img
-                src="/vertical-taller.png"
+                src="/vertical-taller.webp"
                 alt="Taller creativo de Maranatha Papelería en Cali"
                 width="1086"
                 height="1448"

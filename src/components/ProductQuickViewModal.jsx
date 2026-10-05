@@ -21,30 +21,34 @@ function ProductQuickViewModal({ product, isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen || !product) return;
 
-    const html = document.documentElement;
+    // Guardar posición actual de scroll antes del bloqueo
+    const scrollY = window.scrollY || window.pageYOffset || 0;
     const body = document.body;
-    
-    const originalHtmlBg = html.style.backgroundColor;
-    const originalBodyBg = body.style.backgroundColor;
-    const originalOverflow = body.style.overflow;
-    
+    const originalBodyStyle = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+
     let metaTheme = document.querySelector('meta[name="theme-color"]');
     let originalThemeColor = metaTheme ? metaTheme.getAttribute('content') : null;
 
-    html.style.backgroundColor = '#000000';
-    body.style.backgroundColor = '#000000';
+    // Bloqueo de scroll robusto para iOS Safari y navegadores de escritorio
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
     body.style.overflow = 'hidden';
 
     if (metaTheme) {
       metaTheme.setAttribute('content', '#000000');
-    } else {
-      metaTheme = document.createElement('meta');
-      metaTheme.name = 'theme-color';
-      metaTheme.content = '#000000';
-      document.head.appendChild(metaTheme);
     }
 
-    if (window.lenis) {
+    if (window.lenis && typeof window.lenis.stop === 'function') {
       window.lenis.stop();
     }
 
@@ -54,20 +58,23 @@ function ProductQuickViewModal({ product, isOpen, onClose }) {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      html.style.backgroundColor = originalHtmlBg;
-      body.style.backgroundColor = originalBodyBg;
-      body.style.overflow = originalOverflow;
+      body.style.position = originalBodyStyle.position || '';
+      body.style.top = originalBodyStyle.top || '';
+      body.style.left = originalBodyStyle.left || '';
+      body.style.right = originalBodyStyle.right || '';
+      body.style.width = originalBodyStyle.width || '';
+      body.style.overflow = originalBodyStyle.overflow || '';
 
-      if (metaTheme) {
-        if (originalThemeColor) {
-          metaTheme.setAttribute('content', originalThemeColor);
-        } else {
-          document.head.removeChild(metaTheme);
-        }
+      // Restaurar posición exacta de scroll de la página
+      window.scrollTo(0, scrollY);
+
+      if (metaTheme && originalThemeColor) {
+        metaTheme.setAttribute('content', originalThemeColor);
       }
 
-      if (window.lenis) {
+      if (window.lenis && typeof window.lenis.start === 'function') {
         window.lenis.start();
+        window.lenis.resize();
       }
       window.removeEventListener('keydown', handleKeyDown);
     };
@@ -115,9 +122,18 @@ function ProductQuickViewModal({ product, isOpen, onClose }) {
         {/* 
           AQUÍ ESTÁ LA MAGIA DEL SCROLL:
           Envolvemos el grid en un div independiente con `overscroll-contain`. 
-          Esto aísla el comportamiento táctil para que Safari no lo bloquee.
+          Añadimos `-webkit-overflow-scrolling: touch` y detenemos la propagación de wheel
+          para que el scroll interno funcione perfecto tanto en trackpads, ratón y pantallas táctiles.
         */}
-        <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar">
+        <div 
+          className="flex-1 overflow-y-auto overscroll-contain no-scrollbar"
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehavior: 'contain',
+            maxHeight: '100%',
+          }}
+          onWheel={(e) => e.stopPropagation()}
+        >
           <div className="grid grid-cols-1 md:grid-cols-12 min-h-full">
             
             {/* Columna Izquierda: Foto de producto + Badges de taller */}

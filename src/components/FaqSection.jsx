@@ -144,7 +144,7 @@ export default function FaqSection() {
               <div className="absolute -bottom-6 -left-6 w-full h-full max-w-[400px] max-h-[300px] bg-gradient-to-tr from-[#DBC9DF]/40 via-[#E7D1FF]/20 to-transparent rounded-full blur-2xl -z-10" />
 
               <img
-                src="/Papelería pastel sobre plataforma lila.png"
+                src="/papeleria-plataforma-lila.webp"
                 alt="Composición 3D editorial de papelería pastel sobre plataforma lila con flores secas, libros y cintas washi"
                 width="1536"
                 height="1024"
@@ -284,7 +284,7 @@ export default function FaqSection() {
 
         {/* Composición 3D recortada por overflow-hidden en el borde del viewport */}
         <img
-          src="/Papelería pastel sobre plataforma lila.png"
+          src="/papeleria-plataforma-lila.webp"
           alt="Composición 3D editorial de papelería pastel sobre plataforma lila con flores secas, libros y cintas washi"
           width="1536"
           height="1024"

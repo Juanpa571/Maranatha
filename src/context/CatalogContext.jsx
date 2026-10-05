@@ -24,7 +24,7 @@ export function CatalogProvider({ children }) {
       description: 'Diseñamos empaques que cuentan tu historia.',
       pricePrefix: 'Desde',
       priceVal: '$2.800 COP',
-      image: '/catalogo/cajas-personalizadas.png',
+      image: '/catalogo/cajas-personalizadas.webp',
       alt: 'Cajas personalizadas para fiestas y marcas en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar cajas personalizadas para un evento o marca en Cali.',
       categorySlug: 'papeleria-creativa',
@@ -37,7 +37,7 @@ export function CatalogProvider({ children }) {
       description: 'Vinilo impermeable troquelado al contorno para tu marca.',
       pricePrefix: 'Desde',
       priceVal: '$25.000 / 50 und',
-      image: '/catalogo/stickers-personalizados.png',
+      image: '/catalogo/stickers-personalizados.webp',
       alt: 'Stickers personalizados troquelados en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar stickers personalizados desde 50 unidades en Cali.',
       categorySlug: 'papeleria-creativa',
@@ -50,7 +50,7 @@ export function CatalogProvider({ children }) {
       description: 'Para paredes, vitrinas y espacios que quieras transformar.',
       pricePrefix: 'Desde',
       priceVal: '$35.000 COP',
-      image: '/catalogo/vinilos-adhesivos.png',
+      image: '/catalogo/vinilos-adhesivos.webp',
       alt: 'Vinilos adhesivos para paredes y vitrinas en Cali',
       whatsapp: 'Hola Maranatha, quisiera cotizar vinilos adhesivos para pared o vitrinas en Cali.',
       categorySlug: 'insumos',
@@ -169,18 +169,31 @@ export function CatalogProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    // Revalidación asíncrona en idle: no compite con LCP ni bloquea el render inicial
+    // Revalidación asíncrona en idle: no compite con LCP ni bloquea el render inicial en 4G lenta
+    let isCleanedUp = false;
     let idleId = null;
-    const timer = setTimeout(() => {
+    let timerId = null;
+
+    const runFetch = () => {
+      if (isCleanedUp) return;
+      window.removeEventListener('scroll', runFetch);
+      window.removeEventListener('touchstart', runFetch);
       if ('requestIdleCallback' in window) {
-        idleId = window.requestIdleCallback(() => fetchCatalogData(), { timeout: 2500 });
+        idleId = window.requestIdleCallback(() => fetchCatalogData(), { timeout: 4000 });
       } else {
         fetchCatalogData();
       }
-    }, 1200);
+    };
+
+    window.addEventListener('scroll', runFetch, { passive: true, once: true });
+    window.addEventListener('touchstart', runFetch, { passive: true, once: true });
+    timerId = setTimeout(runFetch, 4500);
 
     return () => {
-      clearTimeout(timer);
+      isCleanedUp = true;
+      window.removeEventListener('scroll', runFetch);
+      window.removeEventListener('touchstart', runFetch);
+      clearTimeout(timerId);
       if (idleId && 'cancelIdleCallback' in window) {
         window.cancelIdleCallback(idleId);
       }

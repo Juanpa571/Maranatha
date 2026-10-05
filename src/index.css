@@ -16,6 +16,15 @@
   }
 }
 
+/* Ocultar barra de scroll pero permitiendo desplazamiento táctil y de rueda */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Interacción hover física estilo Voldog para el botón cápsula acelerada 100% en GPU (Zero Layout Reflow) */
 .voldog-btn-expand {
   position: absolute;

@@ -6,62 +6,7 @@ export default function Footer() {
   const location = useLocation();
   const footerRef = useRef(null);
 
-  // Cambio dinámico de color de tema en iOS Safari y barra de navegación móvil
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (!metaThemeColor) {
-      metaThemeColor = document.createElement('meta');
-      metaThemeColor.name = 'theme-color';
-      metaThemeColor.content = '#ffffff';
-      document.head.appendChild(metaThemeColor);
-    }
-
-    const defaultThemeColor = '#ffffff';
-    const footerColor = '#16161A';
-    const originalThemeColor = metaThemeColor.getAttribute('content') || defaultThemeColor;
-    const originalBodyBg = document.body.style.backgroundColor || '';
-
-    if (!('IntersectionObserver' in window)) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const isMobile = window.innerWidth < 1024;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && isMobile) {
-            metaThemeColor.setAttribute('content', footerColor);
-            document.documentElement.style.backgroundColor = footerColor;
-            document.body.style.backgroundColor = footerColor;
-          } else {
-            metaThemeColor.setAttribute('content', originalThemeColor);
-            document.documentElement.style.backgroundColor = originalThemeColor;
-            document.body.style.backgroundColor = originalBodyBg;
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    const targetElement = footerRef.current;
-    if (targetElement) {
-      observer.observe(targetElement);
-    }
-
-    return () => {
-      if (targetElement) {
-        observer.unobserve(targetElement);
-      }
-      observer.disconnect();
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', originalThemeColor);
-      }
-      document.documentElement.style.backgroundColor = originalThemeColor;
-      document.body.style.backgroundColor = originalBodyBg;
-    };
-  }, [location.pathname]);
+  // Color y tema coordinado por useActiveSectionTheme mediante data-theme="dark"
 
   const handleScrollToTop = () => {
     if (window.lenis) {
