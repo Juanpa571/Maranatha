@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import VoldogHero from '../components/VoldogHero';
+import { usePageSeo } from '../hooks/usePageSeo';
 
 const CategoryCards = lazy(() => import('../components/CategoryCards'));
 const CoreCatalog = lazy(() => import('../components/CoreCatalog'));
@@ -11,8 +12,15 @@ const Footer = lazy(() => import('../components/Footer'));
 export default function HomePage() {
   const [loadHeavySections, setLoadHeavySections] = React.useState(false);
 
+  usePageSeo({
+    title: 'Maranatha Papelería Creativa | Eventos y Empaques en Cali',
+    description:
+      'Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.',
+    canonical: 'https://maranathapapeleria.com/',
+    schema: null,
+  });
+
   useEffect(() => {
-    document.title = 'Maranatha Papelería Creativa | Eventos y Empaques en Cali';
 
     let isCleanedUp = false;
     let idleId = null;

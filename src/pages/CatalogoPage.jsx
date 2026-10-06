@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn } from 'lucide-react';
 import { useCatalog } from '../hooks/useCatalog';
+import { usePageSeo } from '../hooks/usePageSeo';
 import SubpageHeader from '../components/SubpageHeader';
 import SubpageVoldogHero from '../components/SubpageVoldogHero';
 import Footer from '../components/Footer';
@@ -25,6 +26,72 @@ export default function CatalogoPage() {
     ];
   }, [allProducts.length, categoriesList]);
 
+  // Schema.org BreadcrumbList + ItemList según SEO Bible 3.0 (Módulos 08 y 12)
+  const catalogSchema = useMemo(() => {
+    if (!allProducts || allProducts.length === 0) return null;
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Inicio',
+              item: 'https://maranathapapeleria.com/',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Catálogo',
+              item: 'https://maranathapapeleria.com/catalogo',
+            },
+          ],
+        },
+        {
+          '@type': 'ItemList',
+          name: 'Catálogo de Papelería Creativa, Empaques e Insumos en Cali | Maranatha',
+          description:
+            'Catálogo completo de stickers troquelados, empaques personalizados, cajas 3D, insumos y papelería empresarial en Cali.',
+          numberOfItems: allProducts.length,
+          itemListElement: allProducts.map((prod, idx) => ({
+            '@type': 'ListItem',
+            position: idx + 1,
+            name: prod.title,
+            item: {
+              '@type': 'Product',
+              name: prod.title,
+              image: prod.image?.startsWith('http')
+                ? prod.image
+                : `https://maranathapapeleria.com${prod.image}`,
+              description: prod.description || prod.subtitle || prod.title,
+              offers: {
+                '@type': 'Offer',
+                price: String(prod.priceNum || 0),
+                priceCurrency: 'COP',
+                availability: 'https://schema.org/InStock',
+                seller: {
+                  '@type': 'Organization',
+                  name: 'Maranatha Papelería Creativa',
+                },
+              },
+            },
+          })),
+        },
+      ],
+    };
+  }, [allProducts]);
+
+  usePageSeo({
+    title: 'Catálogo de Papelería y Empaques en Cali | Maranatha',
+    description:
+      'Catálogo completo en Cali: stickers troquelados, cajas temáticas 3D, insumos, tarjetas de presentación y empaques comerciales. Cotiza al +57 314 585 4213.',
+    canonical: 'https://maranathapapeleria.com/catalogo',
+    schema: catalogSchema,
+  });
+
   const handleOpenProduct = useCallback((prod) => {
     setSelectedProduct(prod);
   }, []);
@@ -34,7 +101,6 @@ export default function CatalogoPage() {
   }, []);
 
   useEffect(() => {
-    document.title = 'Catálogo Completo | Maranatha Papelería Creativa';
     if (window.lenis) {
       window.lenis.scrollTo(0, { immediate: true });
       window.lenis.resize();

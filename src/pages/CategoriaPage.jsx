@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ZoomIn, ArrowRight } from 'lucide-react';
 import { useCatalog } from '../hooks/useCatalog';
+import { usePageSeo } from '../hooks/usePageSeo';
 import SubpageHeader from '../components/SubpageHeader';
 import SubpageVoldogHero from '../components/SubpageVoldogHero';
 import Footer from '../components/Footer';
@@ -50,18 +51,87 @@ export default function CategoriaPage() {
     setSelectedProduct(null);
   }, []);
 
-  // Scroll al tope y título de pestaña según categoría
-  useEffect(() => {
-    if (category?.title) {
-      document.title = `${category.title} en Cali | Maranatha`;
+  // Schema.org BreadcrumbList + ItemList específico de la categoría (Módulos 08 y 12)
+  const categorySchema = useMemo(() => {
+    if (!category || !Array.isArray(category.products) || category.products.length === 0) {
+      return null;
     }
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Inicio',
+              item: 'https://maranathapapeleria.com/',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Catálogo',
+              item: 'https://maranathapapeleria.com/catalogo',
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: category.title,
+              item: `https://maranathapapeleria.com/categoria/${category.slug}`,
+            },
+          ],
+        },
+        {
+          '@type': 'ItemList',
+          name: `${category.title} en Cali | Maranatha Papelería Creativa`,
+          description: category.description || `${category.title} personalizada en Cali.`,
+          numberOfItems: category.products.length,
+          itemListElement: category.products.map((prod, idx) => ({
+            '@type': 'ListItem',
+            position: idx + 1,
+            name: prod.title,
+            item: {
+              '@type': 'Product',
+              name: prod.title,
+              image: prod.image?.startsWith('http')
+                ? prod.image
+                : `https://maranathapapeleria.com${prod.image}`,
+              description: prod.description || prod.subtitle || prod.title,
+              offers: {
+                '@type': 'Offer',
+                price: String(prod.priceNum || 0),
+                priceCurrency: 'COP',
+                availability: 'https://schema.org/InStock',
+                seller: {
+                  '@type': 'Organization',
+                  name: 'Maranatha Papelería Creativa',
+                },
+              },
+            },
+          })),
+        },
+      ],
+    };
+  }, [category]);
+
+  usePageSeo({
+    title: category?.seoTitle || (category?.title ? `${category.title} en Cali | Maranatha` : 'Categoría | Maranatha'),
+    description: category?.description || 'Papelería personalizada, insumos y empaques en Cali.',
+    canonical: `https://maranathapapeleria.com/categoria/${categorySlug}`,
+    schema: categorySchema,
+  });
+
+  // Scroll al tope según cambio de categoría
+  useEffect(() => {
     if (window.lenis) {
       window.lenis.scrollTo(0, { immediate: true });
       window.lenis.resize();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
-  }, [categorySlug, category]);
+  }, [categorySlug]);
 
   const getWhatsappUrl = (text) => `https://wa.me/573145854213?text=${encodeURIComponent(text)}`;
 

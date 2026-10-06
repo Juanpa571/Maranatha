@@ -87,22 +87,15 @@
       @media (min-width: 1536px) { .hero-logo-center { transform: translate3d(-50%, calc(-50% + 145px), 0) scale(3.8); } }
     </style>
 
-    <!-- Schema 1: WebSite con SearchAction -->
+    <!-- Schema 1: WebSite para Site Name en Google SERP -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Maranatha Papelería Creativa | Eventos y Empaques en Cali",
+      "name": "Maranatha Papelería Creativa",
+      "alternateName": "Maranatha Cali",
       "url": "https://maranathapapeleria.com",
-      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://maranathapapeleria.com/catalogo?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      }
+      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos."
     }
     </script>
 
@@ -170,7 +163,7 @@
     }
     </script>
 
-    <!-- Schema 3: FAQPage estructurado para motores de IA -->
+    <!-- Schema 3: FAQPage estructurado con las 8 preguntas oficiales -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -178,64 +171,69 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Qué productos personalizados elaboran en Maranatha Papelería Creativa?",
+          "name": "¿Cuál es la cantidad mínima para hacer un pedido?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas 3D, dulceros para fiestas, cake toppers en relieve, tarjetas de presentación, etiquetas adhesivas y pendones."
+            "text": "La cantidad mínima depende del producto que elijas: en papelería para eventos y fiestas trabajamos desde 10 a 20 unidades, y en la línea empresarial (tarjetas de presentación, etiquetas para ropa y volantes) desde solo 50 unidades. Sin mínimos de miles como en litografías industriales."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Cuál es la cantidad mínima para encargar stickers personalizados en Cali?",
+          "name": "¿Cuánto tiempo tarda en estar listo mi pedido?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El pedido mínimo de stickers personalizados troquelados en vinilo o papel fotográfico es de tan solo 50 unidades por diseño, con corte troquelado exacto."
+            "text": "La papelería para eventos y fiestas suele tomar de 2 a 3 días hábiles. Para pedidos de marcas y emprendedores (stickers, etiquetas y tarjetas) el tiempo habitual es de 3 a 6 días hábiles a partir de la aprobación final del diseño."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Cómo se realizan los envíos en Cali y el resto de Colombia?",
+          "name": "¿Cómo sé cómo quedará mi diseño antes de que lo impriman?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Realizamos entregas directas y mensajería express en toda la ciudad de Cali, y despachos garantizados a nivel nacional a través de transportadoras certificadas hacia cualquier ciudad de Colombia."
+            "text": "Antes de cortar o imprimir cualquier pieza, te enviamos una previsualización o muestra digital por WhatsApp para que revises con calma ortografía, textos, medidas y colores. Es el momento clave para corregir cualquier detalle, ya que pasamos a producción únicamente con tu visto bueno final."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Cómo solicitar una cotización o realizar un pedido en Maranatha?",
+          "name": "¿Qué pasa si no tengo un diseño listo o solo tengo mi logo en una imagen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Puedes escribirnos directamente a nuestro WhatsApp oficial +57 314 585 4213 para recibir asesoría personalizada inmediata sobre tu evento o emprendimiento."
+            "text": "No te preocupes, te ayudamos con eso. Recibimos tu logo o diseño en formato PNG, JPG, PDF o enlace de Canva, y lo adaptamos al tamaño de tu empaque o producto. Si tu archivo necesita ajustes básicos de corte, lo preparamos con gusto; y si requiere redibujar o vectorizar el logo desde cero, te avisamos previamente con el valor adicional correspondiente. Para eventos, también te asesoramos con la temática."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen tienda física o cómo se realizan las entregas en Cali y Colombia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Operamos como taller creativo de producción bajo pedido: no disponemos de tienda comercial abierta al público ni atención por mostrador. Toda la atención, cotización y diseño se gestiona de forma ágil y personalizada por WhatsApp. Para entregas en Cali puedes recibir por mensajería local rápida a tu puerta o recoger tu pedido en nuestro taller coordinando previamente la cita por WhatsApp. Para el resto de Colombia realizamos envíos seguros con guía de seguimiento por Interrapidísimo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipo de materiales utilizan para los stickers y cajas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trabajamos con papel e impresión de alta calidad. Para los stickers disponemos de tres tipos de materiales con diferentes niveles de resistencia (desde acabados estándar hasta opciones resistentes al frío y a la humedad), según el producto y empaque donde los vayas a usar. Para las cajas y papelería estructural utilizamos cartulinas especiales de alto gramaje (220g a 300g) para que queden firmes y duraderas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se realiza el pago de mi pedido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Al ser productos 100% personalizados, iniciamos el trabajo de diseño y producción con un anticipo del 50%, y el 50% restante se cancela contra entrega en Cali o previo al despacho nacional. Aceptamos transferencias por Bancolombia, Nequi, Daviplata o PSE."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo pedir una temática, forma o medida que no esté en la página web?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "¡Claro que sí! Todo lo que ves en nuestro catálogo es una referencia de lo que podemos crear. Fabricamos tamaños especiales, cortes con siluetas exclusivas y temáticas para cualquier tipo de celebración o empaque comercial."
           }
         }
       ]
-    }
-    </script>
-
-    <!-- Schema 4: BlogPosting / Article con dateModified para Freshness Signals -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "Guía de Papelería Creativa, Empaques y Stickers en Cali",
-      "description": "Taller de papelería creativa en Cali. Stickers personalizados desde 50 unidades, cajas temáticas, tarjetas de presentación y detalles para eventos.",
-      "url": "https://maranathapapeleria.com",
-      "image": "https://maranathapapeleria.com/hero-page.webp",
-      "datePublished": "2026-01-15T09:00:00+00:00",
-      "dateModified": "2026-09-27T00:00:00+00:00",
-      "author": {
-        "@type": "Person",
-        "name": "Karla",
-        "jobTitle": "Diseñadora y Fundadora"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Maranatha Papelería Creativa",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://maranathapapeleria.com/logo.svg"
-        }
-      }
     }
     </script>
   </head>

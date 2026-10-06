@@ -84,20 +84,6 @@ export default function FaqSection() {
     'https://wa.me/573145854213?text=' +
     encodeURIComponent('Hola Maranatha 👋, tengo una duda sobre un pedido personalizado y quisiera recibir asesoría.');
 
-  // Marcado estructurado Schema.org FAQPage para Google y motores de IA (AEO)
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  };
-
   return (
     <section
       id="preguntas-frecuentes"
@@ -107,12 +93,6 @@ export default function FaqSection() {
     >
       {/* Ancla alternativa #faq para compatibilidad de enlaces */}
       <span id="faq" className="absolute top-0 pointer-events-none" />
-      
-      {/* Marcado Schema.org JSON-LD para AEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
 
       <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center lg:items-start">

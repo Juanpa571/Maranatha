@@ -1,12 +1,39 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, FileCheck, CheckCircle2, AlertCircle, Clock, Truck, ShieldAlert } from 'lucide-react';
+import { usePageSeo } from '../hooks/usePageSeo';
 import SubpageHeader from '../components/SubpageHeader';
 import Footer from '../components/Footer';
 
+const TERMINOS_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: 'https://maranathapapeleria.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Términos y Condiciones',
+      item: 'https://maranathapapeleria.com/terminos-y-condiciones',
+    },
+  ],
+};
+
 export default function TerminosPage() {
+  usePageSeo({
+    title: 'Términos y Condiciones del Servicio | Maranatha Cali',
+    description:
+      'Condiciones de cotización, tiempos de confección, aprobación digital y entrega de papelería personalizada en Cali por Maranatha.',
+    canonical: 'https://maranathapapeleria.com/terminos-y-condiciones',
+    schema: TERMINOS_SCHEMA,
+  });
+
   useEffect(() => {
-    document.title = 'Términos y Condiciones | Maranatha Papelería Creativa';
     if (window.lenis) {
       window.lenis.scrollTo(0, { immediate: true });
       window.lenis.resize();

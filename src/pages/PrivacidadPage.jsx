@@ -1,12 +1,39 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, ShieldCheck, Lock, Mail, MessageCircle, FileText } from 'lucide-react';
+import { usePageSeo } from '../hooks/usePageSeo';
 import SubpageHeader from '../components/SubpageHeader';
 import Footer from '../components/Footer';
 
+const PRIVACIDAD_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: 'https://maranathapapeleria.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Política de Privacidad',
+      item: 'https://maranathapapeleria.com/politica-de-privacidad',
+    },
+  ],
+};
+
 export default function PrivacidadPage() {
+  usePageSeo({
+    title: 'Política de Privacidad y Tratamiento de Datos | Maranatha Cali',
+    description:
+      'Conoce cómo protegemos y tratamos tu información personal conforme a la Ley 1581 de 2012 de Colombia en Maranatha Papelería Creativa en Cali.',
+    canonical: 'https://maranathapapeleria.com/politica-de-privacidad',
+    schema: PRIVACIDAD_SCHEMA,
+  });
+
   useEffect(() => {
-    document.title = 'Política de Privacidad | Maranatha Papelería Creativa';
     if (window.lenis) {
       window.lenis.scrollTo(0, { immediate: true });
       window.lenis.resize();
